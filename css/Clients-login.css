@@ -84,32 +84,34 @@ body {
       float: left;
       font-size: 10px;
       color: #000000;
-      text-decoration: none;
     }
     .fp2 a {
       margin-left: 70px;
       float: right;
       font-size: 10px;
       color: #000000;
+    }
+    button.black img{
+      float: right;
+      padding-left: 15px;
+    }
+    button.white img{
+      float: left;
+      padding-right: 15px;
+    }
+
+
+    a{
       text-decoration: none;
     }
    
-    .BACK a {
+    .back {
       color: #000000;
-      text-decoration: none;
     }
-   
-    .BACK {
-      padding-top: 5px;
-    }
-   
-    .CONTINUE a {
-      color: #FFFFFF;
-      text-decoration: none;
-    }
-   
+
     .CONTINUE {
-      padding-top: 5px;
+
+      color: #FFFFFF;
     }
    
     .bout {

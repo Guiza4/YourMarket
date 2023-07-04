@@ -79,28 +79,32 @@ body {
       gap: 20px;
     }
    
-    .BACK a {
+    button.black img{
+      float: right;
+      padding-left: 15px;
+    }
+    button.white img{
+      float: left;
+      padding-right: 15px;
+    }
+
+
+    a{
+      text-decoration: none;
+    }
+   
+    .back {
       color: #000000;
-      text-decoration: none;
     }
-   
-    .BACK {
-      padding-top: 5px;
-    }
-   
-    .CONTINUE a {
-      color: #FFFFFF;
-      text-decoration: none;
-    }
-   
+
     .CONTINUE {
-      padding-top: 5px;
+
+      color: #FFFFFF;
     }
    
     .bout {
       display: flex;
     }
-   
     footer {
       text-align: center;
     }
