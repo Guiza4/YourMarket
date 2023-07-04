@@ -1,27 +1,45 @@
 <?php
 
-if (empty($_POST["lastname"] && $_POST["firstname"])){
+if (empty($_POST["lastname"] && $_POST["firstname"])) {
     die("Last Name and First Name are required");
 }
 
-if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
+if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
     die("Valid email is required");
 }
 
-if (strlen($_POST["password"]) < 8){
+if (strlen($_POST["password"]) < 8) {
     die("Password must be at least 8 characters");
 }
 
-if(! preg_match("/[a-z]/i", $_POST["password"])){
+if (!preg_match("/[a-z]/i", $_POST["password"])) {
     die("Password must contain at least one letter");
 }
 
-if(! preg_match("/[0-9]/i", $_POST["password"])){
+if (!preg_match("/[0-9]/i", $_POST["password"])) {
     die("Password must contain at least one number");
 }
 
-if(! preg_match("/[A-Z]/i", $_POST["password"])){
-    die("Password must contain at least one Upper letter");
+if ($_POST["password"] !== $_POST["password_conf"]) {
+    die("Passwords much match");
 }
 
-print_r($_POST);
+$password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+$mysqli = require __DIR__ . "/connecdb.php";
+
+$sql = "INSERT INTO buyer (lastname, firstname, email, password)
+        VALUES (?,?,?,?)";
+
+$stmt = $mysqli->stmt_init();
+
+if (! $stmt->prepare($sql)) {
+    die("SQL error: " . $mysqli->error);
+}//Si On a une erreur ici c'est qu'il y a une erreur avec le sql
+
+$stmt->bind_param("ssss", $_POST["lastname"], $_POST["firstname"], $_POST["email"], $password_hash);
+
+
+$stmt->execute();
+
+echo "Signup Successful";
