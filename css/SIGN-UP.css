@@ -32,8 +32,20 @@ body {
       padding: 20px;
       text-align: center;
     }
-   
-    .login-form input[type="email"],
+    input[type="text"]{
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #cccccc;
+    }
+    .login-form input[type="email"]{
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #cccccc;
+    }
     .login-form input[type="password"] {
       width: 100%;
       padding: 10px;
@@ -67,30 +79,6 @@ body {
       gap: 20px;
     }
    
-    .logo img {
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      display: inline-block;
-      width: 295px;
-      height: 187px;
-      border-radius: 10px;
-      border: 1px solid black;
-    }
-   
-    .fp {
-      display: flex;
-    }
-   
-    .fp1 a {
-      float: left;
-      font-size: 10px;
-      color: #000000;
-    }
-    .fp2 a {
-      margin-left: 70px;
-      float: right;
-      font-size: 10px;
-      color: #000000;
-    }
     button.black img{
       float: right;
       padding-left: 15px;
@@ -117,7 +105,6 @@ body {
     .bout {
       display: flex;
     }
-   
     footer {
       text-align: center;
     }
@@ -141,61 +128,4 @@ body {
     .logo-1 img {
       width: 526px;
       height: 241px;
-    }
-   
-    /* Styles for social login buttons */
-    .social-login {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
-   
-    .social-login a {
-      display: inline-block;
-      width: 200px;
-      height: 40px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      text-align: center;
-      line-height: 40px;
-      font-size: 16px;
-      color: #ffffff;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .social-login .google {
-      background-color: #ffffff;
-      color: #000000;
-      border: 1px solid #000000;
-    }
-    .social-login .google a{
-      
-    }
-    .social-login .google img{
-      padding-top: 8px;
-      padding-right: 5px;
-      height: 24px;
-      width: 24px;
-    }
-
-    .social-login .facebook {
-      background-color: #1877F2;
-    }
-    .social-login .facebook img{
-      padding-top: 8px;
-      padding-right: 5px;
-      height: 24px;
-      width: 24px;
-    }
-
-    .social-login .apple {
-      background-color: #000000;
-    }
-    .social-login .apple img{
-      padding-top: 8px;
-      padding-right: 5px;
-      height: 24px;
-      width: 24px;
     }
