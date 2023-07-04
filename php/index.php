@@ -16,9 +16,9 @@ session_start();
     <h1>Home</h1>
 <?php if (isset($_SESSION["user_id"])): ?>
     <p>You are logged in.</p>
-
+    <p><a href="logout.php">Log out</a> </p>
 <?php else: ?>
-    <p><a href="login.php">Log In</a> or <a href="../SignUP-Test.html">Sign Up</a></p>
+    <p><a href="login.php">Log In</a> or <a href="/YourMarket/YourMarket/html/SignUP_Test.html">Sign Up</a></p>
 <?php endif; ?>
 
 </body>
