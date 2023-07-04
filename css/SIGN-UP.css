@@ -1,0 +1,127 @@
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+   
+    .container {
+      display: flex;
+    }
+   
+    .left-side {
+      flex: 1;
+      background-color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid black;
+      border-radius: 10px;
+    }
+   
+    .right-side {
+      flex: 1;
+      background-image: url('image/Sign-in-bg.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+   
+    .login-form {
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+    }
+    input[type="text"]{
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #cccccc;
+    }
+    .login-form input[type="email"]{
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #cccccc;
+    }
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #cccccc;
+    }
+   
+    .login-form button {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 15px;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+    }
+   
+    .login-form button.white {
+      background-color: #ffffff;
+      margin-right: 20px;
+      border: 2px solid black;
+      display: flex;
+      gap: 10px;
+    }
+   
+    .login-form button.black {
+      background-color: #000000;
+      border: 2px solid black;
+      width: 150px;
+      display: flex;
+      gap: 20px;
+    }
+   
+    .BACK a {
+      color: #000000;
+      text-decoration: none;
+    }
+   
+    .BACK {
+      padding-top: 5px;
+    }
+   
+    .CONTINUE a {
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+   
+    .CONTINUE {
+      padding-top: 5px;
+    }
+   
+    .bout {
+      display: flex;
+    }
+   
+    footer {
+      text-align: center;
+    }
+   
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+   
+    .Fout {
+      margin-top: 430px;
+      margin-right: 80px;
+      margin-left: 80px;
+    }
+   
+    .logo-1 {
+      margin-top: 30px;
+    }
+   
+    .logo-1 img {
+      width: 526px;
+      height: 241px;
+    }
