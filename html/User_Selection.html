@@ -1,26 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>User Selection</title>
-  <link href="../css/User_Selection.css" rel="stylesheet">
+  <title>Choix de l'utilisateur</title>
+  <style>
+    body {
+      background-image: url('image/Home bg.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      margin: 100px 400px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .logo img {
+      width: 295px;
+      height: 187px;
+    }
+    
+    .user-options {
+      text-align: center;
+    }
+    
+    .user-options a {
+      display: block;
+      margin: 10px 0;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .user-options label {
+      display: block;
+      padding: 20px 30px;
+      border-radius: 10px;
+      color: #ffffff;
+    }
+    h2 {
+      text-align: center;
+    }
+
+    #admin-label {
+      background-color: #4559B5; /* Bleu foncé */
+    }
+    
+    #seller-label {
+      background-color: #EB567B; /* Rouge */
+    }
+    
+    #buyer-label {
+      background-color: #3FBBF7; /* Bleu clair */
+    }
+
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      color: #ffffff;
+    }
+    
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+
+  </style>
 </head>
 <body>
   <div class="container">
     <div class="logo">
-      <img src="../assets/image/logo.png" alt="Logo">
+      <img src="image/logo.png" alt="Logo">
     </div>
     
     <div class="user-options">
       <h2>USER TYPE</h2>
-      <a href="admin.html" id="admin">
+      <a href="admin-login.html" id="admin">
         <label id="admin-label">Admin</label>
       </a>
       
-      <a href="seller.html" id="seller">
+      <a href="Clients-login.html" id="seller">
         <label id="seller-label">Seller</label>
       </a>
       
-      <a href="buyer.html" id="buyer">
+      <a href="Clients-login.html" id="buyer">
         <label id="buyer-label">Buyer</label>
       </a>
     </div>
