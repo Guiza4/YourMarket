@@ -81,22 +81,30 @@ body {
       color: #000000;
       text-decoration: none;
     }
-    .BACK a{
-      color: #000000;
-      text-decoration: none;
+    button.black img{
+      float: right;
+      padding-left: 15px;
     }
-    .BACK{
-      padding-top: 5px;
-    }
-    .CONTINUE a{
-      color: #FFFFFF;
-      text-decoration: none;
-    }
-    .CONTINUE{
-      padding-top: 5px;
+    button.white img{
+      float: left;
+      padding-right: 15px;
     }
 
-    .bout{
+
+    a{
+      text-decoration: none;
+    }
+   
+    .back {
+      color: #000000;
+    }
+
+    .CONTINUE {
+
+      color: #FFFFFF;
+    }
+   
+    .bout {
       display: flex;
     }
     footer {
