@@ -13,9 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($user) {
         if (password_verify($_POST["password"], $user["password"])) {
-            die("Login Successful");
-        } else {
+            session_start();
+            $_SESSION["user_id"] = $user["ID_Buyer"];
 
+            header("Location: index.php");
+            exit;
         }
     }
 
@@ -38,7 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <form method="post">
     <label for="email">email</label>
-    <input type="email" name="email" id="email" value="<?= htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : "") ?>">
+    <input type="email" name="email" id="email"
+           value="<?= htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : "") ?>">
 
     <label for="password">password</label>
     <input type="password" name="password" id="password">
