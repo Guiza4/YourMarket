@@ -22,7 +22,7 @@ body {
     
     .right-side {
       flex: 1;
-      background-image: url('image/malik.png');
+      background-image: url('../image/malik.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
