@@ -1,0 +1,199 @@
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+   
+    .container {
+      display: flex;
+    }
+   
+    .left-side {
+      flex: 1;
+      background-color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid black;
+      border-radius: 10px;
+    }
+   
+    .right-side {
+      flex: 1;
+      background-image: url('image/Sign-in-bg.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+   
+    .login-form {
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+    }
+   
+    .login-form input[type="email"],
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #cccccc;
+    }
+   
+    .login-form button {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 15px;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+    }
+   
+    .login-form button.white {
+      background-color: #ffffff;
+      margin-right: 20px;
+      border: 2px solid black;
+      display: flex;
+      gap: 10px;
+    }
+   
+    .login-form button.black {
+      background-color: #000000;
+      border: 2px solid black;
+      width: 150px;
+      display: flex;
+      gap: 20px;
+    }
+   
+    .logo img {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+      width: 295px;
+      height: 187px;
+      border-radius: 10px;
+      border: 1px solid black;
+    }
+   
+    .fp {
+      display: flex;
+    }
+   
+    .fp1 a {
+      float: left;
+      font-size: 10px;
+      color: #000000;
+      text-decoration: none;
+    }
+    .fp2 a {
+      margin-left: 70px;
+      float: right;
+      font-size: 10px;
+      color: #000000;
+      text-decoration: none;
+    }
+   
+    .BACK a {
+      color: #000000;
+      text-decoration: none;
+    }
+   
+    .BACK {
+      padding-top: 5px;
+    }
+   
+    .CONTINUE a {
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+   
+    .CONTINUE {
+      padding-top: 5px;
+    }
+   
+    .bout {
+      display: flex;
+    }
+   
+    footer {
+      text-align: center;
+    }
+   
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+   
+    .Fout {
+      margin-top: 430px;
+      margin-right: 80px;
+      margin-left: 80px;
+    }
+   
+    .logo-1 {
+      margin-top: 30px;
+    }
+   
+    .logo-1 img {
+      width: 526px;
+      height: 241px;
+    }
+   
+    /* Styles for social login buttons */
+    .social-login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+   
+    .social-login a {
+      display: inline-block;
+      width: 200px;
+      height: 40px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 40px;
+      font-size: 16px;
+      color: #ffffff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .social-login .google {
+      background-color: #ffffff;
+      color: #000000;
+      border: 1px solid #000000;
+    }
+    .social-login .google a{
+      
+    }
+    .social-login .google img{
+      padding-top: 8px;
+      padding-right: 5px;
+      height: 24px;
+      width: 24px;
+    }
+
+    .social-login .facebook {
+      background-color: #1877F2;
+    }
+    .social-login .facebook img{
+      padding-top: 8px;
+      padding-right: 5px;
+      height: 24px;
+      width: 24px;
+    }
+
+    .social-login .apple {
+      background-color: #000000;
+    }
+    .social-login .apple img{
+      padding-top: 8px;
+      padding-right: 5px;
+      height: 24px;
+      width: 24px;
+    }
