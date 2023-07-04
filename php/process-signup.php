@@ -33,13 +33,21 @@ $sql = "INSERT INTO buyer (lastname, firstname, email, password)
 
 $stmt = $mysqli->stmt_init();
 
-if (! $stmt->prepare($sql)) {
+if (!$stmt->prepare($sql)) {
     die("SQL error: " . $mysqli->error);
 }//Si On a une erreur ici c'est qu'il y a une erreur avec le sql
 
 $stmt->bind_param("ssss", $_POST["lastname"], $_POST["firstname"], $_POST["email"], $password_hash);
 
 
-$stmt->execute();
+if ($stmt->execute()) {
+    header("Location: /YourMarket/YourMarket/html/SignUP_Test_Success.html");
+    exit;
+} else {
+    if ($mysqli->errno === 1062) {
+        die("Email already taken");
+    } else {
+        die($mysqli->error . " " . $mysqli->errno);
+    }
+}
 
-echo "Signup Successful";
