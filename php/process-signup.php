@@ -30,6 +30,7 @@ if ($_POST["password"] !== $_POST["password_conf"]) {
 
 $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 $dateofbirth = $_POST["dateofbirth"];
+$phone = $_POST["phone"];
 
 
 $mysqli = require __DIR__ . "/connecdb.php";
@@ -46,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 die("SQL error: " . $mysqli->error);
             }//Si On a une erreur ici c'est qu'il y a une erreur avec le sql
 
-            $stmt->bind_param("ssssss", $_POST["lastname"], $_POST["firstname"], $_POST["phone"], $dateofbirth, $_POST["email"], $password_hash);
+            $stmt->bind_param("ssssss", $_POST["lastname"], $_POST["firstname"], $phone, $dateofbirth, $_POST["email"], $password_hash);
 
 
             if ($stmt->execute()) {
@@ -68,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 die("SQL error: " . $mysqli->error);
             }//Si On a une erreur ici c'est qu'il y a une erreur avec le sql
 
-            $stmt->bind_param("ssssss", $_POST["lastname"], $_POST["firstname"], $dateofbirth, $_POST["phone"], $_POST["email"], $password_hash);
+            $stmt->bind_param("ssssss", $_POST["lastname"], $_POST["firstname"], $dateofbirth, $phone, $_POST["email"], $password_hash);
 
 
             if ($stmt->execute()) {
