@@ -4,6 +4,10 @@ if (empty($_POST["lastname"] && $_POST["firstname"])) {
     die("Last Name and First Name are required");
 }
 
+if (empty($_POST["dateofbirth"])) {
+    die("Your Date of Birth is required");
+}
+
 if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
     die("Valid email is required");
 }
@@ -25,29 +29,61 @@ if ($_POST["password"] !== $_POST["password_conf"]) {
 }
 
 $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+$dateofbirth = $_POST["dateofbirth"];
+
 
 $mysqli = require __DIR__ . "/connecdb.php";
 
-$sql = "INSERT INTO buyer (lastname, firstname, email, password)
-        VALUES (?,?,?,?)";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['usertype'])) {
+        $userType = $_POST['usertype'];
+        if ($userType === "seller") {
+            $sql = "INSERT INTO seller (lastname, firstname, phone, dateofbirth, email, password)
+        VALUES (?,?,?,?,?,?)";
+            $stmt = $mysqli->stmt_init();
 
-$stmt = $mysqli->stmt_init();
+            if (!$stmt->prepare($sql)) {
+                die("SQL error: " . $mysqli->error);
+            }//Si On a une erreur ici c'est qu'il y a une erreur avec le sql
 
-if (!$stmt->prepare($sql)) {
-    die("SQL error: " . $mysqli->error);
-}//Si On a une erreur ici c'est qu'il y a une erreur avec le sql
-
-$stmt->bind_param("ssss", $_POST["lastname"], $_POST["firstname"], $_POST["email"], $password_hash);
+            $stmt->bind_param("ssssss", $_POST["lastname"], $_POST["firstname"], $_POST["phone"], $dateofbirth, $_POST["email"], $password_hash);
 
 
-if ($stmt->execute()) {
-    header("Location: /YourMarket/YourMarket/html/SignUP_Test_Success.html");
-    exit;
-} else {
-    if ($mysqli->errno === 1062) {
-        die("Email already taken");
-    } else {
-        die($mysqli->error . " " . $mysqli->errno);
+            if ($stmt->execute()) {
+                header("Location: /YourMarket/YourMarket/html/SignUP_Test_Success.html");
+                exit;
+            } else {
+                if ($mysqli->errno === 1062) {
+                    die("Email already taken");
+                } else {
+                    die($mysqli->error . " " . $mysqli->errno);
+                }
+            }
+        } elseif ($userType === "buyer") {
+            $sql = "INSERT INTO buyer (lastname, firstname, dateofbirth, phone, email, password)
+        VALUES (?,?,?,?,?,?)";
+            $stmt = $mysqli->stmt_init();
+
+            if (!$stmt->prepare($sql)) {
+                die("SQL error: " . $mysqli->error);
+            }//Si On a une erreur ici c'est qu'il y a une erreur avec le sql
+
+            $stmt->bind_param("ssssss", $_POST["lastname"], $_POST["firstname"], $dateofbirth, $_POST["phone"], $_POST["email"], $password_hash);
+
+
+            if ($stmt->execute()) {
+                header("Location: /YourMarket/YourMarket/html/SignUP_Test_Success.html");
+                exit;
+            } else {
+                if ($mysqli->errno === 1062) {
+                    die("Email already taken");
+                } else {
+                    die($mysqli->error . " " . $mysqli->errno);
+                }
+            }
+        }
     }
 }
+
+
 

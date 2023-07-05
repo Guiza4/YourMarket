@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link href="../css/SIGN-UP.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="container">
+    <div class="left-side">
+        <div class="login-form">
+            <h2>SIGN UP</h2>
+            <form action="../php/process-signup.php" method="post" novalidate>
+                <div>
+                    <label for="lastname"></label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Last Name">
+                </div>
+                <div>
+                    <label for="firstname"></label>
+                    <input type="text" id="firstname" name="firstname" placeholder="First Name">
+                </div>
+                <div>
+                    <label for="dateofbirth"></label>
+                    <input type="date" id="dateofbirth" name="dateofbirth" placeholder="Date of Birth">
+                </div>
+                <div>
+                    <label for="phone"></label>
+                    <input type="text" id="phone" name="phone" placeholder="Phone Number">
+                </div>
+                <div>
+                    <label for="email"></label>
+                    <input type="email" id="email" name="email" placeholder="Email">
+                </div>
+                <div>
+                    <label for="password"></label>
+                    <input type="password" id="password" name="password" placeholder="Password">
+                </div>
+                <div>
+                    <label for="password_conf"></label>
+                    <input type="password" id="password_conf" name="password_conf" placeholder="Repeat Password">
+                </div>
+                <div>
+                    <label for="seller"></label>
+                    <input type="radio" name="usertype" id="seller" value="seller">seller
+                    <label for="buyer"></label>
+                    <input type="radio" name="usertype" id="buyer" value="buyer">buyer
+                </div>
+                <br><br><br>
+                <div class="bout">
+                    <button class="white">
+                        <a href="User_Selection.html">
+                            <img src="../image/arrow-left.png" width="25" height="auto">
+                            <label class="back">BACK</label>
+                        </a>
+                    </button>
+                    <button type="submit" class="black">
+                            <label class="CONTINUE">CONTINUE</label>
+                            <img src="../image/arrows-right.png" width="25">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="right-side">
+        <div class="logo-1">
+            <center><img src="../image/logo-2.png"></center>
+        </div>
+        <div class="Fout">
+            <footer>
+                <a href="mentions-legales.html">LEGAL</a>
+                <a href="politique-confidentialite.html">PRIVACY CENTER</a>
+                <a href="cookies.html">COOKIE</a>
+                <a href="a-propos.html">ABOUT US</a>
+            </footer>
+        </div>
+    </div>
+</div>
+</body>
+</html>
