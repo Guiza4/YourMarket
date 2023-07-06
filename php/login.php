@@ -87,27 +87,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <br>
                 <div class="bout">
-                    <button class="white">
-                        <a href="../html/User_Selection.html">
+                    <a href="../html/User_Selection.html" onclick="submitForm(event,'backButton')">
+                        <button class="white" id="backButton">
                             <img src="../image/arrow-left.png" width="25" height="auto">
                             <label class="back">BACK</label>
-                        </a>
-                    </button>
-                    <button class="black">
-                        <a href="index.php">
+                        </button>
+                    </a>
+                    <a href="index.php" id="continue" onclick="submitForm(event)">
+                        <button class="black">
                             <label class="CONTINUE">CONTINUE</label>
                             <img src="../image/arrows-right.png" width="25">
-
-                        </a>
-                    </button>
+                        </button>
+                    </a>
                 </div>
-                <div class="social-login">
-                    <h4>Or connect With Social Media</h4>
-                    <a class="google" href="https://www.google.com/"><img src="../image/Google.png">Sign in with Google</a>
-                    <a class="facebook" href="https://www.facebook.com/"><img src="../image/Facebook.png">Sign in with
-                        Facebook</a>
-                    <a class="apple" href="https://www.apple.com/"><img src="../image/apple.png">Sign in with Apple</a>
-                </div>
+            </form>
+            <div class="social-login">
+                <h4>Or connect With Social Media</h4>
+                <a class="google" href="https://www.google.com/"><img src="../image/Google.png">Sign in with Google</a>
+                <a class="facebook" href="https://www.facebook.com/"><img src="../image/Facebook.png">Sign in with
+                    Facebook</a>
+                <a class="apple" href="https://www.apple.com/"><img src="../image/apple.png">Sign in with Apple</a>
+            </div>
         </div>
         <div class="logo">
             <img src="../image/logo.png" alt="Logo">
@@ -129,3 +129,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </div>
 </body>
 </html>
+
+<script>
+    function submitForm(event, buttonId) {
+        if (buttonId === 'backButton') {
+            // Perform specific action for the 'backButton'
+            window.location.href = '../html/User_Selection.html'; // Redirect to User_Selection.html
+            event.preventDefault(); // Prevent the default action of the anchor tag
+        } else {
+            event.preventDefault(); // Prevent the default action of the anchor tag
+            document.querySelector('form').submit();
+        }
+    }
+</script>
