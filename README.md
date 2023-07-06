@@ -7,5 +7,6 @@
 5) Créer le php pour la gestion des articles.
 6) Terminer les designs nécessaires
 7) Rectifier le CSS pour améliorer le rendu de certaines pages.
+8) Vérifier comment partager la base de donnée avec git ou autre
 
 ****************************************** TO DO ******************************************
