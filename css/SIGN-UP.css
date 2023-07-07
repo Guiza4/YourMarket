@@ -95,7 +95,7 @@ input[type="tel"] {
     border: 2px solid black;
     width: 150px;
     display: flex;
-    gap: 20px;
+    gap: 10px;
 }
 
 button.black img {
@@ -115,11 +115,13 @@ a {
 
 .back {
     color: #000000;
+    margin: auto;
 }
 
 .CONTINUE {
 
     color: #FFFFFF;
+    margin: auto;
 }
 
 .bout {
