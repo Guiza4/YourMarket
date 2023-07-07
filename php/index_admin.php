@@ -16,7 +16,7 @@ session_start();
 <h1>Home</h1>
 <?php if (isset($_SESSION["user_id"])): ?>
     <p>You are logged in.</p>
-    <p><a href="logout.php">Log out</a> </p>
+    <p><a href="logout_admin.php">Log out</a> </p>
 <?php else:
     header("Location: login_admin.php");
     exit;?>

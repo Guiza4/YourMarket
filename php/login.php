@@ -2,7 +2,6 @@
 $is_invalid = false;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $mysqli = require __DIR__ . "/connecdb.php";
-
     if (isset($_POST['usertype'])) {
         $userType = $_POST['usertype'];
         if ($userType === "seller") {

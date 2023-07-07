@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Login Admin</title>
     <link href="../css/admin-login.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -50,19 +50,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="password" name="password" id="password" placeholder="Password">
                 </div>
                 <div class="bout">
-                    <button class="white">
-                        <a href="../html/User_Selection.html">
+                    <a href="../html/User_Selection.html" onclick="submitForm(event,'backButton')">
+                        <button class="white" id="backButton">
                             <img src="../image/arrow-left.png" width="25" height="auto">
                             <label class="back">BACK</label>
-                        </a>
-                    </button>
-                    <button class="black">
-                        <a href="index_admin.php">
+                        </button>
+                    </a>
+                    <a href="index_admin.php" id="continue" onclick="submitForm(event)">
+                        <button class="black">
                             <label class="CONTINUE">CONTINUE</label>
                             <img src="../image/arrows-right.png" width="25">
-
-                        </a>
-                    </button>
+                        </button>
+                    </a>
                 </div>
             </form>
         </div>
@@ -81,5 +80,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 </div>
+<script>
+    function submitForm(event, buttonId) {
+        if (buttonId === 'backButton') {
+            // Perform specific action for the 'backButton'
+            window.location.href = '../html/User_Selection.html'; // Redirect to User_Selection.html
+            event.preventDefault(); // Prevent the default action of the anchor tag
+        } else {
+            event.preventDefault(); // Prevent the default action of the anchor tag
+            document.querySelector('form').submit();
+        }
+    }
+</script>
 </body>
 </html>
