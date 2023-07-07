@@ -84,7 +84,6 @@ input[type="tel"] {
 
 .login-form button.white {
     background-color: #ffffff;
-    margin-right: 20px;
     border: 2px solid black;
     display: flex;
     gap: 10px;
@@ -126,6 +125,7 @@ a {
 
 .bout {
     display: flex;
+    gap: 20px;
 }
 
 footer {

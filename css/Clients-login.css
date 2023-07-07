@@ -53,7 +53,6 @@ body {
 
 .login-form button.white {
     background-color: #ffffff;
-
     border: 2px solid black;
     display: flex;
     gap: 10px;
