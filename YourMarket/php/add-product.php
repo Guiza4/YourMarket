@@ -12,12 +12,12 @@
         <img src="../image/logo-2.png" alt="Logo" height="64" width="222">
     </div>
     <div class="nav-search">
-        <input type="text" id="search-bar" placeholder="Rechercher...">
+        <input type="text" id="search-bar" placeholder="Search...">
     </div>
     <a href="#">
         <div class="nav-categorie">
             <img src="../image/categorie.png" width="25" height="49">
-            <span>Catégorie</span>
+            <span>Category</span>
         </div>
     </a>
     <a href="#">
@@ -46,24 +46,24 @@
         <form action="" method="post" enctype="multipart/form-data">
             <div class="flex">
                 <div class="inputBox">
-                    <span>product name (required)</span>
-                    <input type="text" class="box" required maxlength="100" placeholder="enter product name"
+                    <span>Product name (required)</span>
+                    <input type="text" class="box" required maxlength="100" placeholder="Enter Product Name"
                            name="name">
                 </div>
                 <div class="inputBox">
-                    <span>product price (required)</span>
-                    <input type="number" min="0" class="box" required max="9999999999" placeholder="enter product price"
+                    <span>Product Price (required)</span>
+                    <input type="number" min="0" class="box" required max="9999999999" placeholder="Enter Product Price"
                            onkeypress="if(this.value.length == 10) return false;" name="price">
                 </div>
                 <div class="inputBox">
-                    <span>Categorie (required)</span>
-                    <input type="text" class="box" required maxlength="100" placeholder="enter product categorie"
+                    <span>Category (required)</span>
+                    <input type="text" class="box" required maxlength="100" placeholder="Enter Product Category"
                            name="categorie">
                 </div>
                 <div class="inputBox">
-                    <span>Stok (required)</span>
-                    <input type="number"  min="1" class="box" required max="9999999999" placeholder="enter quantity"
-                           name="stok">
+                    <span>Stock (required)</span>
+                    <input type="number"  min="1" class="box" required max="9999999999" placeholder="Enter Quantity"
+                           name="stock">
                 </div>
                 <div class="inputBox">
                     <span>image 01 (required)</span>
@@ -81,7 +81,7 @@
                            required>
                 </div>
                 <div class="inputBox">
-                    <span>product details (required)</span>
+                    <span>Product Details (required)</span>
                     <textarea name="details" placeholder="enter product details" class="box" required maxlength="500"
                               cols="30" rows="10"></textarea>
                 </div>
