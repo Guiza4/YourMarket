@@ -1,0 +1,264 @@
+Index: css/home.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* Styles CSS */\r\nbody {\r\n    font-family: Arial, sans-serif;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n#promo-banner {\r\n    background-color: #000000;\r\n    padding: 10px;\r\n    text-align: center;\r\n    color: #FFFFFF;\r\n}\r\n\r\n#promo-banner a {\r\n    color: #FFFFFF;\r\n    text-decoration: none;\r\n}\r\n\r\n#navbar {\r\n    border: 3px solid black;\r\n    background-color: #FFFFFF;\r\n    padding: 10px;\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n#navbar img {\r\n    margin-right: 10px;\r\n}\r\n\r\n#search-bar {\r\n    margin-left: 100px;\r\n    padding: 10px;\r\n    padding-right: 90px;\r\n    border: 1px solid #000000;\r\n    border-radius: 10px;\r\n}\r\n.search-icon {\r\n    background-image: url(\"../image/search.png\");\r\n    background-repeat: no-repeat;\r\n    background-size: 16px 16px;\r\n    display: inline-block;\r\n    width: 16px;\r\n    height: 16px;\r\n    margin-right: 200px;\r\n    margin-left: 5px;\r\n}\r\n\r\n#navbar a {\r\n    margin-right: 70px;\r\n    text-decoration: none;\r\n    color: #000000;\r\n}\r\n\r\n#main-content {\r\n    margin: 20px;\r\n}\r\n\r\n.rounded-box {\r\n    display: flex;\r\n    border-radius: 10px;\r\n    padding: 20px;\r\n    margin-bottom: 20px;\r\n    background-image: linear-gradient(210deg, rgba(235, 86, 123, 1) 0%, rgba(150, 158, 255, 0.5899999737739563) 48%, rgba(145, 58, 254, 0.8399999737739563) 100%);\r\n}\r\n\r\n.refurbished-left {\r\n    width: 50%;\r\n}\r\n\r\n.refurbished-right{\r\n    width: 50%;\r\n    display: flex;\r\n}\r\n.carousel-images img {\r\n    width: 70%;\r\n    height: 70%;\r\n    display: none;\r\n}\r\n\r\n.prev-button-item,\r\n.next-button-item{\r\n    padding-top: 180px;\r\n    width: 10%;\r\n}\r\n\r\n.prev-button,\r\n.next-button {\r\n    padding-top: 90px;\r\n    width: 10%;\r\n}\r\n.prev-button-item img,\r\n.next-button-item img{\r\n    width: 24px;\r\n    height: 24px;\r\n}\r\n\r\n.prev-button img,\r\n.next-button img{\r\n    width: 24px;\r\n    height: 24px;\r\n}\r\n.bg-arrow{\r\n    border: none;\r\n    background: none;\r\n    cursor: pointer;\r\n}\r\n.shop-refurbished{\r\n    width: 30%;\r\n    height: 40px;\r\n    border: 1px solid #000000;\r\n    border-radius: 10px;\r\n    display: flex;\r\n    background-color: #FFFFFF;\r\n    margin-left: 30%;\r\n}\r\n\r\n.shop-refurbished a{\r\n    padding: 8px;\r\n    text-decoration: none;\r\n    color: #000000;\r\n}\r\n.shop-refurbished img{\r\n    padding-top: 6px;\r\n}\r\n\r\n\r\n.product-description {\r\n    font-size: 10px;\r\n    color: #4A4848 ;\r\n}\r\n.title-1{\r\n    font-size: 30px;\r\n    color: #000000;\r\n\r\n}\r\n.title-2{\r\n    font-size: 24px;\r\n    color: #A8A8A8;\r\n}\r\n.Most-Wanted{\r\n    padding: 10px;\r\n    display: flex;\r\n    border-radius: 10px;\r\n    background-color: #ffffff;\r\n    gap: 25px;\r\n}\r\n\r\n.product-box {\r\n    border: 2px solid black;\r\n    position: relative;\r\n    border-radius: 10px;\r\n    background-color: #ffffff;\r\n}\r\n.best-seller{\r\n    width: 50%;\r\n    margin: 10px;\r\n    border-radius: 10px;\r\n    background-color: #DFDFDF;\r\n\r\n}\r\n.item-image{\r\n    margin-bottom: -35px;\r\n    margin-top: -20px;\r\n}\r\n.description{\r\n    margin-left:8px ;\r\n}\r\n\r\n.product-box img {\r\n    width: 200px;\r\n    height: 200px;\r\n    object-fit: cover;\r\n}\r\n\r\nfooter a {\r\n    color: #000000;\r\n    text-decoration: none;\r\n    margin: 0 10px;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/css/home.css b/css/home.css
+--- a/css/home.css	(revision 2ca10ea9e5eea3256c8d3f7db75a0adf255b99e9)
++++ b/css/home.css	(date 1689078895799)
+@@ -36,6 +36,7 @@
+     border: 1px solid #000000;
+     border-radius: 10px;
+ }
++
+ .search-icon {
+     background-image: url("../image/search.png");
+     background-repeat: no-repeat;
+@@ -69,10 +70,11 @@
+     width: 50%;
+ }
+ 
+-.refurbished-right{
++.refurbished-right {
+     width: 50%;
+     display: flex;
+ }
++
+ .carousel-images img {
+     width: 70%;
+     height: 70%;
+@@ -80,7 +82,7 @@
+ }
+ 
+ .prev-button-item,
+-.next-button-item{
++.next-button-item {
+     padding-top: 180px;
+     width: 10%;
+ }
+@@ -90,23 +92,26 @@
+     padding-top: 90px;
+     width: 10%;
+ }
++
+ .prev-button-item img,
+-.next-button-item img{
++.next-button-item img {
+     width: 24px;
+     height: 24px;
+ }
+ 
+ .prev-button img,
+-.next-button img{
++.next-button img {
+     width: 24px;
+     height: 24px;
+ }
+-.bg-arrow{
++
++.bg-arrow {
+     border: none;
+     background: none;
+     cursor: pointer;
+ }
+-.shop-refurbished{
++
++.shop-refurbished {
+     width: 30%;
+     height: 40px;
+     border: 1px solid #000000;
+@@ -116,30 +121,34 @@
+     margin-left: 30%;
+ }
+ 
+-.shop-refurbished a{
++.shop-refurbished a {
+     padding: 8px;
+     text-decoration: none;
+     color: #000000;
+ }
+-.shop-refurbished img{
++
++.shop-refurbished img {
+     padding-top: 6px;
+ }
+ 
+ 
+ .product-description {
+     font-size: 10px;
+-    color: #4A4848 ;
++    color: #4A4848;
+ }
+-.title-1{
++
++.title-1 {
+     font-size: 30px;
+     color: #000000;
+ 
+ }
+-.title-2{
++
++.title-2 {
+     font-size: 24px;
+     color: #A8A8A8;
+ }
+-.Most-Wanted{
++
++.Most-Wanted {
+     padding: 10px;
+     display: flex;
+     border-radius: 10px;
+@@ -153,19 +162,22 @@
+     border-radius: 10px;
+     background-color: #ffffff;
+ }
+-.best-seller{
++
++.best-seller {
+     width: 50%;
+     margin: 10px;
+     border-radius: 10px;
+     background-color: #DFDFDF;
+ 
+ }
+-.item-image{
++
++.item-image {
+     margin-bottom: -35px;
+     margin-top: -20px;
+ }
+-.description{
+-    margin-left:8px ;
++
++.description {
++    margin-left: 8px;
+ }
+ 
+ .product-box img {
+Index: ../.idea/vcs.xml
+===================================================================
+diff --git a/../.idea/vcs.xml b/../.idea/vcs.xml
+deleted file mode 100644
+--- a/../.idea/vcs.xml	(revision 2ca10ea9e5eea3256c8d3f7db75a0adf255b99e9)
++++ /dev/null	(revision 2ca10ea9e5eea3256c8d3f7db75a0adf255b99e9)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="" vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../.idea/php.xml
+===================================================================
+diff --git a/../.idea/php.xml b/../.idea/php.xml
+deleted file mode 100644
+--- a/../.idea/php.xml	(revision 2ca10ea9e5eea3256c8d3f7db75a0adf255b99e9)
++++ /dev/null	(revision 2ca10ea9e5eea3256c8d3f7db75a0adf255b99e9)
+@@ -1,19 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="MessDetectorOptionsConfiguration">
+-    <option name="transferred" value="true" />
+-  </component>
+-  <component name="PHPCSFixerOptionsConfiguration">
+-    <option name="transferred" value="true" />
+-  </component>
+-  <component name="PHPCodeSnifferOptionsConfiguration">
+-    <option name="highlightLevel" value="WARNING" />
+-    <option name="transferred" value="true" />
+-  </component>
+-  <component name="PhpStanOptionsConfiguration">
+-    <option name="transferred" value="true" />
+-  </component>
+-  <component name="PsalmOptionsConfiguration">
+-    <option name="transferred" value="true" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"50393439-1ffd-4d68-9085-b7fbbbe96caa\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2SKupz9jY3hkkxdV8AAVPNjhX9E\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/wamp64/www/YourMarket/YourMarket&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"50393439-1ffd-4d68-9085-b7fbbbe96caa\" name=\"Changes\" comment=\"\" />\r\n      <created>1688907780891</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1688907780891</updated>\r\n      <workItem from=\"1688907781926\" duration=\"640000\" />\r\n      <workItem from=\"1688908778737\" duration=\"133000\" />\r\n      <workItem from=\"1688908929463\" duration=\"75000\" />\r\n      <workItem from=\"1688909055759\" duration=\"76000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 2ca10ea9e5eea3256c8d3f7db75a0adf255b99e9)
++++ b/.idea/workspace.xml	(date 1689078895808)
+@@ -4,7 +4,12 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="50393439-1ffd-4d68-9085-b7fbbbe96caa" name="Changes" comment="" />
++    <list default="true" id="50393439-1ffd-4d68-9085-b7fbbbe96caa" name="Changes" comment="">
++      <change afterPath="$PROJECT_DIR$/php/add-product.php" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/home.css" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/php/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/index.php" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -14,7 +19,7 @@
+     <execution />
+   </component>
+   <component name="Git.Settings">
+-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -25,19 +30,19 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/wamp64/www/YourMarket/YourMarket&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "git-widget-placeholder": "yous",
++    "last_opened_file_path": "C:/wamp64/www/YourMarket/YourMarket",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -50,6 +55,7 @@
+       <workItem from="1688908778737" duration="133000" />
+       <workItem from="1688908929463" duration="75000" />
+       <workItem from="1688909055759" duration="76000" />
++      <workItem from="1689076963160" duration="1616000" />
+     </task>
+     <servers />
+   </component>
+Index: php/add-product.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/php/add-product.php b/php/add-product.php
+new file mode 100644
+--- /dev/null	(date 1689078895813)
++++ b/php/add-product.php	(date 1689078895813)
+@@ -0,0 +1,1 @@
++<?php
