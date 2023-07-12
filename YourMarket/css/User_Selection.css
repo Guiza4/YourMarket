@@ -1,0 +1,72 @@
+body {
+    background-image: url('../image/Home bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 400px;
+    margin: 100px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 295px;
+    height: 187px;
+}
+
+.user-options {
+    text-align: center;
+}
+
+.user-options a {
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-options label {
+    display: block;
+    padding: 20px 30px;
+    border-radius: 10px;
+    color: #ffffff;
+}
+h2 {
+    text-align: center;
+}
+
+#admin-label {
+    background-color: #4559B5; /* Bleu foncé */
+}
+
+#seller-label {
+    background-color: #EB567B; /* Rouge */
+}
+
+#buyer-label {
+    background-color: #3FBBF7; /* Bleu clair */
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #ffffff;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+}

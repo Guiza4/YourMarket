@@ -1,0 +1,181 @@
+/* Styles CSS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#promo-banner {
+    background-color: #000000;
+    padding: 10px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+#promo-banner a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+#navbar {
+    border: 3px solid black;
+    background-color: #FFFFFF;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#navbar img {
+    margin-right: 10px;
+}
+
+#search-bar {
+    margin-left: 100px;
+    padding: 10px;
+    padding-right: 90px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+.search-icon {
+    background-image: url("../image/search.png");
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 200px;
+    margin-left: 5px;
+}
+
+#navbar a {
+    margin-right: 70px;
+    text-decoration: none;
+    color: #000000;
+}
+
+#main-content {
+    margin: 20px;
+}
+
+.rounded-box {
+    display: flex;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-image: linear-gradient(210deg, rgba(235, 86, 123, 1) 0%, rgba(150, 158, 255, 0.5899999737739563) 48%, rgba(145, 58, 254, 0.8399999737739563) 100%);
+}
+
+.refurbished-left {
+    width: 50%;
+}
+
+.refurbished-right{
+    width: 50%;
+    display: flex;
+}
+.carousel-images img {
+    width: 70%;
+    height: 70%;
+    display: none;
+}
+
+.prev-button-item,
+.next-button-item{
+    padding-top: 180px;
+    width: 10%;
+}
+
+.prev-button,
+.next-button {
+    padding-top: 90px;
+    width: 10%;
+}
+.prev-button-item img,
+.next-button-item img{
+    width: 24px;
+    height: 24px;
+}
+
+.prev-button img,
+.next-button img{
+    width: 24px;
+    height: 24px;
+}
+.bg-arrow{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.shop-refurbished{
+    width: 30%;
+    height: 40px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    display: flex;
+    background-color: #FFFFFF;
+    margin-left: 30%;
+}
+
+.shop-refurbished a{
+    padding: 8px;
+    text-decoration: none;
+    color: #000000;
+}
+.shop-refurbished img{
+    padding-top: 6px;
+}
+
+
+.product-description {
+    font-size: 10px;
+    color: #4A4848 ;
+}
+.title-1{
+    font-size: 30px;
+    color: #000000;
+
+}
+.title-2{
+    font-size: 24px;
+    color: #A8A8A8;
+}
+.Most-Wanted{
+    padding: 10px;
+    display: flex;
+    border-radius: 10px;
+    background-color: #ffffff;
+    gap: 25px;
+}
+
+.product-box {
+    border: 2px solid black;
+    position: relative;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.best-seller{
+    width: 50%;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #DFDFDF;
+
+}
+.item-image{
+    margin-bottom: -35px;
+    margin-top: -20px;
+}
+.description{
+    margin-left:8px ;
+}
+
+.product-box img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+footer a {
+    color: #000000;
+    text-decoration: none;
+    margin: 0 10px;
+}
