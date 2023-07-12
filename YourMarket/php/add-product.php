@@ -65,14 +65,14 @@ if (isset($_POST['add_product'])) {
 }
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
-    $delete_product_image = $mysqli->prepare("SELECT * FROM `article` WHERE id = ?");
+    $delete_product_image = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Article = ?");
     $delete_product_image->bind_param("i", $delete_id);
     $delete_product_image->execute();
     $fetch_delete_image = $delete_product_image->fetch(PDO::FETCH_ASSOC);
     unlink('../uploaded_img/' . $fetch_delete_image['image_1']);
     unlink('../uploaded_img/' . $fetch_delete_image['image_2']);
     unlink('../uploaded_img/' . $fetch_delete_image['image_3']);
-    $delete_product = $mysqli->prepare("DELETE FROM `article` WHERE id = ?");
+    $delete_product = $mysqli->prepare("DELETE FROM `article` WHERE ID_Article = ?");
     $delete_product->bind_param("i", $delete_id);
     $delete_product->execute();
     $delete_cart = $mysqli->prepare("DELETE FROM `cart` WHERE pid = ?");
@@ -186,8 +186,17 @@ if (isset($_GET['delete'])) {
             $select_products->bind_param("i", $sellerId); // Bind the seller ID as a parameter
             $select_products->execute();
 
+            if ($select_products->error) {
+                // Display the error message
+                echo("Error executing query: " . $select_products->error);
+            }
+
             $result = $select_products->get_result(); // Get the result set
 
+            if ($result === false) {
+                // Display the error message
+                echo("Error fetching result set: " . $mysqli->error);
+            }
             if ($result->num_rows > 0) {
                 while ($fetch_products = $result->fetch_assoc()) {
                     ?>
@@ -195,10 +204,10 @@ if (isset($_GET['delete'])) {
                         <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
                         <div class="name"><?= $fetch_products['name']; ?></div>
                         <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
-                        <div class="details"><span><?= $fetch_products['details']; ?></span></div>
+                        <div class="details"><span><?= $fetch_products['details']; ?></span></div><br>
                         <div class="flex-btn">
-                            <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">update</a>
-                            <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
+                            <a href="update_product.php?update=<?= $fetch_products['ID_Article']; ?>" class="option-btn">update</a>
+                            <a href="add-product.php?delete=<?= $fetch_products['ID_Article']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
                         </div>
                     </div>
                     <?php
@@ -206,12 +215,8 @@ if (isset($_GET['delete'])) {
             } else {
                 echo '<p class="empty">No products added yet!</p>';
             }
-
             ?>
-
         </div>
     </section>
 </div>
-
-
 </body>
