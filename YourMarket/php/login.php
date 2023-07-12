@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (password_verify($_POST["password"], $user["password"])) {
                     session_start();
                     $_SESSION["user_id"] = $user["ID_Seller"];
+                    $_SESSION["user_type"] = "seller";
 
                     header("Location: index.php");
                     exit;
@@ -33,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (password_verify($_POST["password"], $user["password"])) {
                     session_start();
                     $_SESSION["user_id"] = $user["ID_Buyer"];
+                    $_SESSION["user_type"] = "buyer";
 
                     header("Location: index.php");
                     exit;

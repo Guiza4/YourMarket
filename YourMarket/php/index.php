@@ -13,7 +13,7 @@ session_start();
     <script src="../js/home.js"></script>
 </head>
 <body>
-<?php if (isset($_SESSION["user_id"])): ?>
+<?php if (isset($_SESSION["user_id"]) && isset($_SESSION["user_type"])): ?>
     <!-- Barre de promotion -->
     <div id="promo-banner">
         <a href="#">Promo -10% for new users with the code : Malik77</a>
@@ -21,11 +21,18 @@ session_start();
 
     <!-- Barre de navigation -->
     <div id="navbar">
-        <a href="logout.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="222"></a>
+        <a href="logout.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
         <input type="text" id="search-bar" placeholder="Search..."><span class="search-icon"></span>
         <img src="../image/categorie.png" width="25" height="49"><a href="#">Category</a>
         <img src="../image/account.png" width="30" height="32"><a href="#">Account</a>
-        <img src="../image/cart.png" width="38" height="34"><a href="#">Cart</a>
+
+        <?php if ($_SESSION["user_type"] === "seller"): ?>
+            <!-- Display something specific for seller -->
+            <img src="../image/sellings.png" width="38" height="34"><a href="add-product.php">Sellings</a>
+        <?php else: ?>
+            <!-- Display the "Cart" link for other user types -->
+            <img src="../image/cart.png" width="38" height="34"><a href="#">Cart</a>
+        <?php endif; ?>
     </div>
 
     <!-- Contenu principal -->

@@ -9,7 +9,7 @@
 <!-- Barre de navigation -->
 <div id="navbar">
     <div class="nav-logo">
-        <img src="../image/logo-2.png" alt="Logo" height="64" width="222">
+        <a href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
     </div>
     <div class="nav-search">
         <input type="text" id="search-bar" placeholder="Search...">
@@ -57,8 +57,12 @@
                 </div>
                 <div class="inputBox">
                     <span>Category (required)</span>
-                    <input type="text" class="box" required maxlength="100" placeholder="Enter Product Category"
-                           name="categorie">
+                    <select class="box">
+                        <option>Phone</option>
+                        <option>Computer</option>
+                        <option>Watch</option>
+                        <option>Video Games</option>
+                    </select>
                 </div>
                 <div class="inputBox">
                     <span>Stock (required)</span>

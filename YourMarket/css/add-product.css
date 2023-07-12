@@ -84,7 +84,8 @@ body {
 }
 
 .box-add-product {
-    margin-top: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     border: 2px solid black;
     border-radius: 20px;
     width: 90%;
@@ -107,10 +108,6 @@ body {
 .box-add-product form {
     max-width: 70rem;
     margin: 0 auto;
-    background-color: var(--white);
-    box-shadow: var(--box-shadow);
-    border: var(--border);
-    border-radius: .5rem;
     padding: 2rem;
 }
 
@@ -126,12 +123,10 @@ body {
 
 .box-add-product form span {
     font-size: 1.3rem;
-    color: var(--light-color);
 }
 
 .box-add-product form .box {
     font-size: 1.2rem;
-    background-color: var(--light-bg);
     border-radius: .5rem;
     width: 100%;
     margin-top: 1.5rem;
