@@ -3,7 +3,9 @@ $mysqli = require __DIR__ . "/connecdb.php";
 session_start();
 
 if (isset($_POST['add_product'])) {
+    $sellerId = $_SESSION["user_id"]; // Get the seller ID from the session
 
+    // Retrieve product details from the form inputs
     $name = $_POST['name'];
     $name = filter_var($name, FILTER_SANITIZE_STRING);
     $price = $_POST['price'];
@@ -33,32 +35,34 @@ if (isset($_POST['add_product'])) {
     $image_tmp_name_3 = $_FILES['image_3']['tmp_name'];
     $image_folder_3 = '../uploaded_img/' . $image_3;
 
-    $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE name = ?");
-    $select_products->bind_param("s", $name); // Bind the parameter
+    $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE name = ? AND ID_Seller = ?");
+    if (!$select_products) {
+        die("Error preparing statement: " . $mysqli->error);
+    }
+    $select_products->bind_param("si", $name, $sellerId); // Bind the parameters
     $select_products->execute(); // Execute the statement
     $result = $select_products->get_result(); // Get the result set
     $rowCount = $result->num_rows; // Get the row count
 
     if ($rowCount > 0) {
-        $message[] = 'product name already exists!';
+        $message[] = 'Product name already exists!';
     } else {
-        $insert_products = $mysqli->prepare("INSERT INTO `article`(name, details, price, category, stock, image_1, image_2, image_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $insert_products->bind_param("ssssssss", $name, $details, $price, $category, $stock, $image_1, $image_2, $image_3);
+        $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, stock, image_1, image_2, image_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $insert_products->bind_param("issssssss", $sellerId, $name, $details, $price, $category, $stock, $image_1, $image_2, $image_3);
         $insert_products->execute();
 
         if ($insert_products) {
-            if ($image_size_1 > 2000000 or $image_size_2 > 2000000 or $image_size_3 > 2000000) {
-                $message[] = 'image size is too large!';
+            if ($image_size_1 > 2000000 || $image_size_2 > 2000000 || $image_size_3 > 2000000) {
+                $message[] = 'Image size is too large!';
             } else {
                 move_uploaded_file($image_tmp_name_1, $image_folder_1);
                 move_uploaded_file($image_tmp_name_2, $image_folder_2);
                 move_uploaded_file($image_tmp_name_3, $image_folder_3);
-                $message[] = 'new product added!';
+                $message[] = 'New product added!';
             }
         }
     }
 }
-
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
     $delete_product_image = $mysqli->prepare("SELECT * FROM `article` WHERE id = ?");
@@ -173,5 +177,41 @@ if (isset($_GET['delete'])) {
             <input type="submit" value="add product" class="btn" name="add_product">
         </form>
     </div>
+    <section class="show-products">
+        <h1 class="heading">Products Added</h1>
+        <div class="box-container">
+
+            <?php
+            $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Seller = ?");
+            $select_products->bind_param("i", $sellerId); // Bind the seller ID as a parameter
+            $select_products->execute();
+
+            $result = $select_products->get_result(); // Get the result set
+
+            if ($result->num_rows > 0) {
+                while ($fetch_products = $result->fetch_assoc()) {
+                    ?>
+                    <div class="box">
+                        <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
+                        <div class="name"><?= $fetch_products['name']; ?></div>
+                        <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+                        <div class="details"><span><?= $fetch_products['details']; ?></span></div>
+                        <div class="flex-btn">
+                            <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">update</a>
+                            <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo '<p class="empty">No products added yet!</p>';
+            }
+
+            ?>
+
+        </div>
+    </section>
 </div>
+
+
 </body>
