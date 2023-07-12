@@ -26,9 +26,10 @@ session_start();
         <div class="nav-dropdown">
             <img src="../image/categorie.png" width="25" height="49">Category
             <div class="dropdown-content">
-                <a href="#">ITEM 1</a>
-                <a href="#">ITEM 2</a>
-                <a href="#">ITEM 3</a>
+                <a href="#">Phone</a>
+                <a href="#">Computer</a>
+                <a href="#">Watch</a>
+                <a href="#">Video-game</a>
             </div>
         </div>
         <img src="../image/account.png" width="30" height="32"><a class="NAV" href="#">Account</a>
