@@ -21,11 +21,18 @@ session_start();
 
     <!-- Barre de navigation -->
     <div id="navbar">
-        <a href="logout.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="222"></a>
-        <input type="text" id="search-bar" placeholder="Search..."><span class="search-icon"></span>
-        <img src="../image/categorie.png" width="25" height="49"><a href="#">Category</a>
-        <img src="../image/account.png" width="30" height="32"><a href="#">Account</a>
-        <img src="../image/cart.png" width="38" height="34"><a href="#">Cart</a>
+        <a CLASS="NAV" href="logout.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
+        <input type="text" id="search-bar" placeholder="Search...">
+        <div class="nav-dropdown">
+            <img src="../image/categorie.png" width="25" height="49">Category
+            <div class="dropdown-content">
+                <a href="#">ITEM 1</a>
+                <a href="#">ITEM 2</a>
+                <a href="#">ITEM 3</a>
+            </div>
+        </div>
+        <img src="../image/account.png" width="30" height="32"><a class="NAV" href="#">Account</a>
+        <img src="../image/cart.png" width="38" height="34"><a CLASS="NAV" href="#">Cart</a>
     </div>
 
     <!-- Contenu principal -->

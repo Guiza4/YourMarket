@@ -27,6 +27,7 @@ body {
 
 #navbar img {
     margin-right: 10px;
+    margin-left: 4%;
 }
 
 #search-bar {
@@ -36,21 +37,33 @@ body {
     border: 1px solid #000000;
     border-radius: 10px;
 }
-.search-icon {
-    background-image: url("../image/search.png");
-    background-repeat: no-repeat;
-    background-size: 16px 16px;
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 200px;
-    margin-left: 5px;
-}
 
-#navbar a {
-    margin-right: 70px;
+.NAV  {
+    margin-right: 4%;
     text-decoration: none;
     color: #000000;
+}
+.nav-dropdown{
+    position: relative;
+    margin-left: auto;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #FFFFFF;
+    border: 1px solid black;
+    padding: 10px;
+    z-index: 1;
+    border-radius: 10px;
+}
+.nav-dropdown:hover .dropdown-content{
+    display: block;
+}
+.dropdown-content a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 5px;
 }
 
 #main-content {
