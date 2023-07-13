@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="Création de produit et affichage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/css/profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/add-product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/add-product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YourMarket/php/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/profile.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

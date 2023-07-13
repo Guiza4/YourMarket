@@ -1,9 +1,8 @@
 <?php
-
 session_start();
 $mysqli = require __DIR__ . "/connecdb.php";
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,37 +75,27 @@ $mysqli = require __DIR__ . "/connecdb.php";
                         <!--cette bare ne sert completment a rien mais ca fait class et c marant a faire-->
                     </div>
                     <?php
-                    $stmt = $mysqli->prepare("SELECT firstname FROM `seller` WHERE ID_Seller = ?");
-                    $stmt->bind_param("i", $_SESSION["user_id"]); // Utilisez la valeur de l'ID de l'utilisateur actuel
+                    if ($_SESSION["user_type"] === "seller") {
+                        $stmt = $mysqli->prepare("SELECT firstname, lastname, dateofbirth FROM `seller` WHERE ID_Seller = ?");
+                        $stmt->bind_param("i", $_SESSION["user_id"]);
+                    } else {
+                        $stmt = $mysqli->prepare("SELECT firstname, lastname, dateofbirth FROM `buyer` WHERE ID_Buyer = ?");
+                        $stmt->bind_param("i", $_SESSION["user_id"]);
+                    }
+
                     $stmt->execute();
-                    $stmt->bind_result($fetched_firstname);
+                    $stmt->bind_result($fetched_firstname, $fetched_lastname, $fetched_dateofbirth);
                     $stmt->fetch();
                     $stmt->close();
                     ?>
                     <div class="first-name">
-                        First Name : <?= $fetched_firstname; ?>
+                        First Name: <?= $fetched_firstname; ?>
                     </div>
-                    <?php
-                    $stmt = $mysqli->prepare("SELECT lastname FROM `seller` WHERE ID_Seller = ?");
-                    $stmt->bind_param("i", $_SESSION["user_id"]); // Utilisez la valeur de l'ID de l'utilisateur actuel
-                    $stmt->execute();
-                    $stmt->bind_result($fetched_lastname);
-                    $stmt->fetch();
-                    $stmt->close();
-                    ?>
                     <div class="last-name">
-                        Last Name : <?= $fetched_lastname; ?>
+                        Last Name: <?= $fetched_lastname; ?>
                     </div>
-                    <?php
-                    $stmt = $mysqli->prepare("SELECT dateofbirth FROM `seller` WHERE ID_Seller = ?");
-                    $stmt->bind_param("i", $_SESSION["user_id"]); // Utilisez la valeur de l'ID de l'utilisateur actuel
-                    $stmt->execute();
-                    $stmt->bind_result($fetched_dateofbirth);
-                    $stmt->fetch();
-                    $stmt->close();
-                    ?>
                     <div class="date-of-birth">
-                        Date of Birth : <?= $fetched_dateofbirth; ?>
+                        Date of Birth: <?= $fetched_dateofbirth; ?>
                     </div>
                     <div class="category-title">
                         <label class="title-1">Contact</label>
@@ -115,30 +104,28 @@ $mysqli = require __DIR__ . "/connecdb.php";
                         <!--cette bare ne sert completment a rien mais ca fait class et c marant a faire-->
                     </div>
                     <?php
-                    $stmt = $mysqli->prepare("SELECT email FROM `seller` WHERE ID_Seller = ?");
-                    $stmt->bind_param("i", $_SESSION["user_id"]); // Utilisez la valeur de l'ID de l'utilisateur actuel
+                    if ($_SESSION["user_type"] === "seller") {
+                        $stmt = $mysqli->prepare("SELECT email, phone FROM `seller` WHERE ID_Seller = ?");
+                        $stmt->bind_param("i", $_SESSION["user_id"]);
+                    } else {
+                        $stmt = $mysqli->prepare("SELECT email, phone FROM `buyer` WHERE ID_Buyer = ?");
+                        $stmt->bind_param("i", $_SESSION["user_id"]);
+                    }
+
                     $stmt->execute();
-                    $stmt->bind_result($fetched_email);
+                    $stmt->bind_result($fetched_email, $fetched_phone);
                     $stmt->fetch();
                     $stmt->close();
                     ?>
                     <div class="email">
-                        Email : <?= $fetched_email; ?>
+                        Email: <?= $fetched_email; ?>
                     </div>
-                    <?php
-                    $stmt = $mysqli->prepare("SELECT phone FROM `seller` WHERE ID_Seller = ?");
-                    $stmt->bind_param("i", $_SESSION["user_id"]); // Utilisez la valeur de l'ID de l'utilisateur actuel
-                    $stmt->execute();
-                    $stmt->bind_result($fetched_phone);
-                    $stmt->fetch();
-                    $stmt->close();
-                    ?>
                     <div class="phone-number">
-                        Phone Number : <?= $fetched_phone; ?>
+                        Phone Number: <?= $fetched_phone; ?>
                     </div>
                     <a class="NAV" href="logout.php">
                         <div class="log-out">
-                            <Center>LOG OUT</Center>
+                            <center>LOG OUT</center>
                         </div>
                     </a>
                 </div>
@@ -154,15 +141,15 @@ $mysqli = require __DIR__ . "/connecdb.php";
                             <div class="box-container">
                                 <?php
                                 // Récupérer les produits ajoutés par l'utilisateur
-                                $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Seller = ?");
+                                if ($_SESSION["user_type"] === "seller") {
+                                    $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Seller = ?");
+                                } else {
+                                    $select_products = $mysqli->prepare("SELECT * FROM `cart` WHERE ID_Buyer = ?");
+                                }
+
                                 $select_products->bind_param("i", $_SESSION["user_id"]); // Utilisez l'ID de l'utilisateur actuel
                                 $select_products->execute();
                                 $result = $select_products->get_result(); // Obtenir le jeu de résultats
-
-                                if ($result === false) {
-                                    // Afficher le message d'erreur
-                                    echo("Error fetching result set: " . $mysqli->error);
-                                }
 
                                 if ($result->num_rows > 0) {
                                     while ($fetch_products = $result->fetch_assoc()) {
@@ -175,13 +162,9 @@ $mysqli = require __DIR__ . "/connecdb.php";
                                             <div class="category">
                                                 <span>Category:</span> <?= $fetch_products['category']; ?>
                                             </div>
-                                            <div class="stock"><span>Stock:</span> <?= $fetch_products['stock']; ?>
-                                            </div>
+                                            <div class="stock"><span>Stock:</span> <?= $fetch_products['stock']; ?></div>
                                             <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                                             <br>
-                                            <div class="flex-btn">
-                                                <!-- Ajoutez ici les boutons de mise à jour et de suppression du produit -->
-                                            </div>
                                         </div>
                                         <?php
                                     }
@@ -196,13 +179,12 @@ $mysqli = require __DIR__ . "/connecdb.php";
                 <div class="right-side">
                     <a class="NAV" href="logout.php">
                         <div class="change-setting">
-                            <Center>Change setting</Center>
+                            <center>Change setting</center>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
-
     </div>
 <?php else:
     header("Location: login.php");
