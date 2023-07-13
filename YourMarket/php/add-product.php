@@ -64,16 +64,14 @@ if (isset($_GET['delete'])) {
     $delete_product_image = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Article = ?");
     $delete_product_image->bind_param("i", $delete_id);
     $delete_product_image->execute();
-    $fetch_delete_image = $delete_product_image->fetch(PDO::FETCH_ASSOC);
+    $result = $delete_product_image->get_result();
+    $fetch_delete_image = $result->fetch_assoc();
     unlink('../uploaded_img/' . $fetch_delete_image['image_1']);
     unlink('../uploaded_img/' . $fetch_delete_image['image_2']);
     unlink('../uploaded_img/' . $fetch_delete_image['image_3']);
     $delete_product = $mysqli->prepare("DELETE FROM `article` WHERE ID_Article = ?");
     $delete_product->bind_param("i", $delete_id);
     $delete_product->execute();
-    $delete_cart = $mysqli->prepare("DELETE FROM `cart` WHERE pid = ?");
-    $delete_cart->bind_param("i", $delete_id);
-    $delete_cart->execute();
     header('location:add-product.php');
 }
 

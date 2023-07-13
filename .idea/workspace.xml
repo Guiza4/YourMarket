@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="Création de produits ok, mais affichage disparait quand refresh la page">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/add-product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/add-product.php" afterDir="false" />
-    </list>
+    <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="Création de produit et affichage" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689177770141</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Création de produit et affichage">
+      <option name="closed" value="true" />
+      <created>1689237825562</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1689237825562</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,7 +190,8 @@
     <MESSAGE value="ajout image + .idea" />
     <MESSAGE value="On peut ajouter des produits" />
     <MESSAGE value="Création de produits ok, mais affichage disparait quand refresh la page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création de produits ok, mais affichage disparait quand refresh la page" />
+    <MESSAGE value="Création de produit et affichage" />
+    <option name="LAST_COMMIT_MESSAGE" value="Création de produit et affichage" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>
