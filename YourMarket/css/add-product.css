@@ -18,12 +18,11 @@ body {
 
 .nav-logo {
     align-items: center;
-    background-color: #FFFFFF;
     border-radius: 10px;
 }
 
 .nav-logo img {
-    object-fit: cover;
+
 }
 
 .nav-search {
