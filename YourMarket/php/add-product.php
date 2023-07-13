@@ -1,9 +1,8 @@
 <?php
 $mysqli = require __DIR__ . "/connecdb.php";
 session_start();
-
+$sellerId = $_SESSION["user_id"];// Get the seller ID from the session
 if (isset($_POST['add_product'])) {
-    $sellerId = $_SESSION["user_id"]; // Get the seller ID from the session
 
     // Retrieve product details from the form inputs
     $name = $_POST['name'];
@@ -36,9 +35,6 @@ if (isset($_POST['add_product'])) {
     $image_folder_3 = '../uploaded_img/' . $image_3;
 
     $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE name = ? AND ID_Seller = ?");
-    if (!$select_products) {
-        die("Error preparing statement: " . $mysqli->error);
-    }
     $select_products->bind_param("si", $name, $sellerId); // Bind the parameters
     $select_products->execute(); // Execute the statement
     $result = $select_products->get_result(); // Get the result set
@@ -177,6 +173,7 @@ if (isset($_GET['delete'])) {
             <input type="submit" value="add product" class="btn" name="add_product">
         </form>
     </div>
+
     <section class="show-products">
         <h1 class="heading">Products Added</h1>
         <div class="box-container">
@@ -186,17 +183,13 @@ if (isset($_GET['delete'])) {
             $select_products->bind_param("i", $sellerId); // Bind the seller ID as a parameter
             $select_products->execute();
 
-            if ($select_products->error) {
-                // Display the error message
-                echo("Error executing query: " . $select_products->error);
-            }
-
             $result = $select_products->get_result(); // Get the result set
 
             if ($result === false) {
                 // Display the error message
                 echo("Error fetching result set: " . $mysqli->error);
             }
+
             if ($result->num_rows > 0) {
                 while ($fetch_products = $result->fetch_assoc()) {
                     ?>
