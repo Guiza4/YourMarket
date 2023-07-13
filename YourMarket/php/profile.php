@@ -84,10 +84,22 @@
                 </a>
             </div>
             <div class="middel">
+                <div class="product">
+                    <div class="category-title">
+                        <label class="title-1">Activity</label>
+                    </div>
+                    <div class="bar-random">
+                        <!--cette bare ne sert completment a rien mais ca fait class et c marant a faire-->
+                    </div>
 
+                </div>
             </div>
             <div class="right-side">
-
+                <a class="NAV" href="logout.php">
+                    <div class="change-setting">
+                        <Center>Change setting</Center>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
