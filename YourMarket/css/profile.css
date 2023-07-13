@@ -109,9 +109,11 @@ body {
 .box-principal {
     display: flex;
     justify-content: center;
+
 }
 
 .box-profile {
+    background-color: #E0DDDD;
     margin-top: 2%;
     margin-bottom: 2%;
     border: 2px solid black;
@@ -150,7 +152,8 @@ body {
 
 .contenue {
     display: flex;
-
+    border-radius: 18px;
+    background-color: #E0DDDD;
 }
 
 .left-side {
@@ -189,15 +192,30 @@ body {
     height: 10%;
 }
 .middel {
-
-    background-color: #FBBC05;
-    width: 50%;
+    width: 55%;
     height: fit-content;
+}
+.product{
+    padding: 2%;
+    background-color: #FFFFFF;
+    margin: 5px;
+    border-radius: 10px;
+    width: 90%;
+    height: auto;
 
 }
 .right-side {
-    background-color: #EB567B;
-    width: 20%;
+    width: 15%;
     height: auto;
+}
+.change-setting {
+    margin-bottom: 20px;
+    margin-top: 40px;
+    padding-top: 14px;
+    border-radius: 5px;
+    background-image: linear-gradient(210deg, rgba(235, 86, 123, 1) 0%, rgba(150, 158, 255, 0.5899999737739563) 48%, rgba(145, 58, 254, 0.8399999737739563) 100%);
+    width: 69%;
+    height: 8%;
+    margin-left: 17px;
 }
 
