@@ -100,7 +100,7 @@ if (isset($_GET['delete'])) {
             <span>Category</span>
         </div>
     </a>
-    <a href="#">
+    <a href="profile.php">
         <div class="nav-account">
             <img src="../image/account.png" width="30" height="32">
             <span>Account</span>
@@ -168,7 +168,7 @@ if (isset($_GET['delete'])) {
                     <span>Product Details (required)</span>
                     <textarea name="details" placeholder="enter product details" class="box" required maxlength="500"
                               cols="30" rows="10"></textarea>
-                </div>
+                </div><br>
             </div>
 
             <input type="submit" value="add product" class="btn" name="add_product">

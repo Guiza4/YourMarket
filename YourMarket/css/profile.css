@@ -189,7 +189,7 @@ body {
     border-radius: 5px;
     background-color: #FBBC05;
     width: 30%;
-    height: 10%;
+    height: 6%;
 }
 .middel {
     width: 55%;
@@ -203,6 +203,100 @@ body {
     width: 90%;
     height: auto;
 
+
+}
+section{
+    padding:2rem;
+    max-width: 1200px;
+    margin:0 auto;
+}
+
+.show-products .box-container {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+.show-products .box-container .box {
+    background-color: white;
+    border-radius: 2rem;
+    border: solid black;
+    padding: 1rem;
+    height: 35rem;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.show-products .box-container .box img {
+    max-width: 100%;
+    max-height: 40%;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.show-products .box-container .box .name{
+    font-size: 2rem;
+    color:black;
+}
+
+.show-products .box-container .box .category{
+    font-size: 1.5rem;
+    color:#666;
+    line-height: 2;
+}
+
+.show-products .box-container .box .price{
+    font-size: 2rem;
+    color:#2980b9;
+    margin:.5rem 0;
+}
+
+.show-products .box-container .box .details{
+    font-size: 1.5rem;
+    color:#666;
+    line-height: 2;
+    max-lines: 2;
+}
+
+.show-products .box-container .box .stock{
+    font-size: 1.5rem;
+    color:#666;
+    line-height: 2;
+}
+
+.show-products .box-container {
+    grid-template-columns: 1fr;
+}
+
+.delete-btn,
+.option-btn {
+    max-height: 20%;
+    max-width: 20%;
+    margin-top: 2rem;
+    border-radius: 20px;
+    padding: 1rem 3rem;
+    font-size: 1.7rem;
+    text-transform: capitalize;
+    text-decoration: none;
+    color: white;
+    background-color: white;
+    cursor: pointer;
+}
+
+.option-btn{
+    background-color: orange;
+}
+
+.delete-btn{
+    background-color: red;
+}
+.delete-btn:hover,
+.option-btn:hover {
+    background-color: black;
 }
 .right-side {
     width: 15%;
@@ -215,7 +309,7 @@ body {
     border-radius: 5px;
     background-image: linear-gradient(210deg, rgba(235, 86, 123, 1) 0%, rgba(150, 158, 255, 0.5899999737739563) 48%, rgba(145, 58, 254, 0.8399999737739563) 100%);
     width: 69%;
-    height: 8%;
+    height: 5%;
     margin-left: 17px;
 }
 
