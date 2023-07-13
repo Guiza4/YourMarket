@@ -1,7 +1,10 @@
 <?php
 $mysqli = require __DIR__ . "/connecdb.php";
 session_start();
-$sellerId = $_SESSION["user_id"];// Get the seller ID from the session
+$sellerId = $_SESSION["user_id"];
+if(!isset($sellerId)){
+    header('location:login.php');
+}
 if (isset($_POST['add_product'])) {
 
     // Retrieve product details from the form inputs
@@ -182,12 +185,6 @@ if (isset($_GET['delete'])) {
             $select_products->execute();
 
             $result = $select_products->get_result(); // Get the result set
-
-            if ($result === false) {
-                // Display the error message
-                echo("Error fetching result set: " . $mysqli->error);
-            }
-
             if ($result->num_rows > 0) {
                 while ($fetch_products = $result->fetch_assoc()) {
                     ?>

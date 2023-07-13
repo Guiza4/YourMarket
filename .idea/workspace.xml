@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="Création de produit et affichage" />
+    <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="Modif Css">
+      <change afterPath="$PROJECT_DIR$/YourMarket/css/update_product.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/YourMarket/php/update_product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/css/add-product.css" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/css/add-product.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/add-product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/add-product.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -150,7 +156,23 @@
       <option name="project" value="LOCAL" />
       <updated>1689237825562</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Delete Product">
+      <option name="closed" value="true" />
+      <created>1689238356306</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1689238356306</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Modif Css">
+      <option name="closed" value="true" />
+      <created>1689239423692</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1689239423692</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,7 +213,9 @@
     <MESSAGE value="On peut ajouter des produits" />
     <MESSAGE value="Création de produits ok, mais affichage disparait quand refresh la page" />
     <MESSAGE value="Création de produit et affichage" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création de produit et affichage" />
+    <MESSAGE value="Delete Product" />
+    <MESSAGE value="Modif Css" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modif Css" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>
