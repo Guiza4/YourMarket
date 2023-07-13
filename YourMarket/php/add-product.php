@@ -195,6 +195,8 @@ if (isset($_GET['delete'])) {
                         <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
                         <div class="name"><?= $fetch_products['name']; ?></div>
                         <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+                        <div class="category"><span>Category:</span> <?= $fetch_products['category']; ?> </div>
+                        <div class="stock"><span>Stock:</span> <?= $fetch_products['stock']; ?> </div>
                         <div class="details"><span><?= $fetch_products['details']; ?></span></div><br>
                         <div class="flex-btn">
                             <a href="update_product.php?update=<?= $fetch_products['ID_Article']; ?>" class="option-btn">update</a>
