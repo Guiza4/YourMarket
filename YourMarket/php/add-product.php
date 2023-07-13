@@ -168,7 +168,7 @@ if (isset($_GET['delete'])) {
                     <span>Product Details (required)</span>
                     <textarea name="details" placeholder="enter product details" class="box" required maxlength="500"
                               cols="30" rows="10"></textarea>
-                </div><br>
+                </div>
             </div>
 
             <input type="submit" value="add product" class="btn" name="add_product">
@@ -194,7 +194,7 @@ if (isset($_GET['delete'])) {
                         <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
                         <div class="category"><span>Category:</span> <?= $fetch_products['category']; ?> </div>
                         <div class="stock"><span>Stock:</span> <?= $fetch_products['stock']; ?> </div>
-                        <div class="details"><span><?= $fetch_products['details']; ?></span></div><br>
+                        <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                         <div class="flex-btn">
                             <a href="update_product.php?update=<?= $fetch_products['ID_Article']; ?>" class="option-btn">update</a>
                             <a href="add-product.php?delete=<?= $fetch_products['ID_Article']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
