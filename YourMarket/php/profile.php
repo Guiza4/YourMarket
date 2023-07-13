@@ -15,7 +15,7 @@ $mysqli = require __DIR__ . "/connecdb.php";
     <!-- Barre de navigation -->
     <div id="navbar">
         <div class="nav-logo">
-            <a CLASS="NAV" href="logout.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
+            <a CLASS="NAV" href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
         </div>
         <div class="nav-search">
             <input type="text" id="search-bar" placeholder="Search...">
@@ -33,7 +33,7 @@ $mysqli = require __DIR__ . "/connecdb.php";
                 </div>
             </div>
         </a>
-        <a class="NAV" href="#">
+        <a class="NAV" href="profile.php">
             <div class="nav-account">
                 <img src="../image/account.png" width="30" height="32">
                 <span>Account</span>
