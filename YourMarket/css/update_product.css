@@ -150,6 +150,8 @@ body {
 .flex-btn {
     flex-flow: column;
     gap: 0;
+    margin-left: 6rem;
+    margin-right: 6rem;
 }
 
 .btn {
@@ -246,10 +248,85 @@ section{
     grid-template-columns: 1fr;
 }
 
-.delete-btn,
-.option-btn {
+.update-product form{
+    background-color: white;
+    border-radius: .5rem;
+    border:.2rem solid black;
+    padding: 2rem;
+    max-width: 40rem;
+    margin:0 auto;
+    /* justify-content: center; */
+}
+
+.update-product form .image-container{
+    margin-bottom: 2rem;
+}
+
+.update-product form .image-container .main-image img{
+    height: 20rem;
+    width: 100%;
+    object-fit: contain;
+}
+
+.update-product form .image-container .sub-image{
+    display: flex;
+    gap:1rem;
+    justify-content: center;
+    margin:1rem 0;
+}
+
+.update-product form .image-container .sub-image img{
+    height: 5rem;
+    width: 7rem;
+    object-fit: contain;
+    padding:.5rem;
+    border:.2rem solid black;
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.update-product form .image-container .sub-image img:hover{
+    transform: scale(1.1);
+}
+
+.update-product form .box{
+    width: 100%;
+    border-radius: .5rem;
+    padding: .5rem;
+    font-size: 1.8rem;
+    color:black;
+    background-color: #eee;
+    margin: 1rem 0;
+}
+
+.update-product form span{
+    font-size: 1.7rem;
+    color:#666;
+}
+
+.update-product form textarea{
+    height: 15rem;
+    resize: none;
+}
+
+.option-btn{
     max-height: 20%;
-    max-width: 20%;
+    max-width: 30%;
+    margin-top: 2rem;
+    border-radius: 20px;
+    border:.1rem solid black;
+    padding: 1rem 1.5rem;
+    font-size: 1.7rem;
+    text-transform: capitalize;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    background-color: orange;
+}
+
+.updatebtn{
+    max-height: 20%;
+    max-width: 40%;
     margin-top: 2rem;
     border-radius: 20px;
     padding: 1rem 3rem;
@@ -259,16 +336,9 @@ section{
     color: white;
     background-color: white;
     cursor: pointer;
+    background-image: linear-gradient(210deg, rgba(235, 86, 123, 1) 0%, rgba(150, 158, 255, 0.5899999737739563) 48%, rgba(145, 58, 254, 0.8399999737739563) 100%);;
 }
-
-.option-btn{
-    background-color: orange;
-}
-
-.delete-btn{
-    background-color: red;
-}
-.delete-btn:hover,
+.updatebtn:hover,
 .option-btn:hover {
     background-color: black;
 }
