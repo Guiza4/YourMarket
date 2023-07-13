@@ -48,9 +48,29 @@ include 'search.php';
     <!-- Contenu principal -->
     <div id="main-content">
         <?php if (!empty($products)): ?>
+        <heading>Here are your results</heading>
             <section class="search-results">
                 <?php foreach ($products as $product): ?>
-                    <p><?= $product; ?></p>
+                    <div class="middel">
+                        <div class="product">
+                            <section class="show-products">
+                                <div class="box-container">
+                                    <div class="box">
+                                        <!-- Afficher les détails du produit -->
+                                        <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
+                                        <div class="name"><?= $product['name']; ?></div>
+                                        <div class="price">£<span><?= $product['price']; ?></span></div>
+                                        <div class="category">
+                                            <span>Category:</span> <?= $product['category']; ?>
+                                        </div>
+                                        <div class="stock"><span>Stock:</span> <?= $product['stock']; ?></div>
+                                        <div class="details"><span><?= $product['details']; ?></span></div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
             </section>
         <?php else: ?>
