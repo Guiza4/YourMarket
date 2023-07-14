@@ -107,14 +107,13 @@ if (isset($_GET['ID'])) {
                 <div class="name"><?= $product['name']; ?></div>
                 <div class="flex">
                     <div class="price"><span>£</span><?= $product['price']; ?></div>
-                    quantity:<?= $product['stock']; ?>
+                    <div class="quantity">quantity left:<?= $product['stock']; ?></div>
                     <input type="number" name="qty" class="qty" min="1" max="99"
                            onkeypress="" value="1">
                 </div>
                 <div class="details"><?= $product['details']; ?></div>
                 <div class="flex-btn">
                     <input type="submit" value="add to cart" class="btn" name="add_to_cart">
-                    <input class="option-btn" type="submit" name="add_to_wishlist" value="add to wishlist">
                 </div>
             </div>
         </div>

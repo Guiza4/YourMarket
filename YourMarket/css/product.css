@@ -1,37 +1,39 @@
 
-:root{
-    --main-color:#2980b9;
-    --orange:#f39c12;
-    --red:#e74c3c;
-    --black:#333;
-    --white:#fff;
-    --light-color:#666;
-    --light-bg:#eee;
-    --border:.2rem solid var(--black);
-    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
-}
-*::selection{
-    background-color: var(--main-color);
-    color:var(--white);
+:root {
+    --main-color: #2980b9;
+    --orange: #f39c12;
+    --red: #e74c3c;
+    --black: #333;
+    --white: #fff;
+    --light-color: #666;
+    --light-bg: #eee;
+    --border: .2rem solid var(--black);
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
 }
 
-::-webkit-scrollbar{
+*::selection {
+    background-color: var(--main-color);
+    color: var(--white);
+}
+
+::-webkit-scrollbar {
     height: .5rem;
     width: 1rem;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     background-color: var(--main-color);
 }
 
-html{
+html {
     font-size: 62.5%;
     overflow-x: hidden;
 }
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -144,6 +146,7 @@ section {
     max-width: 1200px;
     margin: 0 auto;
 }
+
 * {
     font-family: 'Nunito', sans-serif;
     margin: 0;
@@ -153,6 +156,7 @@ section {
     border: none;
     text-decoration: none;
 }
+
 .heading {
     font-size: 4rem;
     color: var(--black);
@@ -160,6 +164,7 @@ section {
     text-align: center;
     text-transform: uppercase;
 }
+
 .quick-view form {
     padding: 2rem;
     border-radius: .5rem;
@@ -168,27 +173,32 @@ section {
     box-shadow: var(--box-shadow);
     margin-top: 1rem;
 }
+
 .quick-view form .row {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     flex-wrap: wrap;
 }
+
 .quick-view form .row .image-container {
     margin-bottom: 2rem;
     flex: 1 1 40rem;
 }
+
 .quick-view form .row .image-container .main-image img {
     height: 30rem;
     width: 100%;
     object-fit: contain;
 }
+
 .quick-view form .row .image-container .sub-image {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
     margin-top: 2rem;
 }
+
 .quick-view form .row .image-container .sub-image img {
     height: 7rem;
     width: 10rem;
@@ -198,13 +208,16 @@ section {
     cursor: pointer;
     transition: .2s linear;
 }
+
 .quick-view form .row .content {
     flex: 1 1 40rem;
 }
+
 .quick-view form .row .content .name {
     font-size: 2rem;
     color: var(--black);
 }
+
 .quick-view form .row .flex {
     display: flex;
     align-items: center;
@@ -212,10 +225,12 @@ section {
     gap: 1rem;
     margin: 1rem 0;
 }
+
 .quick-view form .row .flex .price {
     font-size: 2rem;
     color: var(--red);
 }
+
 .quick-view form .row .flex .qty {
     width: 7rem;
     padding: 1rem;
@@ -224,19 +239,24 @@ section {
     color: var(--black);
     border-radius: .5rem;
 }
-.quick-view form .row .content .details {
+
+.quick-view form .row .content .details,.quantity {
     font-size: 1.6rem;
     color: var(--light-color);
     line-height: 2;
 }
+
 .flex-btn {
     display: flex;
     gap: 1rem;
 }
+
 .btn {
-    background-color: var(--main-color);
+    background-image: linear-gradient(210deg, rgba(235, 86, 123, 1) 0%, rgba(150, 158, 255, 0.5899999737739563) 48%, rgba(145, 58, 254, 0.8399999737739563) 100%);
+
 }
-.btn, .delete-btn, .option-btn {
+
+.btn, .delete-btn {
     display: block;
     width: 100%;
     margin-top: 1rem;
@@ -248,6 +268,4 @@ section {
     cursor: pointer;
     text-align: center;
 }
-.option-btn {
-    background-color: var(--orange);
-}
+
