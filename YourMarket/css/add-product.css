@@ -18,12 +18,11 @@ body {
 
 .nav-logo {
     align-items: center;
-    background-color: #FFFFFF;
     border-radius: 10px;
 }
 
 .nav-logo img {
-    object-fit: cover;
+
 }
 
 .nav-search {
@@ -150,6 +149,7 @@ body {
 .flex-btn {
     flex-flow: column;
     gap: 0;
+    margin-top:1rem;
 }
 
 .btn {
