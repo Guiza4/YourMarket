@@ -20,7 +20,7 @@ include 'search.php';
 
     <!-- Barre de navigation -->
     <div id="navbar">
-        <a class="NAV" href="logout.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
+        <a class="NAV" href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
         <form method="get" action="index.php">
             <input type="search" id="search-bar" name="search" placeholder="Search..."
                    value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
@@ -29,10 +29,11 @@ include 'search.php';
         <div class="nav-dropdown">
             <img src="../image/categorie.png" width="25" height="49">Category
             <div class="dropdown-content">
-                <a href="#">Phone</a>
-                <a href="#">Computer</a>
-                <a href="#">Watch</a>
-                <a href="#">Video-game</a>
+                <a href="index.php">All</a>
+                <a href="index.php?category=Phone">Phone</a>
+                <a href="index.php?category=Computer">Computer</a>
+                <a href="index.php?category=Watch">Watch</a>
+                <a href="index.php?category=Video-game">Video-game</a>
             </div>
         </div>
         <img src="../image/account.png" width="30" height="32"><a class="NAV" href="profile.php">Account</a>
@@ -45,16 +46,17 @@ include 'search.php';
             <img src="../image/cart.png" width="38" height="34"><a class="NAV" href="#">Cart</a>
         <?php endif; ?>
     </div>
+
     <!-- Contenu principal -->
     <div id="main-content">
         <?php if (!empty($products)): ?>
-        <heading>Here are your results</heading>
+            <h1 class="heading">Results: </h1>
             <section class="search-results">
-                <?php foreach ($products as $product): ?>
-                    <div class="middel">
-                        <div class="product">
-                            <section class="show-products">
-                                <div class="box-container">
+                <div class="product-container">
+                    <div class="product">
+                        <section class="show-products">
+                            <div class="box-container">
+                                <?php foreach ($products as $product): ?>
                                     <div class="box">
                                         <!-- Afficher les détails du produit -->
                                         <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
@@ -67,16 +69,13 @@ include 'search.php';
                                         <div class="details"><span><?= $product['details']; ?></span></div>
                                         <br>
                                     </div>
-                                </div>
-                            </section>
-                        </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </section>
                     </div>
-                <?php endforeach; ?>
+                </div>
             </section>
-        <?php else: ?>
-
-            <section class="search-results">
-            </section>
+        <?php elseif (empty($searchQuery) && empty($_GET['category'])): ?>
             <!-- Contenu principal -->
             <div id="main-content">
                 <!-- Rectangle avec carrousel -->
@@ -323,23 +322,26 @@ include 'search.php';
                     <!-- Ajoutez plus de cases d'articles ici -->
                 </div>
             </div>
+        <?php else: ?>
+            <!-- Display a message when no search results or category is found -->
+            <div id="main-content">
+                <h1 class="heading">No results found!</h1>
+            </div>
         <?php endif; ?>
     </div>
-
-    <center>
-        <footer>
-            <a href="mentions-legales.html">LEGAL</a>
-            <a href="politique-confidentialite.html">PRIVACY CENTER</a>
-            <a href="cookies.html">COOKIE</a>
-            <a href="a-propos.html">ABOUT US</a>
-        </footer>
-    </center>
-
-
-<?php else:
+<?php else: ?>
+    <?php
     header("Location: login.php");
-    exit; ?>
+    exit;
+    ?>
 <?php endif; ?>
-
+<center>
+    <footer>
+        <a href="mentions-legales.html">LEGAL</a>
+        <a href="politique-confidentialite.html">PRIVACY CENTER</a>
+        <a href="cookies.html">COOKIE</a>
+        <a href="a-propos.html">ABOUT US</a>
+    </footer>
+</center>
 </body>
 </html>

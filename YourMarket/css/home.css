@@ -196,13 +196,13 @@ footer a {
 }
 
 section{
-    padding:2rem;
     max-width: 1200px;
     margin:0 auto;
 }
 
 .show-products .box-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
     align-items: flex-start;
@@ -212,8 +212,8 @@ section{
     border-radius: 2rem;
     border: solid black;
     padding: 1rem;
-    height: 35rem;
-    width: 25rem;
+    height: 25rem;
+    width: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -262,10 +262,6 @@ section{
     grid-template-columns: 1fr;
 }
 
-.middel {
-    width: 55%;
-    height: fit-content;
-}
 .product{
     padding: 2%;
     background-color: #FFFFFF;
@@ -276,4 +272,11 @@ section{
 }
 .show-products .box-container {
     grid-template-columns: 1fr;
+}
+
+.heading {
+    font-size: 30px;
+    color: #000000;
+    margin-bottom: .5rem;
+    text-align: center;
 }

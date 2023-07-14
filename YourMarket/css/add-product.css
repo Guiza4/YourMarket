@@ -187,6 +187,7 @@ section{
 
 .show-products .box-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
     align-items: flex-start;
@@ -196,8 +197,8 @@ section{
     border-radius: 2rem;
     border: solid black;
     padding: 1rem;
-    height: 35rem;
-    width: 25rem;
+    height: 33rem;
+    width: 23rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
