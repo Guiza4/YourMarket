@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var currentIndex = 0;
-    var images = $('.carousel-images img');
+    var images = $(".carousel-images img");
     var totalImages = images.length;
 
     // Show the first image
@@ -24,12 +24,23 @@ $(document).ready(function () {
     setInterval(showNextImage, 3000); // Change the delay (in milliseconds) as per your requirement
 
     // Previous button click event
-    $('.prev-button').click(function () {
+    $(".prev-button").click(function () {
         showPrevImage();
     });
 
     // Next button click event
-    $('.next-button').click(function () {
+    $(".next-button").click(function () {
         showNextImage();
     });
+
+    // Filter buttons click event
+    $("#filter-alphabet").click(function () {
+        window.location.href = updateQueryStringParameter(window.location.href, "sort", "name");
+    });
+
+    $("#filter-price").click(function () {
+        window.location.href = updateQueryStringParameter(window.location.href, "sort", "price");
+    });
+
+    // Function to update query string parameter
 });

@@ -60,7 +60,7 @@ body {
 .nav-dropdown:hover .dropdown-content{
     display: block;
 }
-.dropdown-content a{
+.dropdown-content a,button{
     display: block;
     text-decoration: none;
     color: black;
@@ -279,4 +279,32 @@ section{
     color: #000000;
     margin-bottom: .5rem;
     text-align: center;
+}
+
+.filter-container {
+    position: relative;
+    margin-left: auto;
+}
+
+.filter-container .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FFFFFF;
+    border: 1px solid black;
+    padding: 10px;
+    z-index: 1;
+    border-radius: 10px;
+    width: 100px;
+}
+
+.filter-container:hover .dropdown-content {
+    display: block;
+}
+
+.filter-container .dropdown-content a,
+.filter-container .dropdown-content button {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 5px;
 }

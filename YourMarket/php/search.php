@@ -23,3 +23,28 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
         }
     }
 }
+
+// Tri des produits
+if (isset($_GET['order_by'])) {
+    $orderBy = $_GET['order_by'];
+    if ($orderBy === 'name') {
+        usort($products, function ($a, $b) {
+            return strcmp($a['name'], $b['name']);
+        });
+    } elseif ($orderBy === 'price') {
+        usort($products, function ($a, $b) {
+            return $a['price'] - $b['price'];
+        });
+    }
+}
+
+// Direction du tri
+if (isset($_GET['order_direction'])) {
+    $orderDirection = $_GET['order_direction'];
+    if ($orderDirection === 'desc') {
+        $products = array_reverse($products);
+    }
+}
+
+return $products;
+?>

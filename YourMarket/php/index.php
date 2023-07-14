@@ -24,7 +24,6 @@ include 'search.php';
         <form method="get" action="index.php">
             <input type="search" id="search-bar" name="search" placeholder="Search..."
                    value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
-            <button type="submit" name="send"><i data-src="../image/search.png"></i></button>
         </form>
         <div class="nav-dropdown">
             <img src="../image/categorie.png" width="25" height="49">Category
@@ -50,6 +49,17 @@ include 'search.php';
     <!-- Contenu principal -->
     <div id="main-content">
         <?php if (!empty($products)): ?>
+            <?php if (isset($_GET['search']) && !empty($_GET['search'])): ?>
+                <div class="filter-container">
+                        <img src="../image/filter.png" width="35rem" height="45rem">
+                        <div class="dropdown-content">
+                            <button class="filter-button" id="filter-alphabet" onclick="applyFilter('name')">Sort by Name</button>
+                            <button class="filter-button" id="filter-price" onclick="applyFilter('price')">Sort by Price</button>
+
+                        </div>
+                </div>
+            <?php endif; ?>
+
             <h1 class="heading">Results: </h1>
             <section class="search-results">
                 <div class="product-container">
