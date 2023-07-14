@@ -277,3 +277,6 @@ section{
 .show-products .box-container {
     grid-template-columns: 1fr;
 }
+.go-to-product{
+    text-decoration: none;
+}

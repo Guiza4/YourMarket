@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="Création de produit et affichage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/css/profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/add-product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/add-product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/css/home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YourMarket/php/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/product.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="yous" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -199,5 +198,16 @@
     <MESSAGE value="Création de produit et affichage" />
     <option name="LAST_COMMIT_MESSAGE" value="Création de produit et affichage" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/YourMarket/php/update_product.php</url>
+          <line>144</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
