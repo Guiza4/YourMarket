@@ -47,297 +47,293 @@ include 'search.php';
     </div>
 
     <!-- Contenu principal -->
-    <div id="main-content">
-        <?php if (!empty($products)): ?>
-            <?php if (isset($_GET['search']) && !empty($_GET['search'])): ?>
+    <?php if (!empty($products)): ?>
+        <?php if ((isset($_GET['search'])) && !empty($_GET['search'])): ?>
+            <h1 class="heading">Results: </h1>
+            <div id="main-content-search">
+            <?php if (isset($_GET['search']) || isset($_GET['category'])): ?>
                 <div class="filter-container">
-                        <img src="../image/filter.png" width="35rem" height="45rem">
-                        <div class="dropdown-content">
-                            <button class="filter-button" id="filter-alphabet" onclick="applyFilter('name')">Sort by Name</button>
-                            <button class="filter-button" id="filter-price" onclick="applyFilter('price')">Sort by Price</button>
-
-                        </div>
+                    <?php include "filter.php"; ?>
                 </div>
             <?php endif; ?>
-
-            <h1 class="heading">Results: </h1>
-            <section class="search-results">
-                <div class="product-container">
-                    <div class="product">
-                        <section class="show-products">
-                            <div class="box-container">
-                                <?php foreach ($products as $product): ?>
-                                    <div class="box">
-                                        <!-- Afficher les détails du produit -->
-                                        <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
-                                        <div class="name"><?= $product['name']; ?></div>
-                                        <div class="price">£<span><?= $product['price']; ?></span></div>
-                                        <div class="category">
-                                            <span>Category:</span> <?= $product['category']; ?>
-                                        </div>
-                                        <div class="stock"><span>Stock:</span> <?= $product['stock']; ?></div>
-                                        <div class="details"><span><?= $product['details']; ?></span></div>
-                                        <br>
+        <?php endif; ?>
+        <section class="search-results">
+            <div class="product-container">
+                <div class="product">
+                    <section class="show-products">
+                        <div class="box-container">
+                            <?php foreach ($products as $product): ?>
+                                <div class="box">
+                                    <!-- Afficher les détails du produit -->
+                                    <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
+                                    <div class="name"><?= $product['name']; ?></div>
+                                    <div class="price">£<span><?= $product['price']; ?></span></div>
+                                    <div class="category">
+                                        <span>Category:</span> <?= $product['category']; ?>
                                     </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </section>
+                                    <div class="stock"><span>Stock:</span> <?= $product['stock']; ?></div>
+                                    <div class="details"><span><?= $product['details']; ?></span></div>
+                                    <br>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    <?php elseif (empty($searchQuery) && empty($_GET['category'])): ?>
+        <!-- Contenu principal -->
+        <div id="main-content">
+            <!-- Rectangle avec carrousel -->
+            <div class="rounded-box">
+                <div class="refurbished-left">
+                    <center><h2>Save Up To 50%</h2>
+                        <h2>With Refurbished</h2><br>
+                        <h4>Expertly restored, quality checked & a one-year seller guarantee</h4></center>
+                    <div class="shop-refurbished">
+                        <a href="#">Shop Refurbished</a><img src="../image/arrows-right-2.png" width="24"
+                                                             height="24">
                     </div>
                 </div>
-            </section>
-        <?php elseif (empty($searchQuery) && empty($_GET['category'])): ?>
-            <!-- Contenu principal -->
-            <div id="main-content">
-                <!-- Rectangle avec carrousel -->
-                <div class="rounded-box">
-                    <div class="refurbished-left">
-                        <center><h2>Save Up To 50%</h2>
-                            <h2>With Refurbished</h2><br>
-                            <h4>Expertly restored, quality checked & a one-year seller guarantee</h4></center>
-                        <div class="shop-refurbished">
-                            <a href="#">Shop Refurbished</a><img src="../image/arrows-right-2.png" width="24"
-                                                                 height="24">
-                        </div>
+                <div class="refurbished-right">
+                    <div class="prev-button">
+                        <center>
+                            <button class="bg-arrow"><img src="../image/arrow-left.png"></button>
+                        </center>
                     </div>
-                    <div class="refurbished-right">
-                        <div class="prev-button">
-                            <center>
-                                <button class="bg-arrow"><img src="../image/arrow-left.png"></button>
-                            </center>
-                        </div>
-                        <div class="carousel-images">
-                            <center><img src="../image/applewatch.png" alt="Image 1">
-                                <img src="../image/Iphone.png" alt="Image 2">
-                                <img src="../image/Ipad.png" alt="Image 3"></center>
-                        </div>
-                        <div class="next-button">
-                            <center>
-                                <button class="bg-arrow"><img src="../image/arrows-right-2.png"></button>
-                            </center>
-                        </div>
+                    <div class="carousel-images">
+                        <center><img src="../image/applewatch.png" alt="Image 1">
+                            <img src="../image/Iphone.png" alt="Image 2">
+                            <img src="../image/Ipad.png" alt="Image 3"></center>
+                    </div>
+                    <div class="next-button">
+                        <center>
+                            <button class="bg-arrow"><img src="../image/arrows-right-2.png"></button>
+                        </center>
                     </div>
                 </div>
-                <!-- Catégorie Most Wanted -->
-                <div>
-                    <div class="category-title">
-                        <label class="title-1"> Most Wanted</label>
-                        <label class="title-2"> The tech everybody wants !</label>
-                    </div>
-                    <div class="Most-Wanted">
-                        <div class="prev-button-item">
-                            <center>
-                                <button class="bg-arrow"><img src="../image/arrow-left.png"></button>
-                            </center>
-                        </div>
-                        <!-- produit 1 -->
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-1.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>Iphone 12</p></label>
-                                <label class="product-description"><p>125 Gb-purple-unlocked</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£319.99</p></label>
-                            </div>
-                        </div>
-                        <!-- produit 2 -->
-
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-2.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>Iphone 12</p></label>
-                                <label class="product-description"><p>125 Gb-Black-unlocked</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£339.99</p></label>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-3.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>MacBook Air 13" (2019) - QWERTY - English</p></label>
-                                <label class="product-description"><p>Retina - Core i5 - 1.6 GHz - 128 GB SSD - RAM
-                                        8GB</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£539.99</p></label>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-4.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>Switch OLED </p></label>
-                                <label class="product-description"><p>64GB - White</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£539.99</p></label>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-5.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>Xbox One </p></label>
-                                <label class="product-description"><p>500GB - Black</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£99.99</p></label>
-                            </div>
-                        </div>
-                        <!-- Ajoutez plus de cases d'articles ici -->
-                        <div class="next-button-item">
-                            <center>
-                                <button class="bg-arrow"><img src="../image/arrows-right-2.png" width="24px"
-                                                              height="24px">
-                                </button>
-                            </center>
-                        </div>
-                    </div>
+            </div>
+            <!-- Catégorie Most Wanted -->
+            <div>
+                <div class="category-title">
+                    <label class="title-1"> Most Wanted</label>
+                    <label class="title-2"> The tech everybody wants !</label>
                 </div>
-
-                <!-- Catégorie Best Action -->
-                <div>
-                    <div class="category-title">
-                        <label class="title-1"> Best Action</label>
-                        <label class="title-2"> Put a bid or best offer !</label>
+                <div class="Most-Wanted">
+                    <div class="prev-button-item">
+                        <center>
+                            <button class="bg-arrow"><img src="../image/arrow-left.png"></button>
+                        </center>
                     </div>
-                    <div class="Most-Wanted">
-                        <div class="prev-button-item">
-                            <center>
-                                <button class="bg-arrow"><img src="../image/arrow-left.png"></button>
-                            </center>
+                    <!-- produit 1 -->
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
                         </div>
-                        <!-- produit 1 -->
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-1.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>Iphone 12</p></label>
-                                <label class="product-description"><p>125 Gb-purple-unlocked</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£319.99</p></label>
-                            </div>
+                        <div class="item-image">
+                            <img src="../image/item-1.png">
                         </div>
-                        <!-- produit 2 -->
+                        <div class="description">
+                            <label class="product-name"><p>Iphone 12</p></label>
+                            <label class="product-description"><p>125 Gb-purple-unlocked</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£319.99</p></label>
+                        </div>
+                    </div>
+                    <!-- produit 2 -->
 
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-2.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>Iphone 12</p></label>
-                                <label class="product-description"><p>125 Gb-Black-unlocked</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£339.99</p></label>
-                            </div>
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
                         </div>
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-3.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>MacBook Air 13" (2019) - QWERTY - English</p></label>
-                                <label class="product-description"><p>Retina - Core i5 - 1.6 GHz - 128 GB SSD - RAM
-                                        8GB</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£539.99</p></label>
-                            </div>
+                        <div class="item-image">
+                            <img src="../image/item-2.png">
                         </div>
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-4.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>Switch OLED </p></label>
-                                <label class="product-description"><p>64GB - White</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£539.99</p></label>
-                            </div>
+                        <div class="description">
+                            <label class="product-name"><p>Iphone 12</p></label>
+                            <label class="product-description"><p>125 Gb-Black-unlocked</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£339.99</p></label>
                         </div>
-                        <div class="product-box">
-                            <div class="best-seller">
-                                <center> Best Seller</center>
-                            </div>
-                            <div class="item-image">
-                                <img src="../image/item-5.png">
-                            </div>
-                            <div class="description">
-                                <label class="product-name"><p>Xbox One </p></label>
-                                <label class="product-description"><p>500GB - Black</p>
-                                    <p>Warranty: 12 months</p>
-                                    <p>starting at:</p>
-                                </label>
-                                <label class="price"><p>£99.99</p></label>
-                            </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
                         </div>
-                        <!-- Ajoutez plus de cases d'articles ici -->
-                        <div class="next-button-item">
-                            <center>
-                                <button class="bg-arrow"><img src="../image/arrows-right-2.png" width="24px"
-                                                              height="24px">
-                                </button>
-                            </center>
+                        <div class="item-image">
+                            <img src="../image/item-3.png">
+                        </div>
+                        <div class="description">
+                            <label class="product-name"><p>MacBook Air 13" (2019) - QWERTY - English</p></label>
+                            <label class="product-description"><p>Retina - Core i5 - 1.6 GHz - 128 GB SSD - RAM
+                                    8GB</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£539.99</p></label>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
+                        </div>
+                        <div class="item-image">
+                            <img src="../image/item-4.png">
+                        </div>
+                        <div class="description">
+                            <label class="product-name"><p>Switch OLED </p></label>
+                            <label class="product-description"><p>64GB - White</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£539.99</p></label>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
+                        </div>
+                        <div class="item-image">
+                            <img src="../image/item-5.png">
+                        </div>
+                        <div class="description">
+                            <label class="product-name"><p>Xbox One </p></label>
+                            <label class="product-description"><p>500GB - Black</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£99.99</p></label>
                         </div>
                     </div>
                     <!-- Ajoutez plus de cases d'articles ici -->
+                    <div class="next-button-item">
+                        <center>
+                            <button class="bg-arrow"><img src="../image/arrows-right-2.png" width="24px"
+                                                          height="24px">
+                            </button>
+                        </center>
+                    </div>
                 </div>
             </div>
-        <?php else: ?>
-            <!-- Display a message when no search results or category is found -->
-            <div id="main-content">
-                <h1 class="heading">No results found!</h1>
+
+            <!-- Catégorie Best Action -->
+            <div>
+                <div class="category-title">
+                    <label class="title-1"> Best Action</label>
+                    <label class="title-2"> Put a bid or best offer !</label>
+                </div>
+                <div class="Most-Wanted">
+                    <div class="prev-button-item">
+                        <center>
+                            <button class="bg-arrow"><img src="../image/arrow-left.png"></button>
+                        </center>
+                    </div>
+                    <!-- produit 1 -->
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
+                        </div>
+                        <div class="item-image">
+                            <img src="../image/item-1.png">
+                        </div>
+                        <div class="description">
+                            <label class="product-name"><p>Iphone 12</p></label>
+                            <label class="product-description"><p>125 Gb-purple-unlocked</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£319.99</p></label>
+                        </div>
+                    </div>
+                    <!-- produit 2 -->
+
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
+                        </div>
+                        <div class="item-image">
+                            <img src="../image/item-2.png">
+                        </div>
+                        <div class="description">
+                            <label class="product-name"><p>Iphone 12</p></label>
+                            <label class="product-description"><p>125 Gb-Black-unlocked</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£339.99</p></label>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
+                        </div>
+                        <div class="item-image">
+                            <img src="../image/item-3.png">
+                        </div>
+                        <div class="description">
+                            <label class="product-name"><p>MacBook Air 13" (2019) - QWERTY - English</p></label>
+                            <label class="product-description"><p>Retina - Core i5 - 1.6 GHz - 128 GB SSD - RAM
+                                    8GB</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£539.99</p></label>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
+                        </div>
+                        <div class="item-image">
+                            <img src="../image/item-4.png">
+                        </div>
+                        <div class="description">
+                            <label class="product-name"><p>Switch OLED </p></label>
+                            <label class="product-description"><p>64GB - White</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£539.99</p></label>
+                        </div>
+                    </div>
+                    <div class="product-box">
+                        <div class="best-seller">
+                            <center> Best Seller</center>
+                        </div>
+                        <div class="item-image">
+                            <img src="../image/item-5.png">
+                        </div>
+                        <div class="description">
+                            <label class="product-name"><p>Xbox One </p></label>
+                            <label class="product-description"><p>500GB - Black</p>
+                                <p>Warranty: 12 months</p>
+                                <p>starting at:</p>
+                            </label>
+                            <label class="price"><p>£99.99</p></label>
+                        </div>
+                    </div>
+                    <!-- Ajoutez plus de cases d'articles ici -->
+                    <div class="next-button-item">
+                        <center>
+                            <button class="bg-arrow"><img src="../image/arrows-right-2.png" width="24px"
+                                                          height="24px">
+                            </button>
+                        </center>
+                    </div>
+                </div>
+                <!-- Ajoutez plus de cases d'articles ici -->
             </div>
-        <?php endif; ?>
+        </div>
+    <?php else: ?>
+        <!-- Display a message when no search results or category is found -->
+        <div id="main-content">
+            <h1 class="heading">No results found!</h1>
+        </div>
+    <?php endif; ?>
     </div>
 <?php else: ?>
     <?php
