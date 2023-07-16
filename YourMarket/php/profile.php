@@ -57,7 +57,7 @@ $userId = $_SESSION["user_id"];
         </a>
     <?php else: ?>
         <!-- Display the "Cart" link for other user types -->
-        <a CLASS="NAV" href="#">
+        <a CLASS="NAV" href="cart.php">
             <div class="nav-cart">
                 <img src="../image/cart.png" width="38" height="34">
                 <span>Cart</span>

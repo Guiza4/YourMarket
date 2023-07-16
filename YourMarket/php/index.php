@@ -42,7 +42,7 @@ include 'search.php';
             <img src="../image/sellings.png" width="38" height="34"><a class="NAV" href="add-product.php">Sellings</a>
         <?php else: ?>
             <!-- Display the "Cart" link for other user types -->
-            <img src="../image/cart.png" width="38" height="34"><a class="NAV" href="#">Cart</a>
+            <img src="../image/cart.png" width="38" height="34"><a class="NAV" href="cart.php">Cart</a>
         <?php endif; ?>
     </div>
     <!-- Contenu principal -->
