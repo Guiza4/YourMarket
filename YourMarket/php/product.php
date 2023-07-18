@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $mysqli = require __DIR__ . "/connecdb.php";
 session_start();
 $sellerId = $_SESSION["user_id"];
@@ -9,31 +12,73 @@ if (!isset($sellerId)) {
 }
 
 if (isset($_GET['ID'])) {
-    $articleId = $_GET['ID'];
+    $ID_Article = $_GET['ID'];
 
-    // Requête pour récupérer les détails du produit
+    // Query to retrieve the product details
     $select_product = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Article = ?");
     if (!$select_product) {
-        die('Error: ' . $mysqli->error); // Affiche l'erreur spécifique de la requête
+        die('Error: ' . $mysqli->error); // Display the specific query error
     }
-    $select_product->bind_param("i", $articleId);
+    $select_product->bind_param("i", $ID_Article);
     $select_product->execute();
     $product_result = $select_product->get_result();
-
-    if ($product_result->num_rows > 0) {
-        $product = $product_result->fetch_assoc();
-    } else {
-        // Rediriger ou afficher un message d'erreur si le produit n'est pas trouvé
-        header('Location: error.php');
-        exit();
-    }
-} else {
-    // Rediriger ou afficher un message d'erreur si l'ID de l'article n'est pas fourni dans l'URL
-    header('Location: error.php');
-    exit();
+    $product = $product_result->fetch_assoc();
 }
 
 $message = '';
+$highestBid = 0; // Initialize $highestBid with 0
+if (isset($_POST['bid'])) {
+    $ID_Article = $_POST['ID_Article'];
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $image_1 = $_POST['image'];
+    $maximumBid = $_POST['maximum_bid'];
+
+    if ($maximumBid < $price) {
+        $message = "You cannot set a maximum bid lower than the starting bid!";
+    } else {
+        // Add auction bid logic here
+        if ($highestBid < $maximumBid) {
+            $highestBid = $highestBid + 1;
+        }
+
+        // Get the current highest bid from the database
+        $select_highest_bid = $mysqli->prepare("SELECT MAX(highest_bid) AS highest_bid FROM `article` WHERE ID_Article = ?");
+        if (!$select_highest_bid) {
+            die('Error: ' . $mysqli->error);
+        }
+        $select_highest_bid->bind_param("i", $ID_Article);
+        $select_highest_bid->execute();
+        $highest_bid_result = $select_highest_bid->get_result();
+
+        if ($highest_bid_result->num_rows > 0) {
+            $highestBid = $highest_bid_result->fetch_assoc()['highest_bid'];
+        } else {
+            $highestBid = $price; // If no bids yet, set the highest bid as the product price
+        }
+
+        // Calculate the next bid price
+        $nextBid = $highestBid + 1;
+
+        if ($maximumBid >= $nextBid) {
+            // Update the highest bid and ID_Buyer in the article table
+            $update_article = $mysqli->prepare("UPDATE `article` SET highest_bid = ?, ID_Buyer = ? WHERE ID_Article = ?");
+            if (!$update_article) {
+                die('Error: ' . $mysqli->error);
+            }
+            $update_article->bind_param("dii", $maximumBid, $_SESSION["user_id"], $ID_Article);
+            $update_article_result = $update_article->execute();
+
+            if ($update_article_result) {
+                $message = 'Your bid has been placed successfully!';
+            } else {
+                $message = 'Error updating the highest bid and ID_Buyer: ' . $mysqli->error;
+            }
+        } else {
+            $message = "Your maximum bid is lower than the current highest bid!";
+        }
+    }
+}
 
 if (isset($_POST['add_to_cart'])) {
     $ID_Article = $_POST['ID_Article'];
@@ -42,34 +87,81 @@ if (isset($_POST['add_to_cart'])) {
     $image_1 = $_POST['image'];
     $qty = $_POST['qty'];
 
-    $check_cart_numbers = $mysqli->prepare("SELECT * FROM `cart` WHERE name = ? AND user_id = ?");
-    if (!$check_cart_numbers) {
-        die('Error: ' . $mysqli->error);
-    }
-    $check_cart_numbers->bind_param("si", $name, $sellerId);
-    $check_cart_numbers->execute();
-    $check_cart_result = $check_cart_numbers->get_result();
+    $selling_type = $product['selling_type']; // Get the selling type from the product
 
-    if ($check_cart_result->num_rows > 0) {
-        $message = 'already added to cart!';
+    if ($selling_type === 'Auction') {
+        // Handling auction functionality
+
+        // Get the maximum bid entered by the user
+        $maximumBid = $_POST['maximum_bid'];
+
+        if ($maximumBid < $price) {
+            $message = "You cannot set a maximum bid lower than the starting bid!";
+        } else {
+            // Add auction bid logic here
+            if ($highestBid < $maximumBid) {
+                $highestBid = $highestBid + 1;
+            }
+            // Get the current highest bid from the database
+            $select_highest_bid = $mysqli->prepare("SELECT MAX(highest_bid) AS highest_bid FROM `article` WHERE ID_Article = ?");
+            $select_highest_bid->bind_param("i", $ID_Article);
+            $select_highest_bid->execute();
+            $highest_bid_result = $select_highest_bid->get_result();
+
+            if ($highest_bid_result->num_rows > 0) {
+                $highestBid = $highest_bid_result->fetch_assoc()['highest_bid'];
+            } else {
+                $highestBid = $price; // If no bids yet, set the highest bid as the product price
+            }
+
+            // Calculate the next bid price
+            $nextBid = $highestBid + 1;
+
+            if ($maximumBid >= $nextBid) {
+                // Update the highest bid and ID_Buyer in the article table
+                $update_article = $mysqli->prepare("UPDATE `article` SET highest_bid = ?, ID_Buyer = ? WHERE ID_Article = ?");
+                $update_article->bind_param("iii", $maximumBid, $_SESSION["user_id"], $ID_Article);
+                $update_article_result = $update_article->execute();
+
+                if ($update_article_result) {
+                    $message = 'Your bid has been placed successfully!';
+                } else {
+                    $message = 'Error updating the highest bid and ID_Buyer: ' . $mysqli->error;
+                }
+            } else {
+                $message = "Your maximum bid is lower than the current highest bid!";
+            }
+        }
     } else {
-        $insert_cart = $mysqli->prepare("INSERT INTO `cart` (user_id, ID_Article, name, price, quantity, image_1) VALUES (?, ?, ?, ?, ?, ?)");
-        if (!$insert_cart) {
+        // Handling buy now or other selling types
+
+        $check_cart_numbers = $mysqli->prepare("SELECT * FROM `cart` WHERE name = ? AND user_id = ?");
+        if (!$check_cart_numbers) {
             die('Error: ' . $mysqli->error);
         }
-        $insert_cart->bind_param("iisdis", $sellerId, $ID_Article, $name, $price, $qty, $image_1);
-        $insert_cart_result = $insert_cart->execute();
+        $check_cart_numbers->bind_param("si", $name, $sellerId);
+        $check_cart_numbers->execute();
+        $check_cart_result = $check_cart_numbers->get_result();
 
-        if ($insert_cart_result) {
-            $message = 'added to cart!';
+        if ($check_cart_result->num_rows > 0) {
+            $message = 'already added to cart!';
         } else {
-            $message = 'Error adding to cart!';
+            $insert_cart = $mysqli->prepare("INSERT INTO `cart` (user_id, ID_Article, name, price, quantity, image_1) VALUES (?, ?, ?, ?, ?, ?)");
+            if (!$insert_cart) {
+                die('Error: ' . $mysqli->error);
+            }
+            $insert_cart->bind_param("iisdis", $sellerId, $ID_Article, $name, $price, $qty, $image_1);
+            $insert_cart_result = $insert_cart->execute();
+
+            if ($insert_cart_result) {
+                $message = 'added to cart!';
+            } else {
+                $message = 'Error adding to cart: ' . $mysqli->error;
+            }
         }
     }
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +173,7 @@ if (isset($_POST['add_to_cart'])) {
 <!-- Barre de navigation -->
 <div id="navbar">
     <div class="nav-logo">
-        <a CLASS="NAV" href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
+        <a class="NAV" href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
     </div>
     <div class="nav-search">
         <input type="text" id="search-bar" placeholder="Search...">
@@ -116,7 +208,7 @@ if (isset($_POST['add_to_cart'])) {
         </a>
     <?php else: ?>
         <!-- Display the "Cart" link for other user types -->
-        <a CLASS="NAV" href="cart.php">
+        <a class="NAV" href="cart.php">
             <div class="nav-cart">
                 <img src="../image/cart.png" width="38" height="34">
                 <span>Cart</span>
@@ -125,9 +217,7 @@ if (isset($_POST['add_to_cart'])) {
     <?php endif; ?>
 </div>
 <section class="quick-view">
-
     <h1 class="heading">Product view</h1>
-
     <form action="" method="post" class="box">
         <input type="hidden" name="ID_Article" value="<?= $product['ID_Article']; ?>">
         <input type="hidden" name="name" value="<?= $product['name']; ?>">
@@ -149,13 +239,41 @@ if (isset($_POST['add_to_cart'])) {
                 <div class="flex">
                     <div class="price"><span>£</span><?= $product['price']; ?></div>
                     <div class="brand">Brand:<?= $product['brand']; ?></div>
-                    <input type="number" name="qty" class="qty" min="1" max="99"
-                           onkeypress="" value="1">
+                    <?php if ($product['selling_type'] === 'Auction'): ?>
+                        <div class="auction-inputs">
+                            <label for="maximum_bid">Maximum Bid:</label>
+                            <input type="number" name="maximum_bid" id="maximum_bid" min="<?= $product['price']; ?>"
+                                   step="1" required>
+                        </div>
+                    <?php else: ?>
+                        <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="" value="1">
+                    <?php endif; ?>
                 </div>
                 <div class="details"><?= $product['details']; ?></div>
-                <div class="flex-btn">
-                    <input type="submit" value="add to cart" class="btn" name="add_to_cart">
-                </div>
+                <?php if ($product['selling_type'] === 'Auction'): ?>
+                    <div class="current-bid">
+                        <?php
+                        $select_highest_bid = $mysqli->prepare("SELECT MAX(highest_bid) AS highest_bid FROM `article` WHERE ID_Article = ?");
+                        $select_highest_bid->bind_param("i", $ID_Article);
+                        $select_highest_bid->execute();
+                        $highest_bid_result = $select_highest_bid->get_result();
+
+                        if ($highest_bid_result->num_rows > 0) {
+                            $highestBid = $highest_bid_result->fetch_assoc()['highest_bid'];
+                            echo "Current Highest Bid: £" . $highestBid;
+                        } else {
+                            echo "No bids yet.";
+                        }
+                        ?>
+                    </div>
+                    <div class="flex-btn">
+                        <input type="submit" value="Bid" class="btn" name="bid">
+                    </div>
+                <?php else: ?>
+                    <div class="flex-btn">
+                        <input type="submit" value="Add to Cart" class="btn" name="add_to_cart">
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </form>

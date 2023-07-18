@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 18 juil. 2023 à 11:08
+-- Généré le : mar. 18 juil. 2023 à 23:44
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -57,57 +57,51 @@ DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `ID_Article` int NOT NULL AUTO_INCREMENT,
   `ID_Seller` int DEFAULT NULL,
+  `ID_Buyer` int DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `details` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `category` enum('Phone','Computer','Watch','Video Games') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `stock` int DEFAULT NULL,
+  `brand` enum('Apple','Samsung','Xiaomi','Sony','HP','Asus','Nintendo','Microsoft') DEFAULT NULL,
+  `selling_type` enum('Buy Now','Best Offer','Auction') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `minimum_bid` decimal(10,2) DEFAULT NULL,
+  `highest_bid` decimal(10,2) DEFAULT NULL,
   `image_1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `image_2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `image_3` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`ID_Article`),
   UNIQUE KEY `name` (`name`),
-  KEY `ID_Seller` (`ID_Seller`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `ID_Seller` (`ID_Seller`),
+  KEY `FK_article_buyer` (`ID_Buyer`),
+  KEY `FK_article_auction_bids` (`highest_bid`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `article`
 --
 
-INSERT INTO `article` (`ID_Article`, `ID_Seller`, `name`, `details`, `price`, `category`, `stock`, `image_1`, `image_2`, `image_3`) VALUES
-(5, 2, 'Mac 1', 'This is a Mac', '1199.00', 'Computer', 1, 'mac.png', 'refurb-macbook-air-silver-m1-202010.jpg', 'mac_ipad.jpg'),
-(7, 1, 'Apple Watch', 'I sell 3 Apple Watches 7', '399.00', 'Watch', 3, 'iPhone_11_Y_1.png', 'Objets.jpg', 'iPhone_11_Y_1.png'),
-(9, 4, 'phone', 'a vendre', '1232.00', 'Phone', 6, 'item-2.png', 'Iphone.png', 'item-1.png'),
-(12, 3, 'TEST', 'Cest un test', '12345.00', 'Phone', 6, 'item-1.png', 'Iphone.png', 'item-2.png');
+INSERT INTO `article` (`ID_Article`, `ID_Seller`, `ID_Buyer`, `name`, `details`, `price`, `category`, `brand`, `selling_type`, `start_date`, `end_date`, `minimum_bid`, `highest_bid`, `image_1`, `image_2`, `image_3`) VALUES
+(1, 2, NULL, 'Mac 1', 'This is the new Mac', '1199.00', 'Computer', 'Apple', 'Buy Now', NULL, NULL, NULL, NULL, 'mac_ipad-removebg-preview.png', 'apple iphone.png', 'apple_iphone-removebg-preview.png'),
+(4, 2, 3, 'Watch', 'This is my new apple watch', '499.00', 'Watch', 'Apple', 'Auction', '2023-07-19', '2023-07-21', '499.00', '570.00', 'iPhone_11_Y_1.png', 'Objets.jpg', 'mac_ipad.jpg'),
+(5, 2, 3, 'azerty', 'This is my hp', '449.00', 'Computer', 'HP', 'Auction', '2023-07-19', '2023-07-21', NULL, '450.00', 'printer.png', 'item1.png', 'star.png');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `auction`
+-- Structure de la table `auction_bids`
 --
 
-DROP TABLE IF EXISTS `auction`;
-CREATE TABLE IF NOT EXISTS `auction` (
-  `ID_Auction` int NOT NULL,
-  `Starting_date` date NOT NULL,
-  `Ending_date` date NOT NULL,
-  `Initial_Price` float NOT NULL,
-  `Final_Price` float NOT NULL,
-  PRIMARY KEY (`ID_Auction`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `bestoffer`
---
-
-DROP TABLE IF EXISTS `bestoffer`;
-CREATE TABLE IF NOT EXISTS `bestoffer` (
-  `ID_Bestoffer` int NOT NULL,
-  `Offer_date` date NOT NULL,
-  `Offer` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`ID_Bestoffer`)
+DROP TABLE IF EXISTS `auction_bids`;
+CREATE TABLE IF NOT EXISTS `auction_bids` (
+  `ID_Bid` int NOT NULL AUTO_INCREMENT,
+  `ID_Article` int NOT NULL,
+  `ID_Buyer` int NOT NULL,
+  `bid_amount` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`ID_Bid`),
+  KEY `ID_Article` (`ID_Article`),
+  KEY `ID_Buyer` (`ID_Buyer`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -142,18 +136,6 @@ INSERT INTO `buyer` (`ID_Buyer`, `lastname`, `firstname`, `dateofbirth`, `phone`
 -- --------------------------------------------------------
 
 --
--- Structure de la table `buynow`
---
-
-DROP TABLE IF EXISTS `buynow`;
-CREATE TABLE IF NOT EXISTS `buynow` (
-  `ID_BuyNow` int NOT NULL,
-  PRIMARY KEY (`ID_BuyNow`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `cart`
 --
 
@@ -167,53 +149,44 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `quantity` int DEFAULT NULL,
   `image_1` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `cart`
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `ID_Article`, `name`, `price`, `quantity`, `image_1`) VALUES
-(10, 3, 5, 'Mac 1', '1199.00', 82, 'mac.png'),
-(12, 4, 5, 'Mac 1', '1199.00', 47, 'mac.png');
+(18, 1, 5, 'azerty', '449.00', 1, 'printer.png'),
+(12, 4, 5, 'Mac 1', '1199.00', 47, 'mac.png'),
+(13, 2, 1, 'Mac 1', '1199.00', 1, 'mac_ipad-removebg-preview.png');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `my_order`
+-- Structure de la table `orders`
 --
 
-DROP TABLE IF EXISTS `my_order`;
-CREATE TABLE IF NOT EXISTS `my_order` (
-  `ID_order` int NOT NULL,
-  `ID_Article` int NOT NULL,
-  `ID_Buyer` int NOT NULL,
-  `ID_OrderType` int NOT NULL,
-  `Order_date` date NOT NULL,
-  `Promo_Code` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`ID_order`),
-  KEY `ID_Article` (`ID_Article`),
-  KEY `ID_Buyer` (`ID_Buyer`),
-  KEY `ID_OrderType` (`ID_OrderType`)
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `number` varchar(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `method` varchar(50) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `total_products` varchar(1000) NOT NULL,
+  `total_price` int NOT NULL,
+  `placed_on` date NOT NULL,
+  `payment_status` varchar(20) NOT NULL DEFAULT 'pending'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `ordertype`
+-- Déchargement des données de la table `orders`
 --
 
-DROP TABLE IF EXISTS `ordertype`;
-CREATE TABLE IF NOT EXISTS `ordertype` (
-  `ID_OrderType` int NOT NULL,
-  `ID_bestoffer` int DEFAULT NULL,
-  `ID_BuyNow` int DEFAULT NULL,
-  `ID_Auction` int DEFAULT NULL,
-  PRIMARY KEY (`ID_OrderType`),
-  KEY `ID_bestoffer` (`ID_bestoffer`),
-  KEY `ID_BuyNow` (`ID_BuyNow`),
-  KEY `ID_Auction` (`ID_Auction`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
+(0, 3, 'Youssef Guiza', '0620871212', 'youssef.guiza@yahoo.com', 'credit card', '23 Avenue Stephen Pichon, , Paris, Ile-De-France, France, 75013', 'Mac 1 x 1', 1199, '2023-07-19', 'pending');
 
 -- --------------------------------------------------------
 

@@ -197,7 +197,7 @@ section{
     border-radius: 2rem;
     border: solid black;
     padding: 1rem;
-    height: 35rem;
+    height: 42rem;
     width: 23rem;
     display: flex;
     flex-direction: column;
@@ -232,9 +232,9 @@ section{
 
 .show-products .box-container .box .details{
     font-size: 1.5rem;
-    color:#666;
-    line-height: 2;
-    max-lines: 2;
+    color:#000000;
+    line-height: 1;
+    margin-bottom: 4%;
 }
 
 .show-products .box-container .box .brand{
@@ -242,7 +242,12 @@ section{
     color:#666;
     line-height: 2;
 }
-.show-products .box-container .box .sellingtype{
+.show-products .box-container .box .selling_type{
+    font-size: 1.5rem;
+    color:#666;
+    line-height: 2;
+}
+.show-products .box-container .box .date{
     font-size: 1.5rem;
     color:#666;
     line-height: 2;

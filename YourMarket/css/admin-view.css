@@ -1,0 +1,111 @@
+:root {
+    --orange: #f39c12;
+    --red: #e74c3c;
+    --black: #333;
+    --white: #fff;
+    --light-color: #666;
+    --light-bg: #eee;
+    --border: .2rem solid var(--black);
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+}
+
+* {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.heading {
+    font-size: 4rem;
+    color: var(--black);
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+#navbar {
+
+    border: 2px solid black;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(210deg, rgba(235, 86, 123, 1) 0%, rgba(150, 158, 255, 0.5899999737739563) 48%, rgba(145, 58, 254, 0.8399999737739563) 100%);
+}
+
+.nav-logo {
+    align-items: center;
+}
+
+section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.accounts .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 33rem);
+    gap: 1.5rem;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.accounts .box-container .box {
+    padding: 2rem;
+    padding-top: .5rem;
+    border-radius: .5rem;
+    text-align: center;
+    border: var(--border);
+    background-color: var(--white);
+    box-shadow: var(--box-shadow);
+}
+
+.accounts .box-container .box p {
+    font-size: 2rem;
+    color: var(--light-color);
+    margin: 1rem 0;
+}
+
+.accounts .box-container .box p span {
+    color: var(--black);
+}
+
+.delete-btn {
+    background-color: var(--red);
+}
+
+.btn, .delete-btn, .option-btn {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    padding: 1rem 3rem;
+    font-size: 1.7rem;
+    text-transform: capitalize;
+    color: var(--white);
+    cursor: pointer;
+    text-align: center;
+}
