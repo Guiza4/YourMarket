@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 18 juil. 2023 à 23:24
+-- Généré le : mar. 18 juil. 2023 à 23:44
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `article` (
 INSERT INTO `article` (`ID_Article`, `ID_Seller`, `ID_Buyer`, `name`, `details`, `price`, `category`, `brand`, `selling_type`, `start_date`, `end_date`, `minimum_bid`, `highest_bid`, `image_1`, `image_2`, `image_3`) VALUES
 (1, 2, NULL, 'Mac 1', 'This is the new Mac', '1199.00', 'Computer', 'Apple', 'Buy Now', NULL, NULL, NULL, NULL, 'mac_ipad-removebg-preview.png', 'apple iphone.png', 'apple_iphone-removebg-preview.png'),
 (4, 2, 3, 'Watch', 'This is my new apple watch', '499.00', 'Watch', 'Apple', 'Auction', '2023-07-19', '2023-07-21', '499.00', '570.00', 'iPhone_11_Y_1.png', 'Objets.jpg', 'mac_ipad.jpg'),
-(5, 2, NULL, 'azerty', 'This is my hp', '449.00', 'Computer', 'HP', 'Buy Now', NULL, NULL, NULL, NULL, 'printer.png', 'item1.png', 'star.png');
+(5, 2, 3, 'azerty', 'This is my hp', '449.00', 'Computer', 'HP', 'Auction', '2023-07-19', '2023-07-21', NULL, '450.00', 'printer.png', 'item1.png', 'star.png');
 
 -- --------------------------------------------------------
 
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `quantity` int DEFAULT NULL,
   `image_1` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `cart`
@@ -159,6 +159,34 @@ INSERT INTO `cart` (`id`, `user_id`, `ID_Article`, `name`, `price`, `quantity`, 
 (18, 1, 5, 'azerty', '449.00', 1, 'printer.png'),
 (12, 4, 5, 'Mac 1', '1199.00', 47, 'mac.png'),
 (13, 2, 1, 'Mac 1', '1199.00', 1, 'mac_ipad-removebg-preview.png');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `number` varchar(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `method` varchar(50) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `total_products` varchar(1000) NOT NULL,
+  `total_price` int NOT NULL,
+  `placed_on` date NOT NULL,
+  `payment_status` varchar(20) NOT NULL DEFAULT 'pending'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
+(0, 3, 'Youssef Guiza', '0620871212', 'youssef.guiza@yahoo.com', 'credit card', '23 Avenue Stephen Pichon, , Paris, Ile-De-France, France, 75013', 'Mac 1 x 1', 1199, '2023-07-19', 'pending');
 
 -- --------------------------------------------------------
 

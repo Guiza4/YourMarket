@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="Auction en cours 2.1">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/checkout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/index.php" afterDir="false" />
-    </list>
+    <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="Auction en cours 2.1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +42,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "yous",
     "last_opened_file_path": "C:/wamp64/www/ecommerce website",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -219,7 +215,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689700469596</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Merge done plus modif affichage en fct de auction. Manque la table order pour compléter le checkout.php">
+      <option name="closed" value="true" />
+      <created>1689723606900</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1689723606900</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,7 +269,8 @@
     <MESSAGE value="Auction en cours" />
     <MESSAGE value="Auction en cours 2.0" />
     <MESSAGE value="Auction en cours 2.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Auction en cours 2.1" />
+    <MESSAGE value="Merge done plus modif affichage en fct de auction. Manque la table order pour compléter le checkout.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge done plus modif affichage en fct de auction. Manque la table order pour compléter le checkout.php" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>
