@@ -2,11 +2,14 @@
 $mysqli = require __DIR__ . "/connecdb.php";
 session_start();
 $sellerId = $_SESSION["user_id"];
-if(!isset($sellerId)){
+if (!isset($sellerId)) {
     header('location:login.php');
+    exit();
 }
-if (isset($_POST['add_product'])) {
 
+$sellingtype = 'Buy Now'; // Initialize the variable with a default value
+
+if (isset($_POST['add_product'])) {
     // Retrieve product details from the form inputs
     $name = $_POST['name'];
     $name = filter_var($name, FILTER_SANITIZE_STRING);
@@ -39,17 +42,27 @@ if (isset($_POST['add_product'])) {
     $image_tmp_name_3 = $_FILES['image_3']['tmp_name'];
     $image_folder_3 = '../uploaded_img/' . $image_3;
 
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    $minimum_bid = $_POST['minimum_bid'];
+
     $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE name = ? AND ID_Seller = ?");
-    $select_products->bind_param("si", $name, $sellerId); // Bind the parameters
-    $select_products->execute(); // Execute the statement
-    $result = $select_products->get_result(); // Get the result set
-    $rowCount = $result->num_rows; // Get the row count
+    $select_products->bind_param("si", $name, $sellerId);
+    $select_products->execute();
+    $result = $select_products->get_result();
+    $rowCount = $result->num_rows;
 
     if ($rowCount > 0) {
         $message[] = 'Product name already exists!';
     } else {
-        $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, brand, sellingtype, image_1, image_2, image_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $insert_products->bind_param("isssssssss", $sellerId, $name, $details, $price, $category, $brand, $sellingtype, $image_1, $image_2, $image_3);
+        if ($sellingtype === 'auction') {
+            $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, brand, sellingtype, image_1, image_2, image_3, start_date, end_date, minimum_bid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert_products->bind_param("issssssssssss", $sellerId, $name, $details, $price, $category, $brand, $sellingtype, $image_1, $image_2, $image_3, $start_date, $end_date, $minimum_bid);
+        } else {
+            $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, brand, sellingtype, image_1, image_2, image_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert_products->bind_param("isssssssss", $sellerId, $name, $details, $price, $category, $brand, $sellingtype, $image_1, $image_2, $image_3);
+        }
+
         $insert_products->execute();
 
         if ($insert_products) {
@@ -64,6 +77,7 @@ if (isset($_POST['add_product'])) {
         }
     }
 }
+
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
     $delete_product_image = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Article = ?");
@@ -79,10 +93,10 @@ if (isset($_GET['delete'])) {
     $delete_product->execute();
     header('location:add-product.php');
 }
-
 ?>
 
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Add product</title>
     <link href="../css/add-product.css" rel="stylesheet" type="text/css">
@@ -167,6 +181,16 @@ if (isset($_GET['delete'])) {
                         <option>Auction</option>
                     </select>
                 </div>
+
+                <div class="inputBox">
+                    <span>Start Date (if Auction)</span>
+                    <input type="date" class="box" name="start_date">
+                    <span>End Date (if Auction)</span>
+                    <input type="date" class="box" name="end_date">
+                    <span>Minimum Bid (if Auction)</span>
+                    <input type="number" min="0" class="box" name="minimum_bid">
+                </div>
+
                 <div class="inputBox">
                     <span>image 1 (required)</span>
                     <input type="file" name="image_1" accept="image/jpg, image/jpeg, image/png, image/webp" class="box"
@@ -188,7 +212,6 @@ if (isset($_GET['delete'])) {
                               cols="30" rows="10"></textarea>
                 </div>
             </div>
-
             <input type="submit" value="add product" class="btn" name="add_product">
         </form>
     </div>
@@ -196,13 +219,12 @@ if (isset($_GET['delete'])) {
     <section class="show-products">
         <h1 class="heading">Products Added</h1>
         <div class="box-container">
-
             <?php
             $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Seller = ?");
-            $select_products->bind_param("i", $sellerId); // Bind the seller ID as a parameter
+            $select_products->bind_param("i", $sellerId);
             $select_products->execute();
 
-            $result = $select_products->get_result(); // Get the result set
+            $result = $select_products->get_result();
             if ($result->num_rows > 0) {
                 while ($fetch_products = $result->fetch_assoc()) {
                     ?>
@@ -212,11 +234,14 @@ if (isset($_GET['delete'])) {
                         <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
                         <div class="category"><span>Category:</span> <?= $fetch_products['category']; ?> </div>
                         <div class="brand"><span>Brand:</span> <?= $fetch_products['brand']; ?> </div>
-                        <div class="sellingtype"><span>Selling Type:</span> <?= $fetch_products['sellingtype']; ?> </div>
+                        <div class="sellingtype"><span>Selling Type:</span> <?= $fetch_products['sellingtype']; ?>
+                        </div>
                         <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                         <div class="flex-btn">
-                            <a href="update_product.php?update=<?= $fetch_products['ID_Article']; ?>" class="option-btn">update</a>
-                            <a href="add-product.php?delete=<?= $fetch_products['ID_Article']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
+                            <a href="update_product.php?update=<?= $fetch_products['ID_Article']; ?>"
+                               class="option-btn">update</a>
+                            <a href="add-product.php?delete=<?= $fetch_products['ID_Article']; ?>" class="delete-btn"
+                               onclick="return confirm('delete this product?');">delete</a>
                         </div>
                     </div>
                     <?php
@@ -228,4 +253,7 @@ if (isset($_GET['delete'])) {
         </div>
     </section>
 </div>
+
+
 </body>
+</html>
