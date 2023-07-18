@@ -62,20 +62,23 @@ if (isset($_POST['add_to_cart'])) {
 
             if ($maximumBid >= $nextBid) {
                 // Add the user's bid to the database
-                $insert_bid = $mysqli->prepare("INSERT INTO `auction_bids` (ID_Article, ID_Buyer, bid_price) VALUES (?, ?, ?)");
-                $insert_bid->bind_param("iii", $ID_Article, $_SESSION["user_id"], $maximumBid);
+                $insert_bid = $mysqli->prepare("INSERT INTO `auction_bids` (ID_Article, user_id, bid_price) VALUES (?, ?, ?)");
+                $insert_bid->bind_param("iid", $ID_Article, $sellerId, $maximumBid);
                 $insert_bid_result = $insert_bid->execute();
 
                 if ($insert_bid_result) {
-                    // Update the highest bid in the article table
-                    $update_highest_bid = $mysqli->prepare("UPDATE `article` SET highest_bid = ? WHERE ID_Article = ?");
-                    $update_highest_bid->bind_param("ii", $maximumBid, $ID_Article);
-                    $update_highest_bid_result = $update_highest_bid->execute();
+                    // Get the inserted bid ID
+                    $bidId = $mysqli->insert_id;
 
-                    if ($update_highest_bid_result) {
+                    // Update the highest bid and ID_Buyer in the article table
+                    $update_article = $mysqli->prepare("UPDATE `article` SET highest_bid = ?, ID_Buyer = ? WHERE ID_Article = ?");
+                    $update_article->bind_param("iii", $maximumBid, $_SESSION["user_id"], $ID_Article);
+                    $update_article_result = $update_article->execute();
+
+                    if ($update_article_result) {
                         $message = 'Your bid has been placed successfully!';
                     } else {
-                        $message = 'Error updating the highest bid!';
+                        $message = 'Error updating the highest bid and ID_Buyer!';
                     }
                 } else {
                     $message = 'Error placing your bid!';
