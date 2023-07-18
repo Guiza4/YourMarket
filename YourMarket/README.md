@@ -4,6 +4,7 @@
 2) Ajout de la recherche par marque
 3) Ajouter la fonctionnalité de recherche + filtre sur toutes les autres pages
 6) Créer le système d'encheres, best offer + Messagerie
+7) Remplacer les produits dans Home Page par des vrais produits
 
 2) Créer une page forgot password
 3) Nettoyer le code (div etc)

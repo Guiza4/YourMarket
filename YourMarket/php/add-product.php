@@ -7,7 +7,7 @@ if (!isset($sellerId)) {
     exit();
 }
 
-$sellingtype = 'Buy Now'; // Initialize the variable with a default value
+$selling_type = 'Buy Now'; // Initialize the variable with a default value
 
 if (isset($_POST['add_product'])) {
     // Retrieve product details from the form inputs
@@ -19,8 +19,8 @@ if (isset($_POST['add_product'])) {
     $category = filter_var($category, FILTER_SANITIZE_STRING);
     $brand = $_POST['brand'];
     $brand = filter_var($brand, FILTER_SANITIZE_STRING);
-    $sellingtype = $_POST['sellingtype'];
-    $sellingtype = filter_var($sellingtype, FILTER_SANITIZE_STRING);
+    $selling_type = $_POST['selling_type'];
+    $selling_type = filter_var($selling_type, FILTER_SANITIZE_STRING);
     $details = $_POST['details'];
     $details = filter_var($details, FILTER_SANITIZE_STRING);
 
@@ -44,7 +44,7 @@ if (isset($_POST['add_product'])) {
 
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
-    $minimum_bid = $_POST['minimum_bid'];
+    $minimum_bid = $_POST['price'];
 
     $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE name = ? AND ID_Seller = ?");
     $select_products->bind_param("si", $name, $sellerId);
@@ -55,12 +55,12 @@ if (isset($_POST['add_product'])) {
     if ($rowCount > 0) {
         $message[] = 'Product name already exists!';
     } else {
-        if ($sellingtype === 'auction') {
-            $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, brand, sellingtype, image_1, image_2, image_3, start_date, end_date, minimum_bid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $insert_products->bind_param("issssssssssss", $sellerId, $name, $details, $price, $category, $brand, $sellingtype, $image_1, $image_2, $image_3, $start_date, $end_date, $minimum_bid);
+        if ($selling_type === 'Auction') {
+            $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, brand, selling_type, image_1, image_2, image_3, start_date, end_date, minimum_bid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert_products->bind_param("issssssssssss", $sellerId, $name, $details, $price, $category, $brand, $selling_type, $image_1, $image_2, $image_3, $start_date, $end_date, $minimum_bid);
         } else {
-            $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, brand, sellingtype, image_1, image_2, image_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $insert_products->bind_param("isssssssss", $sellerId, $name, $details, $price, $category, $brand, $sellingtype, $image_1, $image_2, $image_3);
+            $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, brand, selling_type, image_1, image_2, image_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert_products->bind_param("isssssssss", $sellerId, $name, $details, $price, $category, $brand, $selling_type, $image_1, $image_2, $image_3);
         }
 
         $insert_products->execute();
@@ -72,6 +72,14 @@ if (isset($_POST['add_product'])) {
                 move_uploaded_file($image_tmp_name_1, $image_folder_1);
                 move_uploaded_file($image_tmp_name_2, $image_folder_2);
                 move_uploaded_file($image_tmp_name_3, $image_folder_3);
+
+                if ($selling_type === 'Auction') {
+                    // Insert the auction-specific fields into the database
+                    $insert_auction_fields = $mysqli->prepare("UPDATE `article` SET start_date = ?, end_date = ?, minimum_bid = ? WHERE ID_Article = ?");
+                    $insert_auction_fields->bind_param("ssdi", $start_date, $end_date, $minimum_bid, $insert_products->insert_id);
+                    $insert_auction_fields->execute();
+                }
+
                 $message[] = 'New product added!';
             }
         }
@@ -147,7 +155,7 @@ if (isset($_GET['delete'])) {
                            name="name">
                 </div>
                 <div class="inputBox">
-                    <span>Product Price (required)</span>
+                    <span>Product Price (required) (Min. Bid if Auction)</span>
                     <input type="number" min="0" class="box" required max="9999999999" placeholder="Enter Product Price"
                            onkeypress="if(this.value.length == 10) return false;" name="price">
                 </div>
@@ -175,22 +183,20 @@ if (isset($_GET['delete'])) {
                 </div>
                 <div class="inputBox">
                     <span>Selling Type (required)</span>
-                    <select class="box" name="sellingtype">
+                    <select class="box" name="selling_type">
                         <option>Buy Now</option>
                         <option>Best Offer</option>
                         <option>Auction</option>
                     </select>
                 </div>
-
                 <div class="inputBox">
                     <span>Start Date (if Auction)</span>
                     <input type="date" class="box" name="start_date">
+                </div>
+                <div class="inputBox">
                     <span>End Date (if Auction)</span>
                     <input type="date" class="box" name="end_date">
-                    <span>Minimum Bid (if Auction)</span>
-                    <input type="number" min="0" class="box" name="minimum_bid">
                 </div>
-
                 <div class="inputBox">
                     <span>image 1 (required)</span>
                     <input type="file" name="image_1" accept="image/jpg, image/jpeg, image/png, image/webp" class="box"
@@ -234,8 +240,12 @@ if (isset($_GET['delete'])) {
                         <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
                         <div class="category"><span>Category:</span> <?= $fetch_products['category']; ?> </div>
                         <div class="brand"><span>Brand:</span> <?= $fetch_products['brand']; ?> </div>
-                        <div class="sellingtype"><span>Selling Type:</span> <?= $fetch_products['sellingtype']; ?>
-                        </div>
+                        <div class="selling_type"><span>Selling Type:</span> <?= $fetch_products['selling_type']; ?></div>
+                        <?php if ($fetch_products['selling_type'] === 'Auction'): ?>
+                            <div class="date">
+                                <span>Start:<?= $fetch_products['start_date']; ?> End:<?= $fetch_products['end_date']; ?></span>
+                            </div>
+                        <?php endif; ?>
                         <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                         <div class="flex-btn">
                             <a href="update_product.php?update=<?= $fetch_products['ID_Article']; ?>"
@@ -253,7 +263,5 @@ if (isset($_GET['delete'])) {
         </div>
     </section>
 </div>
-
-
 </body>
 </html>

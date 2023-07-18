@@ -20,14 +20,16 @@ if (isset($_POST['update'])) {
     $category = filter_var($category, FILTER_SANITIZE_STRING);
     $brand = $_POST['brand'];
     $brand = filter_var($brand, FILTER_SANITIZE_STRING);
-    $sellingtype = $_POST['sellingtype'];
-    $sellingtype = filter_var($sellingtype, FILTER_SANITIZE_STRING);
+    $selling_type = $_POST['selling_type'];
+    $selling_type = filter_var($selling_type, FILTER_SANITIZE_STRING);
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
 
-    $update_product = $mysqli->prepare("UPDATE `article` SET name = ?, price = ?, details = ?, category = ?, brand = ?, sellingtype = ? WHERE ID_Article = ?");
-    $update_product->bind_param("ssssssi", $name, $price, $details, $category, $brand, $sellingtype, $aid);
+    $update_product = $mysqli->prepare("UPDATE `article` SET name = ?, price = ?, details = ?, category = ?, brand = ?, selling_type = ?, start_date = ?, end_date = ? WHERE ID_Article = ?");
+    $update_product->bind_param("ssssssssi", $name, $price, $details, $category, $brand, $selling_type, $start_date, $end_date, $aid);
     $update_product->execute();
 
-    $message[] = 'product updated successfully!';
+    $message[] = 'Product updated successfully!';
 
     $old_image_1 = $_POST['old_image_1'];
     $image_1 = $_FILES['image_1']['name'];
@@ -38,14 +40,14 @@ if (isset($_POST['update'])) {
 
     if (!empty($image_1)) {
         if ($image_size_1 > 2000000) {
-            $message[] = 'image size is too large!';
+            $message[] = 'Image size is too large!';
         } else {
             $update_image_1 = $mysqli->prepare("UPDATE `article` SET image_1 = ? WHERE ID_Article = ?");
             $update_image_1->bind_param("si", $image_1, $aid);
             $update_image_1->execute();
             move_uploaded_file($image_tmp_name_1, $image_folder_1);
             unlink('../uploaded_img/' . $old_image_1);
-            $message[] = 'image 1 updated successfully!';
+            $message[] = 'Image 1 updated successfully!';
         }
     }
 
@@ -58,14 +60,14 @@ if (isset($_POST['update'])) {
 
     if (!empty($image_2)) {
         if ($image_size_2 > 2000000) {
-            $message[] = 'image size is too large!';
+            $message[] = 'Image size is too large!';
         } else {
-            $update_image_02 = $mysqli->prepare("UPDATE `article` SET image_2 = ? WHERE ID_Article = ?");
-            $update_image_02->bind_param("si", $image_2, $aid);
-            $update_image_02->execute();
+            $update_image_2 = $mysqli->prepare("UPDATE `article` SET image_2 = ? WHERE ID_Article = ?");
+            $update_image_2->bind_param("si", $image_2, $aid);
+            $update_image_2->execute();
             move_uploaded_file($image_tmp_name_2, $image_folder_2);
             unlink('../uploaded_img/' . $old_image_2);
-            $message[] = 'image 2 updated successfully!';
+            $message[] = 'Image 2 updated successfully!';
         }
     }
 
@@ -78,17 +80,16 @@ if (isset($_POST['update'])) {
 
     if (!empty($image_3)) {
         if ($image_size_3 > 2000000) {
-            $message[] = 'image size is too large!';
+            $message[] = 'Image size is too large!';
         } else {
             $update_image_3 = $mysqli->prepare("UPDATE `article` SET image_3 = ? WHERE ID_Article = ?");
             $update_image_3->bind_param("si", $image_3, $aid);
             $update_image_3->execute();
             move_uploaded_file($image_tmp_name_3, $image_folder_3);
             unlink('../uploaded_img/' . $old_image_3);
-            $message[] = 'image 3 updated successfully!';
+            $message[] = 'Image 3 updated successfully!';
         }
     }
-
 }
 
 ?>
@@ -96,7 +97,7 @@ if (isset($_POST['update'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Update product</title>
+    <title>Update Product</title>
     <link href="../css/update_product.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -166,47 +167,77 @@ if (isset($_POST['update'])) {
                         </div>
                         <span>Update Name</span>
                         <input type="text" name="name" required class="box" maxlength="100"
-                               placeholder="enter product name" value="<?= $fetch_products['name']; ?>">
-                        <span>Update Price</span>
+                               placeholder="Enter product name" value="<?= $fetch_products['name']; ?>">
+                        <span>Update Price (Starting Bid if Auction)</span>
                         <input type="number" name="price" required class="box" min="0" max="9999999999"
-                               placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;"
+                               placeholder="Enter product price"
+                               onkeypress="if(this.value.length == 10) return false;"
                                value="<?= $fetch_products['price']; ?>">
                         <span>Update Details</span>
                         <textarea name="details" class="box" required cols="30"
                                   rows="10"><?= $fetch_products['details']; ?></textarea>
                         <span>Update Category</span>
                         <?php
-                        $selected = $fetch_products['category'];
+                        $selected_category = $fetch_products['category'];
                         ?>
                         <select class="box" name="category">
-                            <option <?php if($selected == 'Phone'){echo("selected");}?>>Phone</option>
-                            <option <?php if($selected == 'Computer'){echo("selected");}?>>Computer</option>
-                            <option <?php if($selected == 'Watch'){echo("selected");}?>>Watch</option>
-                            <option <?php if($selected == 'Video Games'){echo("selected");}?>>Video Games</option>
+                            <option value="Phone" <?php if ($selected_category === 'Phone') echo 'selected'; ?>>Phone
+                            </option>
+                            <option value="Computer" <?php if ($selected_category === 'Computer') echo 'selected'; ?>>
+                                Computer
+                            </option>
+                            <option value="Watch" <?php if ($selected_category === 'Watch') echo 'selected'; ?>>Watch
+                            </option>
+                            <option value="Video Games" <?php if ($selected_category === 'Video Games') echo 'selected'; ?>>
+                                Video Games
+                            </option>
                         </select>
                         <span>Update Brand</span>
                         <?php
-                        $selected = $fetch_products['brand'];
+                        $selected_brand = $fetch_products['brand'];
                         ?>
                         <select class="box" name="brand">
-                            <option <?php if($selected == 'Apple'){echo("selected");}?>>Apple</option>
-                            <option <?php if($selected == 'Samsung'){echo("selected");}?>>Samsung</option>
-                            <option <?php if($selected == 'Xiaomi'){echo("selected");}?>>Xiaomi</option>
-                            <option <?php if($selected == 'Sony'){echo("selected");}?>>Sony</option>
-                            <option <?php if($selected == 'HP'){echo("selected");}?>>HP</option>
-                            <option <?php if($selected == 'Asus'){echo("selected");}?>>Asus</option>
-                            <option <?php if($selected == 'Nintendo'){echo("selected");}?>>Nintendo</option>
-                            <option <?php if($selected == 'Microsoft'){echo("selected");}?>>Microsoft</option>
+                            <option value="Apple" <?php if ($selected_brand === 'Apple') echo 'selected'; ?>>Apple
+                            </option>
+                            <option value="Samsung" <?php if ($selected_brand === 'Samsung') echo 'selected'; ?>>Samsung
+                            </option>
+                            <option value="Xiaomi" <?php if ($selected_brand === 'Xiaomi') echo 'selected'; ?>>Xiaomi
+                            </option>
+                            <option value="Sony" <?php if ($selected_brand === 'Sony') echo 'selected'; ?>>Sony
+                            </option>
+                            <option value="HP" <?php if ($selected_brand === 'HP') echo 'selected'; ?>>HP</option>
+                            <option value="Asus" <?php if ($selected_brand === 'Asus') echo 'selected'; ?>>Asus
+                            </option>
+                            <option value="Nintendo" <?php if ($selected_brand === 'Nintendo') echo 'selected'; ?>>
+                                Nintendo
+                            </option>
+                            <option value="Microsoft" <?php if ($selected_brand === 'Microsoft') echo 'selected'; ?>>
+                                Microsoft
+                            </option>
                         </select>
                         <span>Update Selling Type</span>
                         <?php
-                        $selected = $fetch_products['sellingtype'];
+                        $selected_selling_type = $fetch_products['selling_type'];
                         ?>
-                        <select class="box" name="sellingtype">
-                            <option <?php if($selected == 'Buy Now'){echo("selected");}?>>Buy Now</option>
-                            <option <?php if($selected == 'Best Offer'){echo("selected");}?>>Best Offer</option>
-                            <option <?php if($selected == 'Auction'){echo("selected");}?>>Auction</option>
+                        <select class="box" name="selling_type">
+                            <option value="Buy Now" <?php if ($selected_selling_type === 'Buy Now') echo 'selected'; ?>>
+                                Buy Now
+                            </option>
+                            <option value="Best Offer" <?php if ($selected_selling_type === 'Best Offer') echo 'selected'; ?>>
+                                Best Offer
+                            </option>
+                            <option value="Auction" <?php if ($selected_selling_type === 'Auction') echo 'selected'; ?>>
+                                Auction
+                            </option>
                         </select>
+                        <?php if ($selected_selling_type === 'Auction'): ?>
+                            <span>Update Starting Date (If Auction)</span>
+                            <input type="date" name="start_date" class="box" maxlength="100"
+                                   value="<?= $fetch_products['start_date']; ?>">
+                            <span>Update Ending Date (If Auction)</span>
+                            <input type="date" name="end_date" class="box" maxlength="100"
+                                   value="<?= $fetch_products['end_date']; ?>">
+                        <?php endif; ?>
                         <span>Update Image 1</span>
                         <input type="file" name="image_1" accept="image/jpg, image/jpeg, image/png, image/webp"
                                class="box">
@@ -217,7 +248,7 @@ if (isset($_POST['update'])) {
                         <input type="file" name="image_3" accept="image/jpg, image/jpeg, image/png, image/webp"
                                class="box">
                         <div class="flex-btn">
-                            <input type="submit" name="update" class="updatebtn" value="update">
+                            <input type="submit" name="update" class="updatebtn" value="Update">
                             <a href="add-product.php" class="option-btn">Go Back</a>
                         </div>
                     </form>
@@ -232,18 +263,6 @@ if (isset($_POST['update'])) {
         </section>
     </div>
 </div>
-
-<script>
-    let mainImage = document.querySelector('.update-product .image-container .main-image img');
-    let subImages = document.querySelectorAll('.update-product .image-container .sub-image img');
-
-    subImages.forEach(image => {
-        image.onclick = () => {
-            src = image.getAttribute('src');
-            mainImage.src = src;
-        };
-    });
-</script>
 
 </body>
 </html>

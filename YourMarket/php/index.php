@@ -63,7 +63,9 @@ include 'search.php';
                     <section class="show-products">
                         <div class="box-container">
                             <?php foreach ($products as $product): ?>
+                                <?php if ($_SESSION['user_type'] === 'buyer'): ?>
                                 <a class="go-to-product" href="product.php?ID=<?= $product['ID_Article']; ?>">
+                                    <?php endif;?>
                                     <div class="box">
                                         <!-- Afficher les détails du produit -->
                                         <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
@@ -75,6 +77,11 @@ include 'search.php';
                                         <div class="brand">
                                             <span>Brand:</span> <?= $product['brand']; ?>
                                         </div>
+                                        <?php if ($product['selling_type'] === 'Auction'): ?>
+                                            <div class="date">
+                                                <span>Start:<?= $product['start_date']; ?> End:<?= $product['end_date']; ?></span>
+                                            </div>
+                                        <?php endif; ?>
                                         <div class="details"><span><?= $product['details']; ?></span></div>
                                         <br>
                                     </div>
