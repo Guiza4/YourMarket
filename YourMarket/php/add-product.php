@@ -1,5 +1,87 @@
 <?php
+$mysqli = require __DIR__ . "/connecdb.php";
+session_start();
+$sellerId = $_SESSION["user_id"];
+if(!isset($sellerId)){
+    header('location:login.php');
+}
+if (isset($_POST['add_product'])) {
+
+    // Retrieve product details from the form inputs
+    $name = $_POST['name'];
+    $name = filter_var($name, FILTER_SANITIZE_STRING);
+    $price = $_POST['price'];
+    $price = filter_var($price, FILTER_SANITIZE_STRING);
+    $category = $_POST['category'];
+    $category = filter_var($category, FILTER_SANITIZE_STRING);
+    $brand = $_POST['brand'];
+    $brand = filter_var($brand, FILTER_SANITIZE_STRING);
+    $sellingtype = $_POST['sellingtype'];
+    $sellingtype = filter_var($sellingtype, FILTER_SANITIZE_STRING);
+    $details = $_POST['details'];
+    $details = filter_var($details, FILTER_SANITIZE_STRING);
+
+    $image_1 = $_FILES['image_1']['name'];
+    $image_1 = filter_var($image_1, FILTER_SANITIZE_STRING);
+    $image_size_1 = $_FILES['image_1']['size'];
+    $image_tmp_name_1 = $_FILES['image_1']['tmp_name'];
+    $image_folder_1 = '../uploaded_img/' . $image_1;
+
+    $image_2 = $_FILES['image_2']['name'];
+    $image_2 = filter_var($image_2, FILTER_SANITIZE_STRING);
+    $image_size_2 = $_FILES['image_2']['size'];
+    $image_tmp_name_2 = $_FILES['image_2']['tmp_name'];
+    $image_folder_2 = '../uploaded_img/' . $image_2;
+
+    $image_3 = $_FILES['image_3']['name'];
+    $image_3 = filter_var($image_3, FILTER_SANITIZE_STRING);
+    $image_size_3 = $_FILES['image_3']['size'];
+    $image_tmp_name_3 = $_FILES['image_3']['tmp_name'];
+    $image_folder_3 = '../uploaded_img/' . $image_3;
+
+    $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE name = ? AND ID_Seller = ?");
+    $select_products->bind_param("si", $name, $sellerId); // Bind the parameters
+    $select_products->execute(); // Execute the statement
+    $result = $select_products->get_result(); // Get the result set
+    $rowCount = $result->num_rows; // Get the row count
+
+    if ($rowCount > 0) {
+        $message[] = 'Product name already exists!';
+    } else {
+        $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, brand, sellingtype, image_1, image_2, image_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $insert_products->bind_param("isssssssss", $sellerId, $name, $details, $price, $category, $brand, $sellingtype, $image_1, $image_2, $image_3);
+        $insert_products->execute();
+
+        if ($insert_products) {
+            if ($image_size_1 > 2000000 || $image_size_2 > 2000000 || $image_size_3 > 2000000) {
+                $message[] = 'Image size is too large!';
+            } else {
+                move_uploaded_file($image_tmp_name_1, $image_folder_1);
+                move_uploaded_file($image_tmp_name_2, $image_folder_2);
+                move_uploaded_file($image_tmp_name_3, $image_folder_3);
+                $message[] = 'New product added!';
+            }
+        }
+    }
+}
+if (isset($_GET['delete'])) {
+    $delete_id = $_GET['delete'];
+    $delete_product_image = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Article = ?");
+    $delete_product_image->bind_param("i", $delete_id);
+    $delete_product_image->execute();
+    $result = $delete_product_image->get_result();
+    $fetch_delete_image = $result->fetch_assoc();
+    unlink('../uploaded_img/' . $fetch_delete_image['image_1']);
+    unlink('../uploaded_img/' . $fetch_delete_image['image_2']);
+    unlink('../uploaded_img/' . $fetch_delete_image['image_3']);
+    $delete_product = $mysqli->prepare("DELETE FROM `article` WHERE ID_Article = ?");
+    $delete_product->bind_param("i", $delete_id);
+    $delete_product->execute();
+    header('location:add-product.php');
+}
+
 ?>
+
 <!DOCTYPE html>
 <head>
     <title>Add product</title>
@@ -9,7 +91,7 @@
 <!-- Barre de navigation -->
 <div id="navbar">
     <div class="nav-logo">
-        <img src="../image/logo-2.png" alt="Logo" height="64" width="222">
+        <a href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
     </div>
     <div class="nav-search">
         <input type="text" id="search-bar" placeholder="Search...">
@@ -20,16 +102,16 @@
             <span>Category</span>
         </div>
     </a>
-    <a href="#">
+    <a href="profile.php">
         <div class="nav-account">
             <img src="../image/account.png" width="30" height="32">
             <span>Account</span>
         </div>
     </a>
-    <a href="#">
-        <div class="nav-cart">
-            <img src="../image/cart.png" width="38" height="34">
-            <span>Cart</span>
+    <a href="add-product.php">
+        <div class="nav-sellings">
+            <img src="../image/sellings.png" width="38" height="34">
+            <span>Sellings</span>
         </div>
     </a>
 </div>
@@ -43,7 +125,7 @@
         <div class="bar-random">
             <!--cette bare ne sert completment a rien mais ca fait class et c marant a faire-->
         </div>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
             <div class="flex">
                 <div class="inputBox">
                     <span>Product name (required)</span>
@@ -57,27 +139,47 @@
                 </div>
                 <div class="inputBox">
                     <span>Category (required)</span>
-                    <input type="text" class="box" required maxlength="100" placeholder="Enter Product Category"
-                           name="categorie">
+                    <select class="box" name="category">
+                        <option>Phone</option>
+                        <option>Computer</option>
+                        <option>Watch</option>
+                        <option>Video Games</option>
+                    </select>
                 </div>
                 <div class="inputBox">
-                    <span>Stock (required)</span>
-                    <input type="number"  min="1" class="box" required max="9999999999" placeholder="Enter Quantity"
-                           name="stock">
+                    <span>Brand (required)</span>
+                    <select class="box" name="brand">
+                        <option>Apple</option>
+                        <option>Samsung</option>
+                        <option>Xiaomi</option>
+                        <option>Sony</option>
+                        <option>HP</option>
+                        <option>Asus</option>
+                        <option>Nintendo</option>
+                        <option>Microsoft</option>
+                    </select>
                 </div>
                 <div class="inputBox">
-                    <span>image 01 (required)</span>
-                    <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box"
+                    <span>Selling Type (required)</span>
+                    <select class="box" name="sellingtype">
+                        <option>Buy Now</option>
+                        <option>Best Offer</option>
+                        <option>Auction</option>
+                    </select>
+                </div>
+                <div class="inputBox">
+                    <span>image 1 (required)</span>
+                    <input type="file" name="image_1" accept="image/jpg, image/jpeg, image/png, image/webp" class="box"
                            required>
                 </div>
                 <div class="inputBox">
-                    <span>image 02 (required)</span>
-                    <input type="file" name="image_02" accept="image/jpg, image/jpeg, image/png, image/webp" class="box"
+                    <span>image 2 (required)</span>
+                    <input type="file" name="image_2" accept="image/jpg, image/jpeg, image/png, image/webp" class="box"
                            required>
                 </div>
                 <div class="inputBox">
-                    <span>image 03 (required)</span>
-                    <input type="file" name="image_03" accept="image/jpg, image/jpeg, image/png, image/webp" class="box"
+                    <span>image 3 (required)</span>
+                    <input type="file" name="image_3" accept="image/jpg, image/jpeg, image/png, image/webp" class="box"
                            required>
                 </div>
                 <div class="inputBox">
@@ -90,5 +192,40 @@
             <input type="submit" value="add product" class="btn" name="add_product">
         </form>
     </div>
+
+    <section class="show-products">
+        <h1 class="heading">Products Added</h1>
+        <div class="box-container">
+
+            <?php
+            $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Seller = ?");
+            $select_products->bind_param("i", $sellerId); // Bind the seller ID as a parameter
+            $select_products->execute();
+
+            $result = $select_products->get_result(); // Get the result set
+            if ($result->num_rows > 0) {
+                while ($fetch_products = $result->fetch_assoc()) {
+                    ?>
+                    <div class="box">
+                        <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
+                        <div class="name"><?= $fetch_products['name']; ?></div>
+                        <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+                        <div class="category"><span>Category:</span> <?= $fetch_products['category']; ?> </div>
+                        <div class="brand"><span>Brand:</span> <?= $fetch_products['brand']; ?> </div>
+                        <div class="sellingtype"><span>Selling Type:</span> <?= $fetch_products['sellingtype']; ?> </div>
+                        <div class="details"><span><?= $fetch_products['details']; ?></span></div>
+                        <div class="flex-btn">
+                            <a href="update_product.php?update=<?= $fetch_products['ID_Article']; ?>" class="option-btn">update</a>
+                            <a href="add-product.php?delete=<?= $fetch_products['ID_Article']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo '<p class="empty">No products added yet!</p>';
+            }
+            ?>
+        </div>
+    </section>
 </div>
 </body>
