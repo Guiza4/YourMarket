@@ -71,7 +71,9 @@ include 'search.php';
                                     <div class="category">
                                         <span>Category:</span> <?= $product['category']; ?>
                                     </div>
-                                    <div class="stock"><span>Stock:</span> <?= $product['stock']; ?></div>
+                                    <div class="brand">
+                                        <span>Brand:</span> <?= $product['brand']; ?>
+                                    </div>
                                     <div class="details"><span><?= $product['details']; ?></span></div>
                                     <br>
                                 </div>

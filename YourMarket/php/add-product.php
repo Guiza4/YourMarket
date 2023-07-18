@@ -14,8 +14,10 @@ if (isset($_POST['add_product'])) {
     $price = filter_var($price, FILTER_SANITIZE_STRING);
     $category = $_POST['category'];
     $category = filter_var($category, FILTER_SANITIZE_STRING);
-    $stock = $_POST['stock'];
-    $stock = filter_var($stock, FILTER_SANITIZE_STRING);
+    $brand = $_POST['brand'];
+    $brand = filter_var($brand, FILTER_SANITIZE_STRING);
+    $sellingtype = $_POST['sellingtype'];
+    $sellingtype = filter_var($sellingtype, FILTER_SANITIZE_STRING);
     $details = $_POST['details'];
     $details = filter_var($details, FILTER_SANITIZE_STRING);
 
@@ -46,8 +48,8 @@ if (isset($_POST['add_product'])) {
     if ($rowCount > 0) {
         $message[] = 'Product name already exists!';
     } else {
-        $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, stock, image_1, image_2, image_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $insert_products->bind_param("issssssss", $sellerId, $name, $details, $price, $category, $stock, $image_1, $image_2, $image_3);
+        $insert_products = $mysqli->prepare("INSERT INTO `article` (ID_Seller, name, details, price, category, brand, sellingtype, image_1, image_2, image_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $insert_products->bind_param("isssssssss", $sellerId, $name, $details, $price, $category, $brand, $sellingtype, $image_1, $image_2, $image_3);
         $insert_products->execute();
 
         if ($insert_products) {
@@ -145,9 +147,25 @@ if (isset($_GET['delete'])) {
                     </select>
                 </div>
                 <div class="inputBox">
-                    <span>Stock (required)</span>
-                    <input type="number" min="1" class="box" required max="9999999999" placeholder="Enter Quantity"
-                           name="stock">
+                    <span>Brand (required)</span>
+                    <select class="box" name="brand">
+                        <option>Apple</option>
+                        <option>Samsung</option>
+                        <option>Xiaomi</option>
+                        <option>Sony</option>
+                        <option>HP</option>
+                        <option>Asus</option>
+                        <option>Nintendo</option>
+                        <option>Microsoft</option>
+                    </select>
+                </div>
+                <div class="inputBox">
+                    <span>Selling Type (required)</span>
+                    <select class="box" name="sellingtype">
+                        <option>Buy Now</option>
+                        <option>Best Offer</option>
+                        <option>Auction</option>
+                    </select>
                 </div>
                 <div class="inputBox">
                     <span>image 1 (required)</span>
@@ -193,7 +211,8 @@ if (isset($_GET['delete'])) {
                         <div class="name"><?= $fetch_products['name']; ?></div>
                         <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
                         <div class="category"><span>Category:</span> <?= $fetch_products['category']; ?> </div>
-                        <div class="stock"><span>Stock:</span> <?= $fetch_products['stock']; ?> </div>
+                        <div class="brand"><span>Brand:</span> <?= $fetch_products['brand']; ?> </div>
+                        <div class="sellingtype"><span>Selling Type:</span> <?= $fetch_products['sellingtype']; ?> </div>
                         <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                         <div class="flex-btn">
                             <a href="update_product.php?update=<?= $fetch_products['ID_Article']; ?>" class="option-btn">update</a>

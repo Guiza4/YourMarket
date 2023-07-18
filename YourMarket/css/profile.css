@@ -263,7 +263,12 @@ section{
     max-lines: 2;
 }
 
-.show-products .box-container .box .stock{
+.show-products .box-container .box .brand{
+    font-size: 1.5rem;
+    color:#666;
+    line-height: 2;
+}
+.show-products .box-container .box .sellingtype{
     font-size: 1.5rem;
     color:#666;
     line-height: 2;

@@ -36,6 +36,12 @@ $mysqli = require __DIR__ . "/connecdb.php";
                 <input type="radio" value="Nintendo" name="brand" class="filter-radio"><label>Nintendo</label><br>
                 <input type="radio" value="Microsoft" name="brand" class="filter-radio"><label>Microsoft</label><br>
             </div>
+            <div class="sellingtypebtn">
+                <p>Buying</p>
+                <input type="radio" value="Buy Now" name="sellingtype" class="filter-radio"><label>Buy Now</label><br>
+                <input type="radio" value="Best offer" name="sellingtype" class="filter-radio"><label>Best Offer</label><br>
+                <input type="radio" value="Auction" name="sellingtype" class="filter-radio"><label>Auction</label><br>
+            </div>
         </div>
     </div>
 </form>
