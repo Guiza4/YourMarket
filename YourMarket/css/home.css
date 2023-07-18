@@ -317,3 +317,6 @@ section{
     color: black;
     margin-bottom: 5px;
 }
+.go-to-product{
+    text-decoration: none;
+}
