@@ -170,7 +170,8 @@ $userId = $_SESSION["user_id"];
                                         <div class="category">
                                             <span>Category:</span> <?= $fetch_products['category']; ?>
                                         </div>
-                                        <div class="stock"><span>Stock:</span> <?= $fetch_products['stock']; ?></div>
+                                        <div class="brand"><span>brand:</span> <?= $fetch_products['brand']; ?></div>
+                                        <div class="sellingtype"><span>SellingType:</span> <?= $fetch_products['sellingtype']; ?></div>
                                         <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                                         <br>
                                     </div>

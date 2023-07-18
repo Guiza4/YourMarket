@@ -60,7 +60,7 @@ body {
 .nav-dropdown:hover .dropdown-content{
     display: block;
 }
-.dropdown-content a{
+.dropdown-content a,button{
     display: block;
     text-decoration: none;
     color: black;
@@ -69,6 +69,10 @@ body {
 
 #main-content {
     margin: 20px;
+}
+#main-content-search {
+    margin: 20px;
+    display: flex;
 }
 
 .rounded-box {
@@ -196,13 +200,13 @@ footer a {
 }
 
 section{
-    padding:2rem;
     max-width: 1200px;
-    margin:0 auto;
+    margin-left:20px;
 }
 
 .show-products .box-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
     align-items: flex-start;
@@ -212,8 +216,8 @@ section{
     border-radius: 2rem;
     border: solid black;
     padding: 1rem;
-    height: 35rem;
-    width: 25rem;
+    height: 25rem;
+    width: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -252,7 +256,12 @@ section{
     max-lines: 2;
 }
 
-.show-products .box-container .box .stock{
+.show-products .box-container .box .brand{
+    font-size: 1.5rem;
+    color:#666;
+    line-height: 2;
+}
+.show-products .box-container .box .sellingtype{
     font-size: 1.5rem;
     color:#666;
     line-height: 2;
@@ -262,10 +271,6 @@ section{
     grid-template-columns: 1fr;
 }
 
-.middel {
-    width: 55%;
-    height: fit-content;
-}
 .product{
     padding: 2%;
     background-color: #FFFFFF;
@@ -276,6 +281,41 @@ section{
 }
 .show-products .box-container {
     grid-template-columns: 1fr;
+}
+
+.heading {
+    font-size: 30px;
+    color: #000000;
+    margin-bottom: .5rem;
+    text-align: center;
+}
+
+.filter-container {
+    position: relative;
+    margin-left: auto;
+}
+
+.filter-container .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FFFFFF;
+    border: 1px solid black;
+    padding: 10px;
+    z-index: 1;
+    border-radius: 10px;
+    width: 100px;
+}
+
+.filter-container:hover .dropdown-content {
+    display: block;
+}
+
+.filter-container .dropdown-content a,
+.filter-container .dropdown-content button {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 5px;
 }
 .go-to-product{
     text-decoration: none;

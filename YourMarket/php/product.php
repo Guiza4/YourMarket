@@ -148,7 +148,7 @@ if (isset($_POST['add_to_cart'])) {
                 <div class="name"><?= $product['name']; ?></div>
                 <div class="flex">
                     <div class="price"><span>£</span><?= $product['price']; ?></div>
-                    <div class="quantity">quantity left:<?= $product['stock']; ?></div>
+                    <div class="brand">Brand:<?= $product['brand']; ?></div>
                     <input type="number" name="qty" class="qty" min="1" max="99"
                            onkeypress="" value="1">
                 </div>

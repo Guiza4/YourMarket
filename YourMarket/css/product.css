@@ -240,7 +240,7 @@ section {
     border-radius: .5rem;
 }
 
-.quick-view form .row .content .details,.quantity {
+.quick-view form .row .content .details,.brand {
     font-size: 1.6rem;
     color: var(--light-color);
     line-height: 2;

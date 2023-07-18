@@ -1,0 +1,53 @@
+
+.filter-container {
+    flex: 0 0 200px; /* Set the width of the left column */
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+    margin-right: 20px;
+    margin-left: 0;
+}
+
+.filter-box {
+    margin-bottom: 20px;
+}
+
+.filter-box p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.filter-box input[type="range"] {
+    width: 100%;
+}
+
+.pricebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.pricebar span {
+    font-size: 12px;
+    color: #888;
+}
+
+.selected-value {
+    font-weight: bold;
+    padding: 4px 8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: text;
+}
+
+.namebtn, .brandbtn {
+    margin-top: 10px;
+}
+
+.filter-box input[type="checkbox"],
+.filter-box input[type="radio"] {
+    margin-top: 5px;
+}

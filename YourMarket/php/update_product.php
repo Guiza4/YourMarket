@@ -18,11 +18,13 @@ if (isset($_POST['update'])) {
     $details = filter_var($details, FILTER_SANITIZE_STRING);
     $category = $_POST['category'];
     $category = filter_var($category, FILTER_SANITIZE_STRING);
-    $stock = $_POST['stock'];
-    $stock = filter_var($stock, FILTER_SANITIZE_STRING);
+    $brand = $_POST['brand'];
+    $brand = filter_var($brand, FILTER_SANITIZE_STRING);
+    $sellingtype = $_POST['sellingtype'];
+    $sellingtype = filter_var($sellingtype, FILTER_SANITIZE_STRING);
 
-    $update_product = $mysqli->prepare("UPDATE `article` SET name = ?, price = ?, details = ?, category = ?, stock = ? WHERE ID_Article = ?");
-    $update_product->bind_param("sssssi", $name, $price, $details, $category, $stock, $aid);
+    $update_product = $mysqli->prepare("UPDATE `article` SET name = ?, price = ?, details = ?, category = ?, brand = ?, sellingtype = ? WHERE ID_Article = ?");
+    $update_product->bind_param("ssssssi", $name, $price, $details, $category, $brand, $sellingtype, $aid);
     $update_product->execute();
 
     $message[] = 'product updated successfully!';
@@ -182,9 +184,29 @@ if (isset($_POST['update'])) {
                             <option <?php if($selected == 'Watch'){echo("selected");}?>>Watch</option>
                             <option <?php if($selected == 'Video Games'){echo("selected");}?>>Video Games</option>
                         </select>
-                        <span>Update Stock</span>
-                        <input type="number" name="stock" required class="box" min="0" max="9999999999"
-                               placeholder="enter product stock" value="<?= $fetch_products['stock']; ?>">
+                        <span>Update Brand</span>
+                        <?php
+                        $selected = $fetch_products['brand'];
+                        ?>
+                        <select class="box" name="brand">
+                            <option <?php if($selected == 'Apple'){echo("selected");}?>>Apple</option>
+                            <option <?php if($selected == 'Samsung'){echo("selected");}?>>Samsung</option>
+                            <option <?php if($selected == 'Xiaomi'){echo("selected");}?>>Xiaomi</option>
+                            <option <?php if($selected == 'Sony'){echo("selected");}?>>Sony</option>
+                            <option <?php if($selected == 'HP'){echo("selected");}?>>HP</option>
+                            <option <?php if($selected == 'Asus'){echo("selected");}?>>Asus</option>
+                            <option <?php if($selected == 'Nintendo'){echo("selected");}?>>Nintendo</option>
+                            <option <?php if($selected == 'Microsoft'){echo("selected");}?>>Microsoft</option>
+                        </select>
+                        <span>Update Selling Type</span>
+                        <?php
+                        $selected = $fetch_products['sellingtype'];
+                        ?>
+                        <select class="box" name="sellingtype">
+                            <option <?php if($selected == 'Buy Now'){echo("selected");}?>>Buy Now</option>
+                            <option <?php if($selected == 'Best Offer'){echo("selected");}?>>Best Offer</option>
+                            <option <?php if($selected == 'Auction'){echo("selected");}?>>Auction</option>
+                        </select>
                         <span>Update Image 1</span>
                         <input type="file" name="image_1" accept="image/jpg, image/jpeg, image/png, image/webp"
                                class="box">
