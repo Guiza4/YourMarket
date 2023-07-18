@@ -156,6 +156,11 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                                         <div class="brand">
                                             <span>Brand:</span> <?= $product['brand']; ?>
                                         </div>
+                                        <?php if ($product['selling_type'] === 'Auction'): ?>
+                                            <div class="date">
+                                                <span>Start:<?= $product['start_date']; ?> End:<?= $product['end_date']; ?></span>
+                                            </div>
+                                        <?php endif; ?>
                                         <div class="details"><span><?= $product['details']; ?></span></div>
                                         <br>
                                     </div>

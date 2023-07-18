@@ -182,7 +182,7 @@ if (isset($_POST['order'])) {
             </div>
             <div class="inputBox">
                 <span>Address Line 02:</span>
-                <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50" required>
+                <input type="text" name="street" placeholder="E.g. Street name" class="box" maxlength="50">
             </div>
             <div class="inputBox">
                 <span>City:</span>
