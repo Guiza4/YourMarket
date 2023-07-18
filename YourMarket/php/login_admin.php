@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             session_start();
             $_SESSION["user_id"] = $user["ID_Admin"];
 
-            header("Location: index_admin.php");
+            header("Location: admin-view.php");
             exit;
         }
     }
