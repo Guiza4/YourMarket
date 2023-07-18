@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $mysqli = require __DIR__ . "/connecdb.php";
 session_start();
 $sellerId = $_SESSION["user_id"];
@@ -21,7 +24,61 @@ if (isset($_GET['ID'])) {
     $product_result = $select_product->get_result();
     $product = $product_result->fetch_assoc();
 }
+
 $message = '';
+$highestBid = 0; // Initialize $highestBid with 0
+if (isset($_POST['bid'])) {
+    $ID_Article = $_POST['ID_Article'];
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $image_1 = $_POST['image'];
+    $maximumBid = $_POST['maximum_bid'];
+
+    if ($maximumBid < $price) {
+        $message = "You cannot set a maximum bid lower than the starting bid!";
+    } else {
+        // Add auction bid logic here
+        if ($highestBid < $maximumBid) {
+            $highestBid = $highestBid + 1;
+        }
+
+        // Get the current highest bid from the database
+        $select_highest_bid = $mysqli->prepare("SELECT MAX(highest_bid) AS highest_bid FROM `article` WHERE ID_Article = ?");
+        if (!$select_highest_bid) {
+            die('Error: ' . $mysqli->error);
+        }
+        $select_highest_bid->bind_param("i", $ID_Article);
+        $select_highest_bid->execute();
+        $highest_bid_result = $select_highest_bid->get_result();
+
+        if ($highest_bid_result->num_rows > 0) {
+            $highestBid = $highest_bid_result->fetch_assoc()['highest_bid'];
+        } else {
+            $highestBid = $price; // If no bids yet, set the highest bid as the product price
+        }
+
+        // Calculate the next bid price
+        $nextBid = $highestBid + 1;
+
+        if ($maximumBid >= $nextBid) {
+            // Update the highest bid and ID_Buyer in the article table
+            $update_article = $mysqli->prepare("UPDATE `article` SET highest_bid = ?, ID_Buyer = ? WHERE ID_Article = ?");
+            if (!$update_article) {
+                die('Error: ' . $mysqli->error);
+            }
+            $update_article->bind_param("dii", $maximumBid, $_SESSION["user_id"], $ID_Article);
+            $update_article_result = $update_article->execute();
+
+            if ($update_article_result) {
+                $message = 'Your bid has been placed successfully!';
+            } else {
+                $message = 'Error updating the highest bid and ID_Buyer: ' . $mysqli->error;
+            }
+        } else {
+            $message = "Your maximum bid is lower than the current highest bid!";
+        }
+    }
+}
 
 if (isset($_POST['add_to_cart'])) {
     $ID_Article = $_POST['ID_Article'];
@@ -42,11 +99,11 @@ if (isset($_POST['add_to_cart'])) {
             $message = "You cannot set a maximum bid lower than the starting bid!";
         } else {
             // Add auction bid logic here
-
-            // Example: Automatically bid $1 higher than the current highest bid
-
+            if ($highestBid < $maximumBid) {
+                $highestBid = $highestBid + 1;
+            }
             // Get the current highest bid from the database
-            $select_highest_bid = $mysqli->prepare("SELECT MAX(bid_price) AS highest_bid FROM `auction_bids` WHERE ID_Article = ?");
+            $select_highest_bid = $mysqli->prepare("SELECT MAX(highest_bid) AS highest_bid FROM `article` WHERE ID_Article = ?");
             $select_highest_bid->bind_param("i", $ID_Article);
             $select_highest_bid->execute();
             $highest_bid_result = $select_highest_bid->get_result();
@@ -61,27 +118,15 @@ if (isset($_POST['add_to_cart'])) {
             $nextBid = $highestBid + 1;
 
             if ($maximumBid >= $nextBid) {
-                // Add the user's bid to the database
-                $insert_bid = $mysqli->prepare("INSERT INTO `auction_bids` (ID_Article, user_id, bid_price) VALUES (?, ?, ?)");
-                $insert_bid->bind_param("iid", $ID_Article, $sellerId, $maximumBid);
-                $insert_bid_result = $insert_bid->execute();
+                // Update the highest bid and ID_Buyer in the article table
+                $update_article = $mysqli->prepare("UPDATE `article` SET highest_bid = ?, ID_Buyer = ? WHERE ID_Article = ?");
+                $update_article->bind_param("iii", $maximumBid, $_SESSION["user_id"], $ID_Article);
+                $update_article_result = $update_article->execute();
 
-                if ($insert_bid_result) {
-                    // Get the inserted bid ID
-                    $bidId = $mysqli->insert_id;
-
-                    // Update the highest bid and ID_Buyer in the article table
-                    $update_article = $mysqli->prepare("UPDATE `article` SET highest_bid = ?, ID_Buyer = ? WHERE ID_Article = ?");
-                    $update_article->bind_param("iii", $maximumBid, $_SESSION["user_id"], $ID_Article);
-                    $update_article_result = $update_article->execute();
-
-                    if ($update_article_result) {
-                        $message = 'Your bid has been placed successfully!';
-                    } else {
-                        $message = 'Error updating the highest bid and ID_Buyer!';
-                    }
+                if ($update_article_result) {
+                    $message = 'Your bid has been placed successfully!';
                 } else {
-                    $message = 'Error placing your bid!';
+                    $message = 'Error updating the highest bid and ID_Buyer: ' . $mysqli->error;
                 }
             } else {
                 $message = "Your maximum bid is lower than the current highest bid!";
@@ -111,7 +156,7 @@ if (isset($_POST['add_to_cart'])) {
             if ($insert_cart_result) {
                 $message = 'added to cart!';
             } else {
-                $message = 'Error adding to cart!';
+                $message = 'Error adding to cart: ' . $mysqli->error;
             }
         }
     }
@@ -206,12 +251,27 @@ if (isset($_POST['add_to_cart'])) {
                 </div>
                 <div class="details"><?= $product['details']; ?></div>
                 <?php if ($product['selling_type'] === 'Auction'): ?>
+                    <div class="current-bid">
+                        <?php
+                        $select_highest_bid = $mysqli->prepare("SELECT MAX(highest_bid) AS highest_bid FROM `article` WHERE ID_Article = ?");
+                        $select_highest_bid->bind_param("i", $ID_Article);
+                        $select_highest_bid->execute();
+                        $highest_bid_result = $select_highest_bid->get_result();
+
+                        if ($highest_bid_result->num_rows > 0) {
+                            $highestBid = $highest_bid_result->fetch_assoc()['highest_bid'];
+                            echo "Current Highest Bid: £" . $highestBid;
+                        } else {
+                            echo "No bids yet.";
+                        }
+                        ?>
+                    </div>
                     <div class="flex-btn">
                         <input type="submit" value="Bid" class="btn" name="bid">
                     </div>
                 <?php else: ?>
                     <div class="flex-btn">
-                        <input type="submit" value="add to cart" class="btn" name="add_to_cart">
+                        <input type="submit" value="Add to Cart" class="btn" name="add_to_cart">
                     </div>
                 <?php endif; ?>
             </div>

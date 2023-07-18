@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 18 juil. 2023 à 14:20
+-- Généré le : mar. 18 juil. 2023 à 23:24
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -57,29 +57,52 @@ DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `ID_Article` int NOT NULL AUTO_INCREMENT,
   `ID_Seller` int DEFAULT NULL,
+  `ID_Buyer` int DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `details` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `category` enum('Phone','Computer','Watch','Video Games') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `brand` enum('Apple','Samsung','Xiaomi','Sony','HP','Asus','Nintendo','Microsoft') DEFAULT NULL,
-  `sellingtype` enum('Buy Now','Best Offer','Auction') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `selling_type` enum('Buy Now','Best Offer','Auction') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `minimum_bid` decimal(10,2) DEFAULT NULL,
+  `highest_bid` decimal(10,2) DEFAULT NULL,
   `image_1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `image_2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `image_3` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`ID_Article`),
   UNIQUE KEY `name` (`name`),
-  KEY `ID_Seller` (`ID_Seller`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `ID_Seller` (`ID_Seller`),
+  KEY `FK_article_buyer` (`ID_Buyer`),
+  KEY `FK_article_auction_bids` (`highest_bid`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `article`
 --
 
-INSERT INTO `article` (`ID_Article`, `ID_Seller`, `name`, `details`, `price`, `category`, `brand`, `sellingtype`, `start_date`, `end_date`, `minimum_bid`, `image_1`, `image_2`, `image_3`) VALUES
-(1, 2, 'Mac 1', 'This is the new Mac', '1199.00', 'Computer', 'Apple', 'Buy Now', NULL, NULL, NULL, 'mac_ipad-removebg-preview.png', 'apple iphone.png', 'apple_iphone-removebg-preview.png');
+INSERT INTO `article` (`ID_Article`, `ID_Seller`, `ID_Buyer`, `name`, `details`, `price`, `category`, `brand`, `selling_type`, `start_date`, `end_date`, `minimum_bid`, `highest_bid`, `image_1`, `image_2`, `image_3`) VALUES
+(1, 2, NULL, 'Mac 1', 'This is the new Mac', '1199.00', 'Computer', 'Apple', 'Buy Now', NULL, NULL, NULL, NULL, 'mac_ipad-removebg-preview.png', 'apple iphone.png', 'apple_iphone-removebg-preview.png'),
+(4, 2, 3, 'Watch', 'This is my new apple watch', '499.00', 'Watch', 'Apple', 'Auction', '2023-07-19', '2023-07-21', '499.00', '570.00', 'iPhone_11_Y_1.png', 'Objets.jpg', 'mac_ipad.jpg'),
+(5, 2, NULL, 'azerty', 'This is my hp', '449.00', 'Computer', 'HP', 'Buy Now', NULL, NULL, NULL, NULL, 'printer.png', 'item1.png', 'star.png');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auction_bids`
+--
+
+DROP TABLE IF EXISTS `auction_bids`;
+CREATE TABLE IF NOT EXISTS `auction_bids` (
+  `ID_Bid` int NOT NULL AUTO_INCREMENT,
+  `ID_Article` int NOT NULL,
+  `ID_Buyer` int NOT NULL,
+  `bid_amount` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`ID_Bid`),
+  KEY `ID_Article` (`ID_Article`),
+  KEY `ID_Buyer` (`ID_Buyer`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -126,16 +149,16 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `quantity` int DEFAULT NULL,
   `image_1` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `cart`
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `ID_Article`, `name`, `price`, `quantity`, `image_1`) VALUES
+(18, 1, 5, 'azerty', '449.00', 1, 'printer.png'),
 (12, 4, 5, 'Mac 1', '1199.00', 47, 'mac.png'),
-(13, 2, 1, 'Mac 1', '1199.00', 1, 'mac_ipad-removebg-preview.png'),
-(15, 1, 1, 'Mac 1', '1199.00', 1, 'mac_ipad-removebg-preview.png');
+(13, 2, 1, 'Mac 1', '1199.00', 1, 'mac_ipad-removebg-preview.png');
 
 -- --------------------------------------------------------
 
