@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $is_invalid = true;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="fp">
                     <label class="fp1"><a>Don't Have an Account ?</a>
                         <a href="../html/SignUp.html">SIGN UP</a></label>
-                    <label class="fp2"><a href="../html/forgot-password.html">Forgot Password ?</a></label>
+                    <label class="fp2"><a href="forgot-password.php">Forgot Password ?</a></label>
                 </div>
                 <br>
                 <div class="bout">
@@ -134,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <script>
     function submitForm(event, buttonId) {
         if (buttonId === 'backButton') {
-            // Perform specific action for the 'backButton'
+            // Perform a specific action when the 'backButton' is clicked
             window.location.href = '../html/User_Selection.html'; // Redirect to User_Selection.html
             event.preventDefault(); // Prevent the default action of the anchor tag
         } else {

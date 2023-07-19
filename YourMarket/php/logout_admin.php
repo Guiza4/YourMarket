@@ -3,7 +3,7 @@ session_start();
 
 session_destroy();
 
-header("Location: index_admin.php");
+header("Location: admin-view.php");
 exit;
 ?>
 

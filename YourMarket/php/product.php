@@ -161,6 +161,52 @@ if (isset($_POST['add_to_cart'])) {
         }
     }
 }
+if (isset($_POST['submit_offer'])) {
+    $ID_Article = $_POST['ID_Article'];
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $image_1 = $_POST['image'];
+    $offerPrice = $_POST['offer_price'];
+
+    // Check if an offer already exists for the article by the current user
+    $select_offer = $mysqli->prepare("SELECT * FROM `offer` WHERE ID_Article = ? AND user_id = ?");
+    if (!$select_offer) {
+        die('Error: ' . $mysqli->error);
+    }
+    $select_offer->bind_param("ii", $ID_Article, $_SESSION["user_id"]);
+    $select_offer->execute();
+    $offer_result = $select_offer->get_result();
+
+    if ($offer_result->num_rows > 0) {
+        // Update the existing offer price
+        $update_offer = $mysqli->prepare("UPDATE `offer` SET offer_price = ? WHERE ID_Article = ? AND user_id = ?");
+        if (!$update_offer) {
+            die('Error: ' . $mysqli->error);
+        }
+        $update_offer->bind_param("dii", $offerPrice, $ID_Article, $_SESSION["user_id"]);
+        $update_offer_result = $update_offer->execute();
+
+        if ($update_offer_result) {
+            $message = 'Your offer has been updated successfully!';
+        } else {
+            $message = 'Error updating the offer price: ' . $mysqli->error;
+        }
+    } else {
+        // Insert a new offer
+        $insert_offer = $mysqli->prepare("INSERT INTO `offer` (user_id, ID_Article, offer_price) VALUES (?, ?, ?)");
+        if (!$insert_offer) {
+            die('Error: ' . $mysqli->error);
+        }
+        $insert_offer->bind_param("iid", $_SESSION["user_id"], $ID_Article, $offerPrice);
+        $insert_offer_result = $insert_offer->execute();
+
+        if ($insert_offer_result) {
+            $message = 'Your offer has been submitted successfully!';
+        } else {
+            $message = 'Error submitting the offer: ' . $mysqli->error;
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -170,52 +216,10 @@ if (isset($_POST['add_to_cart'])) {
     <link href="../css/product.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<!-- Barre de navigation -->
-<div id="navbar">
-    <div class="nav-logo">
-        <a class="NAV" href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
-    </div>
-    <div class="nav-search">
-        <input type="text" id="search-bar" placeholder="Search...">
-    </div>
-    <a class="NAV" href="#">
-        <div class="nav-categorie">
-            <div class="nav-dropdown">
-                <img src="../image/categorie.png" width="25" height="49">Category
-                <div class="dropdown-content">
-                    <a href="#">Phone</a>
-                    <a href="#">Computer</a>
-                    <a href="#">Watch</a>
-                    <a href="#">Video-game</a>
-                </div>
-            </div>
-        </div>
-    </a>
-    <a class="NAV" href="profile.php">
-        <div class="nav-account">
-            <img src="../image/account.png" width="30" height="32">
-            <span>Account</span>
-        </div>
-    </a>
+<!-- Navigation Bar -->
+<?php include 'navbar.php'; ?>
 
-    <?php if ($_SESSION["user_type"] === "seller"): ?>
-        <!-- Display something specific for seller -->
-        <a class="NAV" href="add-product.php">
-            <div class="nav-cart">
-                <img src="../image/sellings.png" width="38" height="34">
-                <span>Sellings</span>
-            </div>
-        </a>
-    <?php else: ?>
-        <!-- Display the "Cart" link for other user types -->
-        <a class="NAV" href="cart.php">
-            <div class="nav-cart">
-                <img src="../image/cart.png" width="38" height="34">
-                <span>Cart</span>
-            </div>
-        </a>
-    <?php endif; ?>
-</div>
+<?php if (empty($searchQuery) && empty($_GET['category'])): ?>
 <section class="quick-view">
     <h1 class="heading">Product view</h1>
     <form action="" method="post" class="box">
@@ -245,12 +249,14 @@ if (isset($_POST['add_to_cart'])) {
                             <input type="number" name="maximum_bid" id="maximum_bid" min="<?= $product['price']; ?>"
                                    step="1" required>
                         </div>
-                    <?php else: ?>
+                    <?php elseif($product['selling_type']==='Best Offer'): ?>
+                    <?php else:?>
                         <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="" value="1">
                     <?php endif; ?>
                 </div>
                 <div class="details"><?= $product['details']; ?></div>
                 <?php if ($product['selling_type'] === 'Auction'): ?>
+                    <div class="date">Starting Date:<span style="color: #3FBBF7"><?= $product['start_date']; ?></span> |   Ending date:<span style="color: #3FBBF7"><?= $product['end_date']; ?></span></div>
                     <div class="current-bid">
                         <?php
                         $select_highest_bid = $mysqli->prepare("SELECT MAX(highest_bid) AS highest_bid FROM `article` WHERE ID_Article = ?");
@@ -269,6 +275,21 @@ if (isset($_POST['add_to_cart'])) {
                     <div class="flex-btn">
                         <input type="submit" value="Bid" class="btn" name="bid">
                     </div>
+                    <?php elseif ($product['selling_type'] === 'Best Offer'): ?>
+                        <div class="make-offer">
+
+                            <form action="" method="post">
+                                <input type="hidden" name="ID_Article" value="<?= $product['ID_Article']; ?>">
+                                <input type="hidden" name="name" value="<?= $product['name']; ?>">
+                                <input type="hidden" name="price" value="<?= $product['price']; ?>">
+                                <input type="hidden" name="image" value="<?= $product['image_1']; ?>">
+                                <div class="best-offer-inputs">
+                                    <label for="offer_price"><span>Your Offer:</span></label>
+                                    <input type="number" name="offer_price" id="offer_price" min="<?= $product['price']; ?>" step="0.01" required>
+                                </div>
+                                <input type="submit" value="Submit Offer" class="btn" name="submit_offer">
+                            </form>
+                        </div>
                 <?php else: ?>
                     <div class="flex-btn">
                         <input type="submit" value="Add to Cart" class="btn" name="add_to_cart">
@@ -279,6 +300,12 @@ if (isset($_POST['add_to_cart'])) {
     </form>
     <?php if (!empty($message)): ?>
         <div class="message"><?= $message; ?></div>
+    <?php endif; ?>
+    <?php elseif ((isset($_GET['search']) || isset($_GET['category'])) && empty($products)): ?>
+        <!-- Display a message when no search results or category is found -->
+        <div id="main-content">
+            <h1 class="heading">No results found!</h1>
+        </div>
     <?php endif; ?>
     <script>
         let mainImage = document.querySelector('.quick-view .image-container .main-image img');
