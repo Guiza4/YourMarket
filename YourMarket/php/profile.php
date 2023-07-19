@@ -164,7 +164,7 @@ $userId = $_SESSION["user_id"];
 
                         <?php
                         if ($userType === "seller") {
-                            $select_offers = $mysqli->prepare("SELECT * FROM `offer` WHERE product_id IN (SELECT ID_Article FROM `article` WHERE ID_Seller = ?)");
+                            $select_offers = $mysqli->prepare("SELECT * FROM `offer` WHERE offer_id IN (SELECT ID_Article FROM `article` WHERE ID_Seller = ?)");
                             $select_offers->bind_param("i", $userId);
                             $select_offers->execute();
 
@@ -238,9 +238,6 @@ $userId = $_SESSION["user_id"];
                                                     <div class="offer-price">Offer Price: £<?= $fetch_offers['offer_price']; ?></div>
                                                 <?php endif; ?>
                                                 <div class="offer-status">Status: <?= $fetch_offers['offer_status']; ?></div>
-                                            </div>
-                                            <div class="offer-message">
-                                                <span>Message:</span> <?= $fetch_offers['offer_message']; ?>
                                             </div>
                                         </div>
                                         <?php
