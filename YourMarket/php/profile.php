@@ -160,22 +160,39 @@ $userId = $_SESSION["user_id"];
                             $result = $select_products->get_result(); // Obtenir le jeu de résultats
 
                             if ($result->num_rows > 0) {
-                                while ($fetch_products = $result->fetch_assoc()) {
-                                    ?>
-                                    <div class="box">
-                                        <!-- Afficher les détails du produit -->
-                                        <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
-                                        <div class="name"><?= $fetch_products['name']; ?></div>
-                                        <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
-                                        <div class="category">
-                                            <span>Category:</span> <?= $fetch_products['category']; ?>
+                                if ($userType === "seller") {
+                                    while ($fetch_products = $result->fetch_assoc()) {
+                                        ?>
+                                        <div class="box">
+                                            <!-- Afficher les détails du produit -->
+                                            <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
+                                            <div class="name"><?= $fetch_products['name']; ?></div>
+                                            <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+                                            <div class="category">
+                                                <span>Category:</span> <?= $fetch_products['category']; ?>
+                                            </div>
+                                            <div class="brand"><span>brand:</span> <?= $fetch_products['brand']; ?>
+                                            </div>
+                                            <div class="sellingtype">
+                                                <span>SellingType:</span> <?= $fetch_products['sellingtype']; ?></div>
+                                            <div class="details"><span><?= $fetch_products['details']; ?></span></div>
+                                            <br>
                                         </div>
-                                        <div class="brand"><span>brand:</span> <?= $fetch_products['brand']; ?></div>
-                                        <div class="selling_type"><span>Selling Type:</span> <?= $fetch_products['selling_type']; ?></div>
-                                        <div class="details"><span><?= $fetch_products['details']; ?></span></div>
-                                        <br>
-                                    </div>
-                                    <?php
+                                        <?php
+                                    }
+                                }
+                                if ($userType === "buyer") {
+                                    while ($fetch_products = $result->fetch_assoc()) {
+                                        ?>
+                                        <div class="box">
+                                            <!-- Afficher les détails du produit -->
+                                            <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
+                                            <div class="name"><?= $fetch_products['name']; ?></div>
+                                            <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+
+                                        </div>
+                                        <?php
+                                    }
                                 }
                             } else {
                                 echo '<p class="empty">No products added yet!</p>';

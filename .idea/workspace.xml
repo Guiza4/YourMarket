@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="modif de la rue">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_07_2023_14_03__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/checkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/profile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YourMarket/yourmarket.sql" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/yourmarket.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -210,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689762771776</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="modif de la rue">
+      <option name="closed" value="true" />
+      <created>1689764645220</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1689764645220</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +270,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/YourMarket/php/update_product.php</url>
-          <line>146</line>
+          <line>147</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

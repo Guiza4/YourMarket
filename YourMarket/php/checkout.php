@@ -30,6 +30,9 @@ if (isset($_POST['order'])) {
 
     // Vérifier si le panier n'est pas vide
     if ($cart_result->num_rows > 0) {
+        // Définir la variable pour stocker la commande complète
+        $order_details = '';
+
         // Créer une commande pour chaque produit dans le panier
         while ($cart_item = $cart_result->fetch_assoc()) {
             $ID_Article = $cart_item['ID_Article'];
@@ -43,21 +46,20 @@ if (isset($_POST['order'])) {
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
             $insert_order->bind_param("issssssi", $userId, $name, $number, $email, $method, $address, $total_products, $total_price);
 
-            // Insérer une nouvelle commande dans la table "historique"
-            $insert_historique = $mysqli->prepare("INSERT INTO historique (user_id, name, number, email, method, address, total_products, total_price, placed_on)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
-            $insert_historique->bind_param("issssssi", $userId, $name, $number, $email, $method, $address, $total_products, $total_price);
-
             // Construire la chaîne de produits pour la commande
-            $total_products = "$productName x $quantity";
+            $product_details = "$productName x $quantity (Price: £" . number_format($price, 2) . ")";
+
+            // Ajouter les détails du produit à la commande complète
+            $order_details .= $product_details . "<br>";
 
             // Calculer le prix total pour la commande
             $total_price = $price * $quantity;
 
-            // Construire l'adresse complète pour la commande
-            $address = "$flat, $street, $city, $state, $country, $pin_code";
-
-            // Exécuter la requête d'insertion
+            // Insérer une nouvelle commande dans la table "historique"
+            $insert_historique = $mysqli->prepare("INSERT INTO historique (user_id, ID_Article, name, price, quantity, image_1)
+    VALUES (?, ?, ?, ?, ?, ?)");
+            $insert_historique->bind_param("iissis", $userId, $ID_Article, $productName, $price, $quantity, $image_1);
+            // Exécuter les requêtes d'insertion
             $insert_order->execute();
             $insert_historique->execute();
 
@@ -169,7 +171,8 @@ if (isset($_POST['order'])) {
             </div>
             <div class="inputBox">
                 <span>Your Number:</span>
-                <input type="number" name="number" placeholder="Enter your number" class="box" min="0" max="9999999999" required>
+                <input type="number" name="number" placeholder="Enter your number" class="box" min="0" max="9999999999"
+                       required>
             </div>
             <div class="inputBox">
                 <span>Your Email:</span>
@@ -204,7 +207,8 @@ if (isset($_POST['order'])) {
             </div>
             <div class="inputBox">
                 <span>Pin Code:</span>
-                <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" class="box" required>
+                <input type="number" min="0" name="pin_code" placeholder="E.g. 123456" min="0" max="999999" class="box"
+                       required>
             </div>
         </div>
         <input type="submit" name="order" class="btn" value="Place Order">
