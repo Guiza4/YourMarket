@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="fp">
                     <label class="fp1"><a>Don't Have an Account ?</a>
                         <a href="../html/SignUp.html">SIGN UP</a></label>
-                    <label class="fp2"><a href="../html/forgot-password.html">Forgot Password ?</a></label>
+                    <label class="fp2"><a href="forgot-password.php">Forgot Password ?</a></label>
                 </div>
                 <br>
                 <div class="bout">

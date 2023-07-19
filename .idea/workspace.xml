@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="modif de la rue">
+      <change afterPath="$PROJECT_DIR$/YourMarket/php/forgot-password.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/checkout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/yourmarket.sql" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/yourmarket.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/login.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689764645220</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="modif de la rue">
+      <option name="closed" value="true" />
+      <created>1689776330913</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1689776330913</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
