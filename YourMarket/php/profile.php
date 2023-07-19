@@ -105,12 +105,37 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                         </div>
                         <section class="show-products">
                             <div class="box-container">
+                                <!-- Display seller's offers -->
+                                <?php if ($userType === "seller"): ?>
+                                    <?php
+                                    // Fetch offers for the seller
+                                    $select_offers = $mysqli->prepare("SELECT * FROM offer WHERE seller_id = ?");
+                                    $select_offers->bind_param("i", $userId);
+                                    $select_offers->execute();
+                                    $offers = $select_offers->get_result()->fetch_all(MYSQLI_ASSOC);
+                                    ?>
+
+                                    <?php if (!empty($offers)): ?>
+                                        <h2>Offers Received:</h2>
+                                        <?php foreach ($offers as $offer): ?>
+                                            <div class="box">
+                                                <!-- Display offer details -->
+                                                <div>Offer ID: <?= $offer['offer_id']; ?></div>
+                                                <div>Buyer ID: <?= $offer['buyer_id']; ?></div>
+                                                <div>Price: <?= $offer['price']; ?></div>
+                                                <div>Status: <?= $offer['status']; ?></div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+
+                                <!-- Display seller's products -->
                                 <?php
                                 // Récupérer les produits ajoutés par l'utilisateur
                                 if ($userType === "seller") {
                                     $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Seller = ?");
                                 } else {
-                                    $select_products = $mysqli->prepare("SELECT * FROM `cart` WHERE ID_Buyer = ?");
+                                    $select_products = $mysqli->prepare("SELECT * FROM `historique` WHERE ID_Buyer = ?");
                                 }
 
                                 $select_products->bind_param("i", $userId); // Utilisez l'ID de l'utilisateur actuel
@@ -131,7 +156,8 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                                             <div class="brand"><span>brand:</span> <?= $fetch_products['brand']; ?>
                                             </div>
                                             <div class="selling_type">
-                                                <span>Selling Type:</span> <?= $fetch_products['selling_type']; ?></div>
+                                                <span>Selling Type:</span> <?= $fetch_products['selling_type']; ?>
+                                            </div>
                                             <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                                             <br>
                                         </div>

@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="Modif navbar">
+      <change afterPath="$PROJECT_DIR$/YourMarket/php/handle_offer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/YourMarket/php/submit_offer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/css/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/css/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/css/product.css" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/css/product.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YourMarket/php/add-product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/add-product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/checkout.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YourMarket/php/product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YourMarket/php/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/update_product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/update_product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/php/update_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/update_profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/uploaded_img/mac_ipad-removebg-preview.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -240,7 +240,7 @@ section {
     border-radius: .5rem;
 }
 
-.quick-view form .row .flex .auction-inputs {
+.quick-view form .row .flex .auction-inputs, .best-offer-inputs {
     padding: 1rem;
     border: var(--border);
     font-size: 1.8rem;
