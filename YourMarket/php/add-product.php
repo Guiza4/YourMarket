@@ -111,32 +111,8 @@ if (isset($_GET['delete'])) {
 </head>
 <body>
 <!-- Barre de navigation -->
-<div id="navbar">
-    <div class="nav-logo">
-        <a href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
-    </div>
-    <div class="nav-search">
-        <input type="text" id="search-bar" placeholder="Search...">
-    </div>
-    <a href="#">
-        <div class="nav-categorie">
-            <img src="../image/categorie.png" width="25" height="49">
-            <span>Category</span>
-        </div>
-    </a>
-    <a href="profile.php">
-        <div class="nav-account">
-            <img src="../image/account.png" width="30" height="32">
-            <span>Account</span>
-        </div>
-    </a>
-    <a href="add-product.php">
-        <div class="nav-sellings">
-            <img src="../image/sellings.png" width="38" height="34">
-            <span>Sellings</span>
-        </div>
-    </a>
-</div>
+<?php include 'navbar.php'; ?>
+<?php if (empty($searchQuery) && empty($_GET['category'])): ?>
 <!-- Contenu principal -->
 <div CLASS="box-principal">
     <div class="box-add-product">
@@ -263,5 +239,11 @@ if (isset($_GET['delete'])) {
         </div>
     </section>
 </div>
+<?php elseif ((isset($_GET['search']) || isset($_GET['category'])) && empty($products)): ?>
+    <!-- Display a message when no search results or category is found -->
+    <div id="main-content">
+        <h1 class="heading">No results found!</h1>
+    </div>
+<?php endif; ?>
 </body>
 </html>
