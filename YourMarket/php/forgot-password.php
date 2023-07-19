@@ -7,12 +7,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
     $new_password = $_POST["new_password"];
 
+    // Check if the email exists in the "seller" table
     $select_user = $mysqli->prepare("SELECT * FROM seller WHERE email = ?");
     $select_user->bind_param("s", $email);
     $select_user->execute();
     $user_result = $select_user->get_result();
     $user = $user_result->fetch_assoc();
 
+    // If the email doesn't exist in the "seller" table, check in the "buyer" table
     if (!$user) {
         $select_user = $mysqli->prepare("SELECT * FROM buyer WHERE email = ?");
         $select_user->bind_param("s", $email);
@@ -22,22 +24,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if ($user) {
-        // Mettre à jour le mot de passe dans la base de données
+        // Update the password in the database
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
+        // Update the password in the "seller" table
         $update_password = $mysqli->prepare("UPDATE seller SET password = ? WHERE ID_Seller = ?");
         $update_password->bind_param("si", $hashed_password, $user["ID_Seller"]);
         $update_password->execute();
         $update_password->close();
 
+        // Update the password in the "buyer" table
         $update_password = $mysqli->prepare("UPDATE buyer SET password = ? WHERE ID_Buyer = ?");
         $update_password->bind_param("si", $hashed_password, $user["ID_Buyer"]);
         $update_password->execute();
         $update_password->close();
 
-        $is_updated = true;
+        $is_updated = true; // Set the flag indicating the password was updated
     } else {
-        $is_invalid = true;
+        $is_invalid = true; // Set the flag indicating the email is invalid
     }
 }
 ?>

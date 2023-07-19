@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <label class="back">BACK</label>
                         </button>
                     </a>
-                    <a href="index_admin.php" id="continue" onclick="submitForm(event)">
+                    <a href="admin-view.php.php" id="continue" onclick="submitForm(event)">
                         <button class="black">
                             <label class="CONTINUE">CONTINUE</label>
                             <img src="../image/arrows-right.png" width="25">

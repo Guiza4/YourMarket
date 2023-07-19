@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $is_invalid = true;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <script>
     function submitForm(event, buttonId) {
         if (buttonId === 'backButton') {
-            // Perform specific action for the 'backButton'
+            // Perform a specific action when the 'backButton' is clicked
             window.location.href = '../html/User_Selection.html'; // Redirect to User_Selection.html
             event.preventDefault(); // Prevent the default action of the anchor tag
         } else {

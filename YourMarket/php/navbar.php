@@ -1,6 +1,6 @@
 <?php
 include 'search.php';
-// Récupérer tous les produits de la base de données
+// Retrieve all products from the database
 $mysqli = require __DIR__ . "/connecdb.php";
 $select_all_products = $mysqli->query("SELECT * FROM article");
 $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
@@ -15,7 +15,7 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
 </head>
 <body>
 <?php if (isset($_SESSION["user_id"]) && isset($_SESSION["user_type"])): ?>
-    <!-- Barre de navigation -->
+    <!-- Navigation Bar -->
     <div id="navbar">
         <div class="nav-logo">
             <a CLASS="NAV" href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
@@ -46,7 +46,7 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
         </a>
 
         <?php if ($_SESSION["user_type"] === "seller"): ?>
-            <!-- Display something specific for seller -->
+            <!-- Display something specific for sellers -->
             <a class="NAV" href="add-product.php">
                 <div class="nav-cart">
                     <img src="../image/sellings.png" width="38" height="34">
@@ -63,7 +63,7 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
             </a>
         <?php endif; ?>
     </div>
-    <!-- Contenu principal -->
+    <!-- Main Content -->
     <?php if (!empty($products)): ?>
         <?php if ((isset($_GET['search'])) && !empty($_GET['search'])): ?>
             <h1 class="heading">Results: </h1>
@@ -84,7 +84,7 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                                     <a class="go-to-product" href="product.php?ID=<?= $product['ID_Article']; ?>">
                                 <?php endif; ?>
                                 <div class="box">
-                                    <!-- Afficher les détails du produit -->
+                                    <!-- Display product details -->
                                     <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
                                     <div class="name"><?= $product['name']; ?></div>
                                     <div class="price">£<span><?= $product['price']; ?></span></div>
@@ -102,7 +102,7 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                                     <div class="details"><span><?= $product['details']; ?></span></div>
                                     <br>
                                 </div>
-                                    </a>
+                                </a>
                             <?php endforeach; ?>
                         </div>
                     </section>

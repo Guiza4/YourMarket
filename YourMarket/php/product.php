@@ -170,8 +170,9 @@ if (isset($_POST['add_to_cart'])) {
     <link href="../css/product.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<!-- Barre de navigation -->
+<!-- Navigation Bar -->
 <?php include 'navbar.php'; ?>
+
 <?php if (empty($searchQuery) && empty($_GET['category'])): ?>
 <section class="quick-view">
     <h1 class="heading">Product view</h1>
@@ -239,10 +240,10 @@ if (isset($_POST['add_to_cart'])) {
         <div class="message"><?= $message; ?></div>
     <?php endif; ?>
     <?php elseif ((isset($_GET['search']) || isset($_GET['category'])) && empty($products)): ?>
-    <!-- Display a message when no search results or category is found -->
-    <div id="main-content">
-        <h1 class="heading">No results found!</h1>
-    </div>
+        <!-- Display a message when no search results or category is found -->
+        <div id="main-content">
+            <h1 class="heading">No results found!</h1>
+        </div>
     <?php endif; ?>
     <script>
         let mainImage = document.querySelector('.quick-view .image-container .main-image img');
@@ -255,6 +256,5 @@ if (isset($_POST['add_to_cart'])) {
             };
         });
     </script>
-
 </body>
 </html>

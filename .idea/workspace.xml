@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8738d45-ce42-40b8-a4b1-eba209e63c24" name="Changes" comment="modif de la rue">
-      <change beforePath="$PROJECT_DIR$/YourMarket/css/add-product.css" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/css/add-product.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YourMarket/css/cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/css/cart.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/html/SignUp.html" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/html/SignUp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/html/User_Selection.html" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/html/User_Selection.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/add-product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/add-product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/admin-view.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/admin-view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/checkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/forgot-password.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/forgot-password.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/index_admin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/login_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/login_admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/logout_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/logout_admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/navbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/product.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YourMarket/php/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/YourMarket/php/profile.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689779453473</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="modif de la rue">
+      <option name="closed" value="true" />
+      <created>1689779985827</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1689779985827</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
