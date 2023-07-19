@@ -71,28 +71,33 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                         <?php foreach ($products as $product): ?>
                             <?php if ($_SESSION['user_type'] === 'buyer'): ?>
                                 <a class="go-to-product" href="product.php?ID=<?= $product['ID_Article']; ?>">
-                            <?php endif; ?>
-                            <div class="box">
-                                <!-- Afficher les détails du produit -->
-                                <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
-                                <div class="name"><?= $product['name']; ?></div>
-                                <div class="price">£<span><?= $product['price']; ?></span></div>
-                                <div class="category">
-                                    <span>Category:</span> <?= $product['category']; ?>
-                                </div>
-                                <div class="brand">
-                                    <span>Brand:</span> <?= $product['brand']; ?>
-                                </div>
-                                <div class="details"><span><?= $product['details']; ?></span></div>
-                                <br>
-                            </div>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                </section>
+                                    <?php endif;?>
+                                    <div class="box">
+                                        <!-- Afficher les détails du produit -->
+                                        <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
+                                        <div class="name"><?= $product['name']; ?></div>
+                                        <div class="price">£<span><?= $product['price']; ?></span></div>
+                                        <div class="category">
+                                            <span>Category:</span> <?= $product['category']; ?>
+                                        </div>
+                                        <div class="brand">
+                                            <span>Brand:</span> <?= $product['brand']; ?>
+                                        </div>
+                                        <?php if ($product['selling_type'] === 'Auction'): ?>
+                                            <div class="date">
+                                                <span>Start:<?= $product['start_date']; ?> End:<?= $product['end_date']; ?></span>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div class="details"><span><?= $product['details']; ?></span></div>
+                                        <br>
+                                    </div>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     <?php elseif (empty($searchQuery) && empty($_GET['category'])): ?>
     <!-- Contenu principal -->
     <div id="main-content">
@@ -152,6 +157,11 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                                         <div class="brand">
                                             <span>Brand:</span> <?= $product['brand']; ?>
                                         </div>
+                                        <?php if ($product['selling_type'] === 'Auction'): ?>
+                                            <div class="date">
+                                                <span>Start:<?= $product['start_date']; ?> End:<?= $product['end_date']; ?></span>
+                                            </div>
+                                        <?php endif; ?>
                                         <div class="details"><span><?= $product['details']; ?></span></div>
                                         <br>
                                     </div>
