@@ -30,16 +30,17 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
         <input type="search" id="search-bar" name="search" placeholder="Search..."
                value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
     </form>
-    <div class="nav-dropdown">
-        <img src="../image/categorie.png" width="25" height="49">Category
-        <div class="dropdown-content">
-            <a href="index.php">All</a>
-            <a href="index.php?category=Phone">Phone</a>
-            <a href="index.php?category=Computer">Computer</a>
-            <a href="index.php?category=Watch">Watch</a>
-            <a href="index.php?category=Video-game">Video-game</a>
+        <div class="nav-dropdown">
+            <img src="../image/categorie.png" width="25" height="49"><a class="NAV" href="#">Category</a>
+            <div class="dropdown-content">
+                <a href="index.php">All</a>
+                <a href="index.php?category=Phone">Phone</a>
+                <a href="index.php?category=Computer">Computer</a>
+                <a href="index.php?category=Watch">Watch</a>
+                <a href="index.php?category=Video-game">Video-game</a>
+            </div>
         </div>
-    </div>
+
     <img src="../image/account.png" width="30" height="32"><a class="NAV" href="profile.php">Account</a>
 
     <?php if ($_SESSION["user_type"] === "seller"): ?>

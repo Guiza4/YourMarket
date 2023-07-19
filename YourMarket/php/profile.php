@@ -152,7 +152,7 @@ $userId = $_SESSION["user_id"];
                             if ($userType === "seller") {
                                 $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Seller = ?");
                             } else {
-                                $select_products = $mysqli->prepare("SELECT * FROM `cart` WHERE ID_Buyer = ?");
+                                $select_products = $mysqli->prepare("SELECT * FROM `historique` WHERE user_id = ?");
                             }
 
                             $select_products->bind_param("i", $userId); // Utilisez l'ID de l'utilisateur actuel

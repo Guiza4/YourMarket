@@ -43,6 +43,11 @@ if (isset($_POST['order'])) {
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
             $insert_order->bind_param("issssssi", $userId, $name, $number, $email, $method, $address, $total_products, $total_price);
 
+            // Insérer une nouvelle commande dans la table "historique"
+            $insert_historique = $mysqli->prepare("INSERT INTO historique (user_id, name, number, email, method, address, total_products, total_price, placed_on)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+            $insert_historique->bind_param("issssssi", $userId, $name, $number, $email, $method, $address, $total_products, $total_price);
+
             // Construire la chaîne de produits pour la commande
             $total_products = "$productName x $quantity";
 
@@ -54,6 +59,7 @@ if (isset($_POST['order'])) {
 
             // Exécuter la requête d'insertion
             $insert_order->execute();
+            $insert_historique->execute();
 
             // Supprimer l'article du panier de l'utilisateur après avoir passé la commande
             $delete_from_cart = $mysqli->prepare("DELETE FROM cart WHERE user_id = ? AND ID_Article = ?");
