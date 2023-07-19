@@ -68,11 +68,6 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
         <?php if ((isset($_GET['search'])) && !empty($_GET['search'])): ?>
             <h1 class="heading">Results: </h1>
             <div id="main-content-search">
-            <?php if (isset($_GET['search']) || isset($_GET['category'])): ?>
-                <div class="filter-container">
-                    <?php include "filter.php"; ?>
-                </div>
-            <?php endif; ?>
         <?php endif; ?>
         <section class="search-results">
             <div class="product-container">
