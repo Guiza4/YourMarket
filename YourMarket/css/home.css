@@ -170,7 +170,7 @@ section{
     line-height: 2;
 }
 
-.show-products .box-container .box .price{
+.show-products .box-container .box .price,.bestoffer{
     font-size: 2rem;
     color:#2980b9;
     margin:.5rem 0;

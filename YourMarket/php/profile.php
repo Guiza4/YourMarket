@@ -125,14 +125,16 @@ $userId = $_SESSION["user_id"];
                                                 <!-- Display the product details -->
                                                 <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
                                                 <div class="name"><?= $fetch_products['name']; ?></div>
-                                                <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+                                                <?php if ($fetch_products['selling_type'] !== "Best Offer"): ?>
+                                                    <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+                                                <?php endif; ?>
                                                 <div class="category">
                                                     <span>Category:</span> <?= $fetch_products['category']; ?>
                                                 </div>
                                                 <div class="brand"><span>brand:</span> <?= $fetch_products['brand']; ?>
                                                 </div>
                                                 <div class="sellingtype">
-                                                    <span>SellingType:</span> <?= $fetch_products['sellingtype']; ?></div>
+                                                    <span>SellingType:</span> <?= $fetch_products['selling_type']; ?></div>
                                                 <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                                                 <br>
                                             </div>
@@ -146,7 +148,9 @@ $userId = $_SESSION["user_id"];
                                                 <!-- Display the product details -->
                                                 <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
                                                 <div class="name"><?= $fetch_products['name']; ?></div>
-                                                <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+                                                <?php if ($fetch_products['selling_type'] !== "Best Offer"): ?>
+                                                    <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+                                                <?php endif; ?>
                                             </div>
                                             <?php
                                         }
@@ -157,6 +161,99 @@ $userId = $_SESSION["user_id"];
                                 ?>
                             </div>
                         </section>
+
+                        <?php
+                        if ($userType === "seller") {
+                            $select_offers = $mysqli->prepare("SELECT * FROM `offer` WHERE product_id IN (SELECT ID_Article FROM `article` WHERE ID_Seller = ?)");
+                            $select_offers->bind_param("i", $userId);
+                            $select_offers->execute();
+
+                            if ($select_offers->errno) {
+                                echo "Execution failed: " . $select_offers->error;
+                            }
+
+                            $result_offers = $select_offers->get_result();
+
+                            if ($result_offers->num_rows > 0) {
+                                ?>
+                                <section class="seller-offers">
+                                    <div class="category-title">
+                                        <label class="title-1">Offers Received</label>
+                                    </div>
+                                    <div class="bar-random">
+                                        <!-- This bar is just for styling purposes -->
+                                    </div>
+                                    <?php
+                                    while ($fetch_offers = $result_offers->fetch_assoc()) {
+                                        ?>
+                                        <div class="offer">
+                                            <div class="offer-details">
+                                                <div class="offer-buyer">Buyer: <?= $fetch_offers['user_id']; ?></div>
+                                                <?php if ($fetch_offers['offer_status'] !== "Best Offer"): ?>
+                                                    <div class="offer-price">Offer Price: £<?= $fetch_offers['offer_price']; ?></div>
+                                                <?php endif; ?>
+                                                <div class="offer-status">Status: <?= $fetch_offers['offer_status']; ?></div>
+                                            </div>
+                                            <div class="offer-message">
+                                                <span>Message:</span> <?= $fetch_offers['offer_message']; ?>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </section>
+                                <?php
+                            } else {
+                                echo '<p class="empty">No offers received yet!</p>';
+                            }
+                        }
+
+                        if ($userType === "buyer") {
+                            $select_offers = $mysqli->prepare("SELECT * FROM `offer` WHERE user_id = ?");
+                            $select_offers->bind_param("i", $userId);
+                            $select_offers->execute();
+
+                            if ($select_offers->errno) {
+                                echo "Execution failed: " . $select_offers->error;
+                            }
+
+                            $result_offers = $select_offers->get_result();
+
+                            if ($result_offers->num_rows > 0) {
+                                ?>
+                                <section class="buyer-offers">
+                                    <div class="category-title">
+                                        <label class="title-1">Offers Sent</label>
+                                    </div>
+                                    <div class="bar-random">
+                                        <!-- This bar is just for styling purposes -->
+                                    </div>
+                                    <?php
+                                    while ($fetch_offers = $result_offers->fetch_assoc()) {
+                                        ?>
+                                        <div class="offer">
+                                            <div class="offer-details">
+                                                <div class="offer-product-name"><?= $fetch_offers['product_name']; ?></div>
+                                                <?php if ($fetch_offers['offer_status'] !== "Best Offer"): ?>
+                                                    <div class="offer-price">Offer Price: £<?= $fetch_offers['offer_price']; ?></div>
+                                                <?php endif; ?>
+                                                <div class="offer-status">Status: <?= $fetch_offers['offer_status']; ?></div>
+                                            </div>
+                                            <div class="offer-message">
+                                                <span>Message:</span> <?= $fetch_offers['offer_message']; ?>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </section>
+                                <?php
+                            } else {
+                                echo '<p class="empty">No offers sent yet!</p>';
+                            }
+                        }
+                        ?>
+
                     </div>
                 </div>
                 <div class="right-side">

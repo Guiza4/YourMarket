@@ -76,7 +76,11 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                                         <!-- Display Product Details -->
                                         <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
                                         <div class="name"><?= $product['name']; ?></div>
+                                        <?php if ($product['selling_type']!== 'Best Offer'):?>
                                         <div class="price">£<span><?= $product['price']; ?></span></div>
+                                        <?php else: ?>
+                                            <div class="bestoffer"><span>Best Offer</span></div>
+                                        <?php endif; ?>
                                         <div class="category">
                                             <span>Category:</span> <?= $product['category']; ?>
                                         </div>
