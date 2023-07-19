@@ -1,6 +1,5 @@
 <?php
 session_start();
-include 'search.php';
 // Récupérer tous les produits de la base de données
 $mysqli = require __DIR__ . "/connecdb.php";
 $select_all_products = $mysqli->query("SELECT * FROM article");
@@ -18,89 +17,16 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
 </head>
 <body>
 <?php if (isset($_SESSION["user_id"]) && isset($_SESSION["user_type"])): ?>
-<!-- Barre de promotion -->
-<div id="promo-banner">
-    <a href="#">Promo -10% for new users with the code: Malik77</a>
-</div>
+    <!-- Barre de promotion -->
+    <div id="promo-banner">
+        <a href="#">Promo -10% for new users with the code: Malik77</a>
+    </div>
 
-<!-- Barre de navigation -->
-<div id="navbar">
-    <a class="NAV" href="index.php"><img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
-    <form method="get" action="index.php">
-        <input type="search" id="search-bar" name="search" placeholder="Search..."
-               value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
-    </form>
-        <div class="nav-dropdown">
-            <img src="../image/categorie.png" width="25" height="49"><a class="NAV" href="#">Category</a>
-            <div class="dropdown-content">
-                <a href="index.php">All</a>
-                <a href="index.php?category=Phone">Phone</a>
-                <a href="index.php?category=Computer">Computer</a>
-                <a href="index.php?category=Watch">Watch</a>
-                <a href="index.php?category=Video-game">Video-game</a>
-            </div>
-        </div>
-
-    <img src="../image/account.png" width="30" height="32"><a class="NAV" href="profile.php">Account</a>
-
-    <?php if ($_SESSION["user_type"] === "seller"): ?>
-        <!-- Display something specific for seller -->
-        <img src="../image/sellings.png" width="38" height="34"><a class="NAV" href="add-product.php">Sellings</a>
-    <?php else: ?>
-        <!-- Display the "Cart" link for other user types -->
-        <img src="../image/cart.png" width="38" height="34"><a class="NAV" href="cart.php">Cart</a>
-    <?php endif; ?>
-</div>
-
-<!-- Contenu principal -->
-<?php if (!empty($products)): ?>
-<?php if ((isset($_GET['search'])) && !empty($_GET['search'])): ?>
-<h1 class="heading">Results: </h1>
-<div id="main-content-search">
-    <?php if (isset($_GET['search']) || isset($_GET['category'])): ?>
-        <div class="filter-container">
-            <?php include "filter.php"; ?>
-        </div>
-    <?php endif; ?>
-    <?php endif; ?>
-    <section class="search-results">
-        <div class="product-container">
-            <div class="product">
-                <section class="show-products">
-                    <div class="box-container">
-                        <?php foreach ($products as $product): ?>
-                            <?php if ($_SESSION['user_type'] === 'buyer'): ?>
-                                <a class="go-to-product" href="product.php?ID=<?= $product['ID_Article']; ?>">
-                                    <?php endif;?>
-                                    <div class="box">
-                                        <!-- Afficher les détails du produit -->
-                                        <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
-                                        <div class="name"><?= $product['name']; ?></div>
-                                        <div class="price">£<span><?= $product['price']; ?></span></div>
-                                        <div class="category">
-                                            <span>Category:</span> <?= $product['category']; ?>
-                                        </div>
-                                        <div class="brand">
-                                            <span>Brand:</span> <?= $product['brand']; ?>
-                                        </div>
-                                        <?php if ($product['selling_type'] === 'Auction'): ?>
-                                            <div class="date">
-                                                <span>Start:<?= $product['start_date']; ?> End:<?= $product['end_date']; ?></span>
-                                            </div>
-                                        <?php endif; ?>
-                                        <div class="details"><span><?= $product['details']; ?></span></div>
-                                        <br>
-                                    </div>
-                                </a>
-                            <?php endforeach; ?>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </section>
-    <?php elseif (empty($searchQuery) && empty($_GET['category'])): ?>
-    <!-- Contenu principal -->
-    <div id="main-content">
+    <!-- Barre de navigation -->
+    <?php include 'navbar.php'; ?>
+    <?php if (empty($searchQuery) && empty($_GET['category'])): ?>
+        <!-- Contenu principal -->
+        <div id="main-content">
         <!-- Rectangle avec carrousel -->
         <div class="rounded-box">
             <div class="refurbished-left">
@@ -174,26 +100,26 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
             </section>
 
         </div>
-        <?php else: ?>
-            <!-- Display a message when no search results or category is found -->
-            <div id="main-content">
-                <h1 class="heading">No results found!</h1>
-            </div>
-        <?php endif; ?>
-    </div>
-    <?php else: ?>
-        <?php
-        header("Location: login.php");
-        exit;
-        ?>
+    <?php elseif ((isset($_GET['search'])||isset($_GET['category'])) && empty($products)): ?>
+        <!-- Display a message when no search results or category is found -->
+        <div id="main-content">
+            <h1 class="heading">No results found!</h1>
+        </div>
     <?php endif; ?>
-    <center>
-        <footer>
-            <a href="mentions-legales.html">LEGAL</a>
-            <a href="politique-confidentialite.html">PRIVACY CENTER</a>
-            <a href="cookies.html">COOKIE</a>
-            <a href="a-propos.html">ABOUT US</a>
-        </footer>
-    </center>
+    </div>
+<?php else: ?>
+    <?php
+    header("Location: login.php");
+    exit;
+    ?>
+<?php endif; ?>
+<center>
+    <footer>
+        <a href="mentions-legales.html">LEGAL</a>
+        <a href="politique-confidentialite.html">PRIVACY CENTER</a>
+        <a href="cookies.html">COOKIE</a>
+        <a href="a-propos.html">ABOUT US</a>
+    </footer>
+</center>
 </body>
 </html>

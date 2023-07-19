@@ -1,5 +1,6 @@
 /* Styles CSS */
 :root{
+    --main-color:#2980b9;
     --orange:#f39c12;
     --red:#e74c3c;
     --black:#333;
@@ -30,56 +31,6 @@ body {
 #promo-banner a {
     color: #FFFFFF;
     text-decoration: none;
-}
-
-#navbar {
-    border: 3px solid black;
-    background-color: #FFFFFF;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-}
-
-#navbar img {
-    margin-right: 10px;
-    margin-left: 4%;
-}
-
-#search-bar {
-    margin-left: 100px;
-    padding: 10px;
-    padding-right: 90px;
-    border: 1px solid #000000;
-    border-radius: 10px;
-}
-
-.NAV  {
-    margin-right: 4%;
-    text-decoration: none;
-    color: #000000;
-}
-.nav-dropdown{
-    position: relative;
-    margin-left: auto;
-}
-.dropdown-content{
-    display: none;
-    position: absolute;
-    background-color: #FFFFFF;
-    border: 1px solid black;
-    padding: 10px;
-    z-index: 1;
-    border-radius: 10px;
-    width: 100px;
-}
-.nav-dropdown:hover .dropdown-content{
-    display: block;
-}
-.dropdown-content a,button{
-    display: block;
-    text-decoration: none;
-    color: black;
-    margin-bottom: 5px;
 }
 
 #main-content {
