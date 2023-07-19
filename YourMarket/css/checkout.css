@@ -154,7 +154,7 @@ body {
 }
 .checkout-orders form h3 {
     border-radius: .5rem;
-    background-color: var(--black);
+    background-image: linear-gradient(210deg, rgba(235, 86, 123, 1) 0%, rgba(150, 158, 255, 0.5899999737739563) 48%, rgba(145, 58, 254, 0.8399999737739563) 100%);
     color: var(--white);
     padding: 1.5rem 1rem;
     text-align: center;

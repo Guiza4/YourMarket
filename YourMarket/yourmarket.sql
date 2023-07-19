@@ -3,8 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 18 juil. 2023 à 23:44
--- Généré le : mer. 19 juil. 2023 à 10:35
+-- Généré le : mer. 19 juil. 2023 à 14:17
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -158,7 +157,6 @@ CREATE TABLE IF NOT EXISTS `cart` (
 
 INSERT INTO `cart` (`id`, `user_id`, `ID_Article`, `name`, `price`, `quantity`, `image_1`) VALUES
 (18, 1, 5, 'azerty', '449.00', 1, 'printer.png'),
-(12, 4, 5, 'Mac 1', '1199.00', 47, 'mac.png'),
 (13, 2, 1, 'Mac 1', '1199.00', 1, 'mac_ipad-removebg-preview.png');
 
 -- --------------------------------------------------------
@@ -197,28 +195,22 @@ INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `add
 
 DROP TABLE IF EXISTS `historique`;
 CREATE TABLE IF NOT EXISTS `historique` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `number` varchar(10) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `method` varchar(50) NOT NULL,
-  `address` varchar(500) NOT NULL,
-  `total_products` varchar(1000) NOT NULL,
-  `total_price` int NOT NULL,
-  `placed_on` date NOT NULL,
-  `payment_status` varchar(20) NOT NULL DEFAULT 'pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `ID_Article` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `image_1` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `historique`
 --
 
-INSERT INTO `historique` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
-(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'Mac 1 x 2', 2398, '2023-07-19', 'pending'),
-(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'azefgn x 1', 123, '2023-07-19', 'pending'),
-(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', '1234 x 3', 3, '2023-07-19', 'pending'),
-(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'dvfbghnj, x 1', 12345, '2023-07-19', 'pending');
+INSERT INTO `historique` (`id`, `user_id`, `ID_Article`, `name`, `price`, `quantity`, `image_1`) VALUES
+(20, 4, 1, 'Mac 1', '1199.00', 1, 'mac_ipad-removebg-preview.png');
 
 -- --------------------------------------------------------
 
@@ -249,7 +241,8 @@ INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `add
 (0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'Mac 1 x 2', 2398, '2023-07-19', 'pending'),
 (0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'azefgn x 1', 123, '2023-07-19', 'pending'),
 (0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', '1234 x 3', 3, '2023-07-19', 'pending'),
-(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'dvfbghnj, x 1', 12345, '2023-07-19', 'pending');
+(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'dvfbghnj, x 1', 12345, '2023-07-19', 'pending'),
+(0, 4, 'fgb', '1234', 'FBDBF@gmail.com', 'credit card', 'verv, verv, verve, verver, verv, 12345', 'Mac 1 x 1', 1199, '2023-07-19', 'pending');
 
 -- --------------------------------------------------------
 

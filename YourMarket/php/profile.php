@@ -117,7 +117,8 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                                 $select_products->execute();
                                 $result = $select_products->get_result(); // Obtenir le jeu de résultats
 
-                                if ($result->num_rows > 0) {
+                            if ($result->num_rows > 0) {
+                                if ($userType === "seller") {
                                     while ($fetch_products = $result->fetch_assoc()) {
                                         ?>
                                         <div class="box">
@@ -130,28 +131,41 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                                             </div>
                                             <div class="brand"><span>brand:</span> <?= $fetch_products['brand']; ?>
                                             </div>
-                                            <div class="selling_type">
-                                                <span>Selling Type:</span> <?= $fetch_products['selling_type']; ?></div>
+                                            <div class="sellingtype">
+                                                <span>SellingType:</span> <?= $fetch_products['sellingtype']; ?></div>
                                             <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                                             <br>
                                         </div>
                                         <?php
                                     }
-                                } else {
-                                    echo '<p class="empty">No products added yet!</p>';
                                 }
-                                ?>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <div class="right-side">
-                    <a class="NAV" href="update_profile.php">
-                        <div class="change-setting">
-                            <center>Change setting</center>
+                                if ($userType === "buyer") {
+                                    while ($fetch_products = $result->fetch_assoc()) {
+                                        ?>
+                                        <div class="box">
+                                            <!-- Afficher les détails du produit -->
+                                            <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
+                                            <div class="name"><?= $fetch_products['name']; ?></div>
+                                            <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                            } else {
+                                echo '<p class="empty">No products added yet!</p>';
+                            }
+                            ?>
                         </div>
-                    </a>
+                    </section>
                 </div>
+            </div>
+            <div class="right-side">
+                <a class="NAV" href="update_profile.php">
+                    <div class="change-setting">
+                        <center>Change setting</center>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
