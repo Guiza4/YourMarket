@@ -9,8 +9,7 @@ if (!isset($_SESSION["user_id"]) || !isset($_SESSION["user_type"])) {
 
 $userType = $_SESSION["user_type"];
 $userId = $_SESSION["user_id"];
-$select_all_products = $mysqli->query("SELECT * FROM article");
-$all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -20,8 +19,9 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
     <link href="../css/profile.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<!-- Barre de navigation -->
+<!-- Navigation Bar -->
 <?php include 'navbar.php'; ?>
+
 <?php if (empty($searchQuery) && empty($_GET['category'])): ?>
     <div class="box-principal">
         <div class="box-profile">
@@ -38,7 +38,7 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                         <label class="title-1"> Personal Information</label>
                     </div>
                     <div class="bar-random">
-                        <!--cette bare ne sert completment a rien mais ca fait class et c marant a faire-->
+                        <!-- This bar is just for styling purposes -->
                     </div>
                     <?php
                     if ($userType === "seller") {
@@ -67,7 +67,7 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                         <label class="title-1">Contact</label>
                     </div>
                     <div class="bar-random">
-                        <!--cette bare ne sert completment a rien mais ca fait class et c marant a faire-->
+                        <!-- This bar is just for styling purposes -->
                     </div>
                     <?php
                     if ($userType === "seller") {
@@ -101,67 +101,55 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                             <label class="title-1">Activity</label>
                         </div>
                         <div class="bar-random">
-                            <!--cette bare ne sert completment a rien mais ca fait class et c marant a faire-->
+                            <!-- This bar is just for styling purposes -->
                         </div>
                         <section class="show-products">
                             <div class="box-container">
-                                <!-- Display seller's offers -->
-                                <?php if ($userType === "seller"): ?>
-                                    <?php
-                                    // Fetch offers for the seller
-                                    $select_offers = $mysqli->prepare("SELECT * FROM offer WHERE seller_id = ?");
-                                    $select_offers->bind_param("i", $userId);
-                                    $select_offers->execute();
-                                    $offers = $select_offers->get_result()->fetch_all(MYSQLI_ASSOC);
-                                    ?>
-
-                                    <?php if (!empty($offers)): ?>
-                                        <h2>Offers Received:</h2>
-                                        <?php foreach ($offers as $offer): ?>
-                                            <div class="box">
-                                                <!-- Display offer details -->
-                                                <div>Offer ID: <?= $offer['offer_id']; ?></div>
-                                                <div>Buyer ID: <?= $offer['buyer_id']; ?></div>
-                                                <div>Price: <?= $offer['price']; ?></div>
-                                                <div>Status: <?= $offer['status']; ?></div>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-
-                                <!-- Display seller's products -->
                                 <?php
-                                // Récupérer les produits ajoutés par l'utilisateur
+                                // Get the products added by the user
                                 if ($userType === "seller") {
                                     $select_products = $mysqli->prepare("SELECT * FROM `article` WHERE ID_Seller = ?");
                                 } else {
-                                    $select_products = $mysqli->prepare("SELECT * FROM `historique` WHERE ID_Buyer = ?");
+                                    $select_products = $mysqli->prepare("SELECT * FROM `historique` WHERE user_id = ?");
                                 }
 
-                                $select_products->bind_param("i", $userId); // Utilisez l'ID de l'utilisateur actuel
+                                $select_products->bind_param("i", $userId); // Use the ID of the current user
                                 $select_products->execute();
-                                $result = $select_products->get_result(); // Obtenir le jeu de résultats
+                                $result = $select_products->get_result(); // Get the result set
 
                                 if ($result->num_rows > 0) {
-                                    while ($fetch_products = $result->fetch_assoc()) {
-                                        ?>
-                                        <div class="box">
-                                            <!-- Afficher les détails du produit -->
-                                            <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
-                                            <div class="name"><?= $fetch_products['name']; ?></div>
-                                            <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
-                                            <div class="category">
-                                                <span>Category:</span> <?= $fetch_products['category']; ?>
+                                    if ($userType === "seller") {
+                                        while ($fetch_products = $result->fetch_assoc()) {
+                                            ?>
+                                            <div class="box">
+                                                <!-- Display the product details -->
+                                                <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
+                                                <div class="name"><?= $fetch_products['name']; ?></div>
+                                                <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
+                                                <div class="category">
+                                                    <span>Category:</span> <?= $fetch_products['category']; ?>
+                                                </div>
+                                                <div class="brand"><span>brand:</span> <?= $fetch_products['brand']; ?>
+                                                </div>
+                                                <div class="sellingtype">
+                                                    <span>SellingType:</span> <?= $fetch_products['sellingtype']; ?></div>
+                                                <div class="details"><span><?= $fetch_products['details']; ?></span></div>
+                                                <br>
                                             </div>
-                                            <div class="brand"><span>brand:</span> <?= $fetch_products['brand']; ?>
+                                            <?php
+                                        }
+                                    }
+                                    if ($userType === "buyer") {
+                                        while ($fetch_products = $result->fetch_assoc()) {
+                                            ?>
+                                            <div class="box">
+                                                <!-- Display the product details -->
+                                                <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
+                                                <div class="name"><?= $fetch_products['name']; ?></div>
+                                                <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
                                             </div>
-                                            <div class="selling_type">
-                                                <span>Selling Type:</span> <?= $fetch_products['selling_type']; ?>
-                                            </div>
-                                            <div class="details"><span><?= $fetch_products['details']; ?></span></div>
-                                            <br>
-                                        </div>
-                                        <?php
+                                            <?php
+                                        }
                                     }
                                 } else {
                                     echo '<p class="empty">No products added yet!</p>';

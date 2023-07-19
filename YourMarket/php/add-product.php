@@ -143,7 +143,7 @@ if (isset($_GET['delete'])) {
 
 </head>
 <body>
-<!-- Barre de navigation -->
+<!-- Navigation Bar -->
 <?php include 'navbar.php'; ?>
 <?php if (empty($searchQuery) && empty($_GET['category'])): ?>
     <!-- Contenu principal -->

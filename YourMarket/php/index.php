@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Récupérer tous les produits de la base de données
+// Retrieve all products from the database
 $mysqli = require __DIR__ . "/connecdb.php";
 $select_all_products = $mysqli->query("SELECT * FROM article");
 $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
@@ -17,17 +17,17 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
 </head>
 <body>
 <?php if (isset($_SESSION["user_id"]) && isset($_SESSION["user_type"])): ?>
-    <!-- Barre de promotion -->
+    <!-- Promotion Banner -->
     <div id="promo-banner">
         <a href="#">Promo -10% for new users with the code: Malik77</a>
     </div>
 
-    <!-- Barre de navigation -->
+    <!-- Navigation Bar -->
     <?php include 'navbar.php'; ?>
     <?php if (empty($searchQuery) && empty($_GET['category'])): ?>
-        <!-- Contenu principal -->
+        <!-- Main Content -->
         <div id="main-content">
-        <!-- Rectangle avec carrousel -->
+        <!-- Rounded Box with Carousel -->
         <div class="rounded-box">
             <div class="refurbished-left">
                 <center><h2>Save Up To 50%</h2>
@@ -56,13 +56,13 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
         </div>
-        <!-- Catégorie Most Wanted -->
+        <!-- Most Wanted Category -->
         <div>
             <div class="category-title">
                 <label class="title-1"> Our Product</label>
                 <label class="title-2"> The tech everybody wants !</label>
             </div>
-            <!-- Afficher tous les produits -->
+            <!-- Display All Products -->
             <section class="search-results">
                 <div class="product-container">
                     <div class="product">
@@ -73,7 +73,7 @@ $all_products = $select_all_products->fetch_all(MYSQLI_ASSOC);
                                         <a class="go-to-product" href="product.php?ID=<?= $product['ID_Article']; ?>">
                                     <?php endif; ?>
                                     <div class="box">
-                                        <!-- Afficher les détails du produit -->
+                                        <!-- Display Product Details -->
                                         <img src="../uploaded_img/<?= $product['image_1']; ?>" alt="">
                                         <div class="name"><?= $product['name']; ?></div>
                                         <div class="price">£<span><?= $product['price']; ?></span></div>

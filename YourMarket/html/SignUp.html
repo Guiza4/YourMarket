@@ -40,9 +40,9 @@
                 </div>
                 <div>
                     <label for="seller"></label>
-                    <input type="radio" name="usertype" id="seller" value="seller">seller
+                    <input type="radio" name="usertype" id="seller" value="seller">Seller <!-- Option to sign up as a seller -->
                     <label for="buyer"></label>
-                    <input type="radio" name="usertype" id="buyer" value="buyer">buyer
+                    <input type="radio" name="usertype" id="buyer" value="buyer">Buyer <!-- Option to sign up as a buyer -->
                 </div>
                 <br><br><br>
                 <div class="bout">
@@ -66,10 +66,10 @@
         </div>
         <div class="Fout">
             <footer>
-                <a href="mentions-legales.html">LEGAL</a>
-                <a href="politique-confidentialite.html">PRIVACY CENTER</a>
-                <a href="cookies.html">COOKIE</a>
-                <a href="a-propos.html">ABOUT US</a>
+                <a href="mentions-legales.html">LEGAL</a> <!-- Link to legal information -->
+                <a href="politique-confidentialite.html">PRIVACY CENTER</a> <!-- Link to privacy center -->
+                <a href="cookies.html">COOKIE</a> <!-- Link to cookie policy -->
+                <a href="a-propos.html">ABOUT US</a> <!-- Link to about us page -->
             </footer>
         </div>
     </div>
@@ -78,7 +78,7 @@
 <script>
     function submitForm(event, buttonId) {
         if (buttonId === 'backButton') {
-            // Perform specific action for the 'backButton'
+            // Perform a specific action when the 'backButton' is clicked
             window.location.href = '../php/login.php'; // Redirect to User_Selection.html
             event.preventDefault(); // Prevent the default action of the anchor tag
         } else {
