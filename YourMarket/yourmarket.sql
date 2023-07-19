@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 18 juil. 2023 à 14:20
+-- Généré le : mer. 19 juil. 2023 à 10:35
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -72,14 +72,19 @@ CREATE TABLE IF NOT EXISTS `article` (
   PRIMARY KEY (`ID_Article`),
   UNIQUE KEY `name` (`name`),
   KEY `ID_Seller` (`ID_Seller`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `article`
 --
 
 INSERT INTO `article` (`ID_Article`, `ID_Seller`, `name`, `details`, `price`, `category`, `brand`, `sellingtype`, `start_date`, `end_date`, `minimum_bid`, `image_1`, `image_2`, `image_3`) VALUES
-(1, 2, 'Mac 1', 'This is the new Mac', '1199.00', 'Computer', 'Apple', 'Buy Now', NULL, NULL, NULL, 'mac_ipad-removebg-preview.png', 'apple iphone.png', 'apple_iphone-removebg-preview.png');
+(1, 2, 'Mac 1', 'This is the new Mac', '1199.00', 'Computer', 'Apple', 'Buy Now', NULL, NULL, NULL, 'mac_ipad-removebg-preview.png', 'apple iphone.png', 'apple_iphone-removebg-preview.png'),
+(3, 3, 'azefgn', '1AZE', '123.00', 'Phone', 'Apple', 'Buy Now', NULL, NULL, NULL, 'item-1.png', 'Iphone.png', 'item-2.png'),
+(4, 3, 'dvfbghnj,', 'SDZCVFGBHNJ?K.', '12345.00', 'Phone', 'Microsoft', 'Buy Now', NULL, NULL, NULL, 'item-5.png', 'item-3.png', 'item-4.png'),
+(5, 3, 'QSFEZ BEFV', 'EF', '134.00', 'Computer', 'Sony', 'Buy Now', NULL, NULL, NULL, 'applewatch.png', 'Iphone.png', 'arrow-left.png'),
+(6, 3, '1234', 'RGERG', '1.00', 'Phone', 'Apple', 'Buy Now', NULL, NULL, NULL, 'malik.png', 'arrows-right.png', 'malik.png'),
+(7, 3, 'ETRFYG', 'dgfhvjbk', '234.00', 'Computer', 'Asus', 'Buy Now', NULL, NULL, NULL, 'Capture d’écran (7).png', 'Capture d’écran (1).png', 'Capture d’écran (8).png');
 
 -- --------------------------------------------------------
 
@@ -126,16 +131,77 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `quantity` int DEFAULT NULL,
   `image_1` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `cart`
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `ID_Article`, `name`, `price`, `quantity`, `image_1`) VALUES
-(12, 4, 5, 'Mac 1', '1199.00', 47, 'mac.png'),
 (13, 2, 1, 'Mac 1', '1199.00', 1, 'mac_ipad-removebg-preview.png'),
 (15, 1, 1, 'Mac 1', '1199.00', 1, 'mac_ipad-removebg-preview.png');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `historique`
+--
+
+DROP TABLE IF EXISTS `historique`;
+CREATE TABLE IF NOT EXISTS `historique` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `number` varchar(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `method` varchar(50) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `total_products` varchar(1000) NOT NULL,
+  `total_price` int NOT NULL,
+  `placed_on` date NOT NULL,
+  `payment_status` varchar(20) NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `historique`
+--
+
+INSERT INTO `historique` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
+(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'Mac 1 x 2', 2398, '2023-07-19', 'pending'),
+(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'azefgn x 1', 123, '2023-07-19', 'pending'),
+(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', '1234 x 3', 3, '2023-07-19', 'pending'),
+(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'dvfbghnj, x 1', 12345, '2023-07-19', 'pending');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `number` varchar(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `method` varchar(50) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `total_products` varchar(1000) NOT NULL,
+  `total_price` int NOT NULL,
+  `placed_on` date NOT NULL,
+  `payment_status` varchar(20) NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
+(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'Mac 1 x 2', 2398, '2023-07-19', 'pending'),
+(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'azefgn x 1', 123, '2023-07-19', 'pending'),
+(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', '1234 x 3', 3, '2023-07-19', 'pending'),
+(0, 4, 'esxcdvghbj', '2345', 'FDGHJBKN@G.com', 'credit card', 'fdxcgvhbjnk,, gchvbnj,, cftvghbjnk,, cgfvhbjnk,, cfgvhbjnk,, 23456', 'dvfbghnj, x 1', 12345, '2023-07-19', 'pending');
 
 -- --------------------------------------------------------
 
