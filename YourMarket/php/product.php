@@ -251,6 +251,7 @@ if (isset($_POST['add_to_cart'])) {
                 </div>
                 <div class="details"><?= $product['details']; ?></div>
                 <?php if ($product['selling_type'] === 'Auction'): ?>
+                    <div class="date">Starting Date:<span style="color: #3FBBF7"><?= $product['start_date']; ?></span> |   Ending date:<span style="color: #3FBBF7"><?= $product['end_date']; ?></span></div>
                     <div class="current-bid">
                         <?php
                         $select_highest_bid = $mysqli->prepare("SELECT MAX(highest_bid) AS highest_bid FROM `article` WHERE ID_Article = ?");

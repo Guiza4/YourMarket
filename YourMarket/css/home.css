@@ -10,43 +10,10 @@
     --border:.2rem solid var(--black);
     --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
 }
-
-*{
-    font-family: 'Nunito', sans-serif;
-    margin:0; padding:0;
-    box-sizing: border-box;
-    outline: none; border:none;
-    text-decoration: none;
-}
-
-*::selection{
-    background-color: var(--main-color);
-    color:var(--white);
-}
-
-::-webkit-scrollbar{
-    height: .5rem;
-    width: 1rem;
-}
-
-::-webkit-scrollbar-track{
-    background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb{
-    background-color: var(--main-color);
-}
-
 html{
     font-size: 62.5%;
     overflow-x: hidden;
 }
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
 #promo-banner {
     background-color: #000000;
     padding: 10px;
@@ -57,56 +24,6 @@ body {
 #promo-banner a {
     color: #FFFFFF;
     text-decoration: none;
-}
-
-#navbar {
-    border: 3px solid black;
-    background-color: #FFFFFF;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-}
-
-#navbar img {
-    margin-right: 10px;
-    margin-left: 4%;
-}
-
-#search-bar {
-    margin-left: 100px;
-    padding: 10px;
-    padding-right: 90px;
-    border: 1px solid #000000;
-    border-radius: 10px;
-}
-
-.NAV  {
-    margin-right: 4%;
-    text-decoration: none;
-    color: #000000;
-}
-.nav-dropdown{
-    position: relative;
-    margin-left: auto;
-}
-.dropdown-content{
-    display: none;
-    position: absolute;
-    background-color: #FFFFFF;
-    border: 1px solid black;
-    padding: 10px;
-    z-index: 1;
-    border-radius: 10px;
-    width: 100px;
-}
-.nav-dropdown:hover .dropdown-content{
-    display: block;
-}
-.dropdown-content a,button{
-    display: block;
-    text-decoration: none;
-    color: black;
-    margin-bottom: 5px;
 }
 
 #main-content {
@@ -173,7 +90,7 @@ body {
 }
 
 .shop-refurbished a{
-    padding: 8px;
+    padding: 12px;
     text-decoration: none;
     color: #000000;
 }

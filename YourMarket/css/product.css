@@ -248,7 +248,7 @@ section {
     border-radius: .5rem;
 }
 
-.quick-view form .row .content .details,.brand {
+.quick-view form .row .content .details,.brand, .date, .current-bid {
     font-size: 1.6rem;
     color: var(--light-color);
     line-height: 2;
