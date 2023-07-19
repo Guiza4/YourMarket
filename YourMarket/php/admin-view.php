@@ -68,7 +68,7 @@ if (isset($_GET['delete2'])) {
 <!-- Barre de navigation -->
 <div id="navbar">
     <div class="nav-logo">
-        <img src="../image/logo-2.png" alt="Logo" height="64" width="180">
+        <a href="logout_admin.php"> <img src="../image/logo-2.png" alt="Logo" height="64" width="180"></a>
     </div>
 </div>
 
