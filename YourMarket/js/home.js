@@ -1,3 +1,25 @@
+
+function updateQueryStringParameter(url, key, value) {
+    var baseUrl = url.split('?')[0];
+    var queryParams = url.split('?')[1];
+
+    if (!queryParams) {
+        return baseUrl + '?' + key + '=' + value;
+    }
+
+    var updatedParams = [];
+    var params = queryParams.split('&');
+
+    for (var i = 0; i < params.length; i++) {
+        var param = params[i].split('=');
+        if (param[0] === key) {
+            param[1] = value;
+        }
+        updatedParams.push(param.join('='));
+    }
+
+    return baseUrl + '?' + updatedParams.join('&');
+}
 $(document).ready(function () {
     var currentIndex = 0;
     var images = $(".carousel-images img");
