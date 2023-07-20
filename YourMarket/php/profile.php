@@ -148,9 +148,7 @@ $userId = $_SESSION["user_id"];
                                                 <!-- Display the product details -->
                                                 <img src="../uploaded_img/<?= $fetch_products['image_1']; ?>" alt="">
                                                 <div class="name"><?= $fetch_products['name']; ?></div>
-                                                <?php if ($fetch_products['selling_type'] !== "Best Offer"): ?>
                                                     <div class="price">£<span><?= $fetch_products['price']; ?></span></div>
-                                                <?php endif; ?>
                                             </div>
                                             <?php
                                         }

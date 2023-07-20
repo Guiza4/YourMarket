@@ -44,3 +44,10 @@ This project involves creating an auction website called YourMarket, which aims 
 - Bibliography: Provides a list of all sources used, including web resources, books, etc.
 - Plagiarism and Delay: Any plagiarism or delay in meeting deadlines will result in penalties.
 - Defense: The defense date will be communicated to each group.
+
+### Sources
+- Youtube Tutorials:HTML|CSS|JAVASCRIPT|PHP
+- Open Classroom
+- Stack Overflow
+- W3schools
+- Chat GPT
